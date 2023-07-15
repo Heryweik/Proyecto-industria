@@ -27,8 +27,8 @@ export default function SignUp() {
           <h1 className={style.saludo}>Registrarse</h1>
         </div>
           <form className={style.form}>
-            <div className="mb-2">
-              <label className="form-label">Nombre de usuario</label>
+            <div className="mb-1">
+              <label className="form-label mb-0">Nombre de usuario</label>
               <input
                 type="text"
                 className="form-control"
@@ -36,8 +36,8 @@ export default function SignUp() {
                 aria-describedby="emailHelp"
               />
             </div>
-            <div className="mb-2">
-              <label className="form-label">Fecha de nacimiento</label>
+            <div className="mb-1">
+              <label className="form-label mb-0">Fecha de nacimiento</label>
               <input
                 type="date"
                 className="form-control"
@@ -45,8 +45,8 @@ export default function SignUp() {
                 aria-describedby="emailHelp"
               />
             </div>
-            <div className="mb-2">
-              <label className="form-label">Contrasenia</label>
+            <div className="mb-1">
+              <label className="form-label mb-0">Contrasenia</label>
               <input
                 type="password"
                 className="form-control"
@@ -54,8 +54,8 @@ export default function SignUp() {
               />
             </div>
             
-            <div className="mb-2">
-              <label className="form-label">Confirmar contrasenia</label>
+            <div className="mb-1">
+              <label className="form-label mb-0">Confirmar contrasenia</label>
               <input
                 type="password"
                 className="form-control"

@@ -28,7 +28,7 @@ export default function LogIn() {
         </div>
           <form className={style.form}>
             <div className="mb-3">
-              <label className="form-label">Nombre de usuario</label>
+              <label className="form-label mb-0">Nombre de usuario</label>
               <input
                 type="text"
                 className="form-control"
@@ -37,7 +37,7 @@ export default function LogIn() {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Contrasenia</label>
+              <label className="form-label mb-0">Contrasenia</label>
               <input
                 type="password"
                 className="form-control"
