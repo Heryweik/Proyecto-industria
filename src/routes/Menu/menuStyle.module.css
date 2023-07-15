@@ -1,0 +1,4 @@
+.containerFluid {
+    display: flex;
+    background-color: var(--color-fondo1);
+}
