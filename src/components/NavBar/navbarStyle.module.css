@@ -1,0 +1,61 @@
+.Nav {
+    width: 100%;
+    height: auto;
+    background-color: var(--letras-oscuras);
+    color: var(--letras-blancas);
+    padding: .8rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: medium;
+
+    .info {
+        width: auto;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+
+
+        .logo {
+            width: 12rem;
+        }
+
+        .boton {
+            background-color: transparent;
+            border: none;
+            color: var(--letras-blancas);
+            font-size: medium;
+        }
+
+        .boton:hover {
+            font-weight: 600;
+            color: var(--color-claro2);
+        }
+    }
+
+    .nombre {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .usuario {
+            
+        padding: .5rem;
+        border-left: 1px dashed var(--color-claro2);
+        border-bottom: 1px dashed var(--color-claro2);
+        }
+    }
+
+    .sesion {
+        width: auto;
+        background-color: var(--color-claro1);
+        color: var(--letras-blancas);
+        border-radius: 20px;
+    }
+
+    .sesion:hover {
+        background-color: var(--color-hover);
+    }
+}

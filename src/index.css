@@ -11,14 +11,15 @@
 }
 
 :root {
-  --color-fondo1: #F9FAF5;
-  --color-fondo2: #E4E4E4;
-  --color-claro1: #5560d2;
-  --color-claro2: #98aae8;
-  --color-fondo: #B7BAC3;
-  --letras-blancas: #fff;
-  --letras-oscuras: black;
-  --letras-grises: rgb(80, 80, 80);
+  --color-fondo1: #DFE3EE;
+  --color-fondo2: #FEFEFE;
+  --color-claro1: #42928b;
+  --color-claro2: #5dc8bf;
+  --color-hover: #2f6a64;
+  --color-fondo: #DFE3EE;
+  --letras-blancas: #FEFEFE;
+  --letras-oscuras: #363753;
+  --letras-grises: #474756;
 }
 
 :root {

@@ -1,4 +1,6 @@
 .containerFluid {
     display: flex;
+    flex-direction: column;
     background-color: var(--color-fondo1);
+    color: var(--letras-blancas);
 }
