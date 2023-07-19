@@ -13,6 +13,7 @@ export default function NavBar() {
         <button className={style.boton}>Productos</button>
         <button className={style.boton}>Servicios</button>
         <button className={style.boton}>Ventas</button>
+        <button className={style.boton}>Empleados</button>
       </div>
 
       <div className={style.nombre}>

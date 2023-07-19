@@ -1,0 +1,11 @@
+.Nav {
+    width: 100%;
+    height: auto;
+    background-color: var(--letras-oscuras);
+    color: var(--letras-blancas);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: medium;
+
+}

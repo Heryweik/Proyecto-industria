@@ -42,13 +42,15 @@
     height: calc(100vh - 40px);
     width: 60%;
     border-radius: 20px;
-    box-shadow: .3px 1px 5px 5px var(--color-claro2);
+    box-shadow: .3px 1px 5px 5px var(--color-claro1);
+    border: 3px solid var(--color-claro2);
     margin: 20px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    padding-bottom: 50px;
 
     .saludo {
         margin: 40px;
