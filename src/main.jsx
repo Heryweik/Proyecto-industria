@@ -9,6 +9,12 @@ import LogIn from "./routes/LogIn/Login";
 import SignUp from "./routes/SignUp/SignUp";
 import Error  from "./routes/Error";
 import Menu from "./routes/Menu/Menu";
+import Clientes from "./routes/Clientes/Clientes";
+import Empleados from "./routes/Empleados/Empleados";
+import Productos from "./routes/Productos/Productos";
+import Proveedores from "./routes/Proveedores/Proveedores";
+import Servicios from "./routes/Servicios/Servicios";
+import Ventas from "./routes/Ventas/Ventas";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +39,30 @@ const router = createBrowserRouter([
   {
     path: '/menu',
     element: <Menu/>,
+  },
+  {
+    path: '/clientes',
+    element: <Clientes/>,
+  },
+  {
+    path: '/empleados',
+    element: <Empleados/>,
+  },
+  {
+    path: '/proveedores',
+    element: <Proveedores/>,
+  },
+  {
+    path: '/productos',
+    element: <Productos/>,
+  },
+  {
+    path: '/servicios',
+    element: <Servicios/>,
+  },
+  {
+    path: '/ventas',
+    element: <Ventas/>,
   },
 ]);
 

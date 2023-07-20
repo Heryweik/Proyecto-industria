@@ -17,6 +17,11 @@ export default function LogIn() {
       <div
         className={`${style.medium} ${style.bienvenido}`}
       >
+        <div className={style.c1}></div>
+        <div className={style.c2}></div>
+        <div className={style.c3}></div>
+        <div className={style.c4}></div>
+        
         <form className={style.form}>
           <Link to={"/"}>
             <FaChevronLeft className={style.icon} />

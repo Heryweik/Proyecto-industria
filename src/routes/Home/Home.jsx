@@ -15,6 +15,11 @@ export default function Home() {
       <div
         className={`${style.medium} ${style.bienvenido}`}
       >
+        <div className={style.c1}></div>
+        <div className={style.c2}></div>
+        <div className={style.c3}></div>
+        <div className={style.c4}></div>
+
         <div className={style.img2}>
           <img src={logo} alt="" className={style.logo} />
         </div>

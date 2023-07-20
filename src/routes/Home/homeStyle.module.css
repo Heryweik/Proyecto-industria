@@ -11,6 +11,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    z-index: 1;
 
     .img {
         width: 70%;
@@ -51,10 +52,66 @@
     justify-content: center;
     gap: 1rem;
     padding-bottom: 50px;
+    overflow: hidden;
+    z-index: 1;
+
+
+    /* Cuadrados */
+    .c1 {
+        position: absolute;
+        width: 40%;
+        height: 30%;
+        right: 0;
+        top: -30px;
+        background: linear-gradient(to right, var(--color-claro2), var(--color-claro1));
+        opacity: .3;
+        animation: moveLeftRight 4s ease-in-out infinite;
+        border-radius: 20px;
+      }
+
+      .c2 {
+        position: absolute;
+        width: 30%;
+        height: 20%;
+        left: -25px;
+        bottom: 0px;
+        border-radius: 20px;
+        background: linear-gradient(to right, var(--color-claro2), var(--color-claro1));
+        opacity: .5;
+        animation: moveLeftRight  5s ease-in-out infinite;
+      }
+
+      .c3 {
+        position: absolute;
+        z-index: 100;
+        width: 15%;
+        height: 10%;
+        bottom: 20px;
+        right: 10px;
+        border-radius: 20px;
+        background: linear-gradient(to right, var(--color-claro2), var(--color-claro1));
+        opacity: .8;
+        animation: moveUpDown  3s ease-in-out infinite;
+      }
+
+      .c4 {
+        position: absolute;
+        z-index: 2;
+        width: 25%;
+        height: 15%;
+        left: 0;
+        top: 60px;
+        border-radius: 20px;
+        background: linear-gradient(to right, var(--color-claro2), var(--color-claro1));
+        opacity: .6;
+        animation: moveUpDown 8s ease-in-out infinite;
+      }
+
 
     .saludo {
         margin: 40px;
         font-weight: bold;
+        z-index: 10;
     }
 
     .boton {
@@ -62,6 +119,7 @@
         height: 10%;
         background-color: var(--letras-oscuras);
         border-radius: 20px;
+        z-index: 10;
 
         .iSesion {
             border: none;
@@ -90,6 +148,7 @@
         flex-direction: column;
         position: absolute;
         bottom: 0;
+        z-index: 10;
     }
 }
 
@@ -151,6 +210,7 @@
             justify-content: center;
             align-items: center;
             margin-top: -40px;
+            z-index: 10;
         
             .logo {
                 width: 100%;
@@ -165,7 +225,33 @@
  }
 
 
+  
 
+/* Animación de arriba a abajo */
+@keyframes moveUpDown {
+0% {
+  transform: translateY(0); /* Posición inicial del elemento */
+}
+50% {
+  transform: translateY(20px); /* Mover el elemento hacia abajo */
+}
+100% {
+  transform: translateY(0); /* Volver el elemento a su posición inicial */
+}
+}
+
+/* Animación de izquierda a derecha */
+@keyframes moveLeftRight {
+    0% {
+      transform: translateX(0); /* Posición inicial del elemento */
+    }
+    50% {
+      transform: translateX(20px); /* Mover el elemento hacia abajo */
+    }
+    100% {
+      transform: translateX(0); /* Volver el elemento a su posición inicial */
+    }
+    }
 
 /* Extra large devices (large desktops, 1200px and up) */
 /* @media (min-width: 1200px) { } */

@@ -14,36 +14,41 @@ export default function SignUp() {
         </div>
       </div>
 
-      <div
-        className={`${style.medium} ${style.bienvenido}`}
-      >
+      <div className={`${style.medium} ${style.bienvenido}`}>
+        <div className={style.c1}></div>
+        <div className={style.c2}></div>
+        <div className={style.c3}></div>
+        <div className={style.c4}></div>
+
         <form className={style.form}>
           <Link to={"/"}>
             <FaChevronLeft className={style.icon} />
           </Link>
           <div className={style.img2}>
-          <img src={lo} alt="" className={style.logo} />
-        </div>
+            <img src={lo} alt="" className={style.logo} />
+          </div>
           <h1 className={style.saludo}>Registrate</h1>
           <div className={`${style.formInput}`}>
-            
             <input
               type="text"
               className={`form-control ${style.inNombre}`}
               id="exampleInputEmail"
               aria-describedby="emailHelp"
             />
-            <label className={`form-label mb-0 ${style.userLabel}`}>Nombre de usuario</label>
+            <label className={`form-label mb-0 ${style.userLabel}`}>
+              Nombre de usuario
+            </label>
           </div>
           <div className={`${style.formInput}`}>
-            
             <input
               type="email"
               className={`form-control ${style.inNombre}`}
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
             />
-            <label className={`form-label mb-0 ${style.userLabel}`}>Correo</label>
+            <label className={`form-label mb-0 ${style.userLabel}`}>
+              Correo
+            </label>
           </div>
           <div className={`${style.formInput}`}>
             <input
@@ -51,7 +56,9 @@ export default function SignUp() {
               className={`form-control ${style.inNombre}`}
               id="exampleInputPassword1"
             />
-            <label className={`form-label mb-0 ${style.userLabel}`}>Contrasenia</label>
+            <label className={`form-label mb-0 ${style.userLabel}`}>
+              Contrasenia
+            </label>
           </div>
           <div className={`${style.formInput}`}>
             <input
@@ -59,10 +66,11 @@ export default function SignUp() {
               className={`form-control ${style.inNombre}`}
               id="exampleInputPassword"
             />
-            <label className={`form-label mb-0 ${style.userLabel}`}>Confirmar ontrasenia</label>
+            <label className={`form-label mb-0 ${style.userLabel}`}>
+              Confirmar ontrasenia
+            </label>
           </div>
 
-          
           <div className={style.boton}>
             <Link to={"/menu"}>
               <button className={style.iSesion} type="submit">
@@ -72,10 +80,7 @@ export default function SignUp() {
           </div>
 
           <div className={style.footer}>
-            <p>
-              @Copyright
-            </p>
-            
+            <p>@Copyright</p>
           </div>
         </form>
       </div>

@@ -1,8 +1,8 @@
 .Nav {
     width: 100%;
     height: auto;
-    background-color: var(--letras-oscuras);
-    color: var(--letras-blancas);
+    background-color: var(--color-fondo1);
+    color: var(--letras-oscuras);
     padding: .8rem;
     padding-left: 3rem;
     padding-right: 3rem;
@@ -25,14 +25,14 @@
         .boton {
             background-color: transparent;
             border: none;
-            color: var(--letras-blancas);
+            color: var(--letras-oscuras);
             font-size: medium;
+            font-weight: 500;
             height: 2.5rem;
         }
 
         .boton:hover {
-            font-weight: 600;
-            color: var(--color-claro2);
+            font-weight: 700;
             border-bottom: 2px solid var(--color-claro2);
             box-shadow: 1px var(--color-claro2);
         }
@@ -42,12 +42,13 @@
         display: flex;
         align-items: center;
         gap: 1rem;
+        font-weight: 800;
 
         .usuario {
             
         padding: .5rem;
-        border-left: 1px dashed var(--color-claro2);
-        border-bottom: 1px dashed var(--color-claro2);
+        border-left: 2px dashed var(--color-claro2);
+        border-bottom: 2px dashed var(--color-claro2);
         }
     }
 
