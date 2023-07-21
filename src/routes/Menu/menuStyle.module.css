@@ -9,10 +9,10 @@
     min-height: calc(100vh - 7.3rem);
     background-color: var(--color-fondo1);
     display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(366px, 1fr));
+    gap: 50px;
     justify-content: center;
-    padding: 2rem;
+    padding: 1rem;
     padding-left: 10rem;
     padding-right: 10rem;
 
