@@ -1,4 +1,7 @@
 .containerFluid {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
     display: flex;
     background-color: var(--color-fondo1);
 }

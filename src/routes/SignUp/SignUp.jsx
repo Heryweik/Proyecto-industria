@@ -32,42 +32,65 @@ export default function SignUp() {
             <input
               type="text"
               className={`form-control ${style.inNombre}`}
-              id="exampleInputEmail"
+              id="nombre"
               aria-describedby="emailHelp"
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
-              Nombre de usuario
+              Nombre:
+            </label>
+          </div>
+          <div className={`${style.formInput}`}>
+            <input
+              type="text"
+              className={`form-control ${style.inNombre}`}
+              id="apellido"
+              aria-describedby="emailHelp"
+            />
+            <label className={`form-label mb-0 ${style.userLabel}`}>
+              Apellido:
+            </label>
+          </div>
+          <div className={`${style.formInput}`}>
+            <input
+              type="text"
+              className={`form-control ${style.inNombre}`}
+              id="telefono"
+            />
+            <label className={`form-label mb-0 ${style.userLabel}`}>
+              Telefono:
+            </label>
+          </div>
+          <div className={`${style.formInput}`}>
+            <select name="" id="cargo" className={`form-control ${style.inNombre}`}>
+              <option value>Hola</option>
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+            <label className={`form-label mb-0 ${style.userLabel}`}>
+              Selecciona un cargo:
             </label>
           </div>
           <div className={`${style.formInput}`}>
             <input
               type="email"
               className={`form-control ${style.inNombre}`}
-              id="exampleInputEmail1"
+              id="correo"
               aria-describedby="emailHelp"
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
-              Correo
+              Correo:
             </label>
           </div>
           <div className={`${style.formInput}`}>
             <input
               type="password"
               className={`form-control ${style.inNombre}`}
-              id="exampleInputPassword1"
+              id="contra"
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
-              Contrasenia
-            </label>
-          </div>
-          <div className={`${style.formInput}`}>
-            <input
-              type="password"
-              className={`form-control ${style.inNombre}`}
-              id="exampleInputPassword"
-            />
-            <label className={`form-label mb-0 ${style.userLabel}`}>
-              Confirmar ontrasenia
+              Contrasenia:
             </label>
           </div>
 

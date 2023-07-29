@@ -38,7 +38,7 @@ export default function LogIn() {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
             />
-            <label className={`form-label mb-0 ${style.userLabel}`}>Nombre de usuario:</label>
+            <label className={`form-label mb-0 ${style.userLabel}`}>Correo:</label>
           </div>
           <div className={`${style.formInput}`}>
             <input
