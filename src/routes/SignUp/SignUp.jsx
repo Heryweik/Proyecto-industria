@@ -62,7 +62,7 @@ export default function SignUp() {
           </div>
           <div className={`${style.formInput}`}>
             <select name="" id="cargo" className={`form-control ${style.inNombre}`}>
-              <option value>Hola</option>
+              <option value></option>
               <option value=""></option>
               <option value=""></option>
               <option value=""></option>
