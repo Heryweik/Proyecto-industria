@@ -1,0 +1,71 @@
+{
+  "hash": "00813188",
+  "browserHash": "5afd86a2",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "44d450f7",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "3b89fb14",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "dda379df",
+      "needsInterop": false
+    },
+    "react-icons/fa": {
+      "src": "../../node_modules/react-icons/fa/index.esm.js",
+      "file": "react-icons_fa.js",
+      "fileHash": "5b6427d3",
+      "needsInterop": false
+    },
+    "react-icons/bi": {
+      "src": "../../node_modules/react-icons/bi/index.esm.js",
+      "file": "react-icons_bi.js",
+      "fileHash": "b7218904",
+      "needsInterop": false
+    },
+    "react-bootstrap/Table": {
+      "src": "../../node_modules/react-bootstrap/esm/Table.js",
+      "file": "react-bootstrap_Table.js",
+      "fileHash": "22d95b33",
+      "needsInterop": false
+    },
+    "react-bootstrap/OverlayTrigger": {
+      "src": "../../node_modules/react-bootstrap/esm/OverlayTrigger.js",
+      "file": "react-bootstrap_OverlayTrigger.js",
+      "fileHash": "ecdb660b",
+      "needsInterop": false
+    },
+    "react-bootstrap/Tooltip": {
+      "src": "../../node_modules/react-bootstrap/esm/Tooltip.js",
+      "file": "react-bootstrap_Tooltip.js",
+      "fileHash": "cb440962",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-6TTJTGLE": {
+      "file": "chunk-6TTJTGLE.js"
+    },
+    "chunk-SRAQOA3L": {
+      "file": "chunk-SRAQOA3L.js"
+    },
+    "chunk-TAGB2TPY": {
+      "file": "chunk-TAGB2TPY.js"
+    },
+    "chunk-RVBTYSWJ": {
+      "file": "chunk-RVBTYSWJ.js"
+    },
+    "chunk-QSQYAWSL": {
+      "file": "chunk-QSQYAWSL.js"
+    }
+  }
+}
