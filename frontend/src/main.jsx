@@ -4,17 +4,17 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 /* Importacion de rutas */
-import Home from './routes/Home/Home'
-import LogIn from "./routes/LogIn/Login";
-import SignUp from "./routes/SignUp/SignUp";
+import Home from './routes/Home'
+import LogIn from "./routes/Login";
+import SignUp from "./routes/SignUp";
 import Error  from "./routes/Error";
-import Menu from "./routes/Menu/Menu";
-import Clientes from "./routes/Clientes/Clientes";
-import Empleados from "./routes/Empleados/Empleados";
-import Productos from "./routes/Productos/Productos";
-import Proveedores from "./routes/Proveedores/Proveedores";
-import Servicios from "./routes/Servicios/Servicios";
-import Ventas from "./routes/Ventas/Ventas";
+import Menu from "./routes/Menu";
+import Clientes from "./routes/Clientes";
+import Empleados from "./routes/Empleados";
+import Productos from "./routes/Productos";
+import Proveedores from "./routes/Proveedores";
+import Servicios from "./routes/Servicios";
+import Ventas from "./routes/Ventas";
 
 const router = createBrowserRouter([
   {
