@@ -6,7 +6,7 @@
   position: relative;
 
   .main {
-    min-height: calc(100vh - 7.3rem);
+    min-height: calc(100vh - 7.8rem);
     background-color: var(--color-fondo1);
     display: grid;
   grid-template-columns: repeat(auto-fit, minmax(366px, 1fr));
