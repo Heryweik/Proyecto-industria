@@ -21,7 +21,7 @@
         background-size: cover;
         background-position: center center;
         min-width: 300px;
-        height: auto;
+        min-height: auto;
 
         .logo {
             width: 100%;
@@ -33,7 +33,7 @@
         justify-content: space-between;
         align-items: center;
         z-index: 10;
-    
+
         .logo {
             width: 100%;
             display: none;
