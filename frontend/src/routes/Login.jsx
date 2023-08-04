@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import style from "./loginStyle.module.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { FaChevronLeft } from "react-icons/fa";
-import logo from "../assets/img/logoC.jpeg";
+import logo from "../assets/img/logo1.jpg";
 import lo from "../assets/img/logo.jpeg";
 
 export default function LogIn() {

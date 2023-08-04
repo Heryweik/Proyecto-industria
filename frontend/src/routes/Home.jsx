@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import style from "./homeStyle.module.css";
 import "bootstrap/dist/css/bootstrap.css";
-import logo from "../assets/img/logoC.jpeg";
+import logo from "../assets/img/logo2.jpg";
 
 export default function Home() {
   return (
