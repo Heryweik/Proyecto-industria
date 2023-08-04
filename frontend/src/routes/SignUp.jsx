@@ -60,7 +60,7 @@ export default function SignUp() {
               Telefono:
             </label>
           </div>
-          <div className={`${style.formInput}`}>
+          {/*<div className={`${style.formInput}`}>
             <select name="" id="cargo" className={`form-control ${style.inNombre}`}>
               <option value>Hola</option>
               <option value=""></option>
@@ -71,7 +71,7 @@ export default function SignUp() {
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Selecciona un cargo:
             </label>
-          </div>
+  </div> */}
           <div className={`${style.formInput}`}>
             <input
               type="email"
