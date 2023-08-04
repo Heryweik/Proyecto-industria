@@ -178,12 +178,12 @@
                 font-weight: 500;
                 z-index: 10;
                }
-               
+
                .inNombre:focus, inNombre:valid {
                 outline: none;
                 border: 2px solid var(--color-claro2);
                }
-               
+
                .inNombre:focus ~ label, inNombre:valid ~ label {
                 transform: translateY(-205%) scale(0.8);
                 background-color: var(--color-fondo2);

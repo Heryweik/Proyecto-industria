@@ -90,7 +90,7 @@ export default function SignUp() {
               id="contra"
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
-              Contrasenia:
+              Contraseña:
             </label>
           </div>
 
