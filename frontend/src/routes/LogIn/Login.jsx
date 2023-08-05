@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import style from "./loginStyle.module.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { FaChevronLeft } from "react-icons/fa";
-import logo from "../assets/img/logo1.jpg";
-import lo from "../assets/img/logo.jpeg";
+import logo from "../../assets/img/logoC.jpeg";
+import lo from "../../assets/img/logo.jpeg";
 
 export default function LogIn() {
   return (
@@ -21,7 +21,7 @@ export default function LogIn() {
         <div className={style.c2}></div>
         <div className={style.c3}></div>
         <div className={style.c4}></div>
-
+        
         <form className={style.form}>
           <Link to={"/"}>
             <FaChevronLeft className={style.icon} />
@@ -31,7 +31,7 @@ export default function LogIn() {
         </div>
           <h1 className={style.saludo}>Iniciar sesion</h1>
           <div className={`${style.formInput}`}>
-
+            
             <input
               type="text"
               className={`form-control ${style.inNombre}`}
@@ -46,7 +46,7 @@ export default function LogIn() {
               className={`form-control ${style.inNombre}`}
               id="exampleInputPassword1"
             />
-            <label className={`form-label mb-0 ${style.userLabel}`}>Contraseña:</label>
+            <label className={`form-label mb-0 ${style.userLabel}`}>Contrasenia:</label>
           </div>
           <div className={style.boton}>
             <Link to={"/menu"}>
@@ -58,7 +58,7 @@ export default function LogIn() {
 
           <div className={style.footer}>
             <p style={{ fontWeight: "lighter", marginBottom: "-3px" }}>
-            ¿Todavia no eres usuario?
+              Todavia no eres usuario?
             </p>
             <Link to={"/signup"} className={style.link}>
               <p style={{ fontWeight: "bold" }}>Registrate aqui</p>

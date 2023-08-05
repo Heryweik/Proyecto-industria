@@ -1,14 +1,14 @@
 /* import { Link } from "react-router-dom"; */
 import style from "./menuStyle.module.css";
 import "bootstrap/dist/css/bootstrap.css";
-import NavBar from "../components/NavBar/NavBar";
-import Footer from "../components/Footer/Footer";
-import empleados from "../assets/img/empleados.svg";
-import cliente from "../assets/img/user.svg";
-import provee from "../assets/img/proveedor.svg";
-import servicios from "../assets/img/services.svg";
-import ventas from "../assets/img/ventas.svg";
-import product from "../assets/img/products.svg";
+import NavBar from "../../components/NavBar/NavBar";
+import Footer from "../../components/Footer/Footer";
+import empleados from "../../assets/img/empleados.svg";
+import cliente from "../../assets/img/user.svg";
+import provee from "../../assets/img/proveedor.svg";
+import servicios from "../../assets/img/services.svg";
+import ventas from "../../assets/img/ventas.svg";
+import product from "../../assets/img/products.svg";
 import { Link } from "react-router-dom";
 
 export default function Menu() {

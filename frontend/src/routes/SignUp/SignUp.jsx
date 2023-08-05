@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import style from "./signupStyle.module.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { FaChevronLeft } from "react-icons/fa";
-import logo from "../assets/img/logoC.jpeg";
-import lo from "../assets/img/logo.jpeg";
+import logo from "../../assets/img/logoC.jpeg";
+import lo from "../../assets/img/logo.jpeg";
 
 export default function SignUp() {
   return (
@@ -60,9 +60,9 @@ export default function SignUp() {
               Telefono:
             </label>
           </div>
-          {/*<div className={`${style.formInput}`}>
+          <div className={`${style.formInput}`}>
             <select name="" id="cargo" className={`form-control ${style.inNombre}`}>
-              <option value>Hola</option>
+              <option value></option>
               <option value=""></option>
               <option value=""></option>
               <option value=""></option>
@@ -71,7 +71,7 @@ export default function SignUp() {
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Selecciona un cargo:
             </label>
-  </div> */}
+          </div>
           <div className={`${style.formInput}`}>
             <input
               type="email"
@@ -90,7 +90,7 @@ export default function SignUp() {
               id="contra"
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
-              Contraseña:
+              Contrasenia:
             </label>
           </div>
 

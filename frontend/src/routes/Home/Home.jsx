@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import style from "./homeStyle.module.css";
 import "bootstrap/dist/css/bootstrap.css";
-import logo from "../assets/img/logo2.jpg";
+import logo from "../../assets/img/logoC.jpeg";
 
 export default function Home() {
   return (
@@ -36,7 +36,7 @@ export default function Home() {
             <button className={style.iSesion}>Registrarse</button>
           </Link>
         </div>
-
+        
       <div className={style.footer}>
         <p>@Copyright</p>
       </div>

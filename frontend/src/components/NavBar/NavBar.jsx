@@ -58,7 +58,7 @@ export default function NavBar() {
       <div>
       <div className={style.acordeon}>
           <button className={style.titulo} onClick={toggleAcordeon}>
-            Menu
+            Servicios
           </button>
           {abierto && (
             <div className={style.contenido}>
