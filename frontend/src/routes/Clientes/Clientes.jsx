@@ -110,7 +110,7 @@ function ModalAgregar(props) {
         </div>
       </Modal.Body>
       <Modal.Footer className={style.modalFooter}>
-        <button className={style.sesion}>Actualizar informacion</button>
+        <button className={style.sesion}>Agregar</button>
       </Modal.Footer>
     </Modal>
   );
@@ -129,7 +129,7 @@ export default function Clientes() {
         <div className={style.head}>
           <div className={style.junt}>
           <img src={cliente} alt="" className={style.img} />
-            <h1 style={{ fontWeight: "700" }}>Clientes</h1>
+            <span style={{ fontWeight: "700" }}>Clientes</span>
           </div>
           
           <div>

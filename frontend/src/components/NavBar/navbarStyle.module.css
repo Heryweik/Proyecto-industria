@@ -403,7 +403,8 @@
             width: auto;
             background-color: var(--color-claro1);
             color: var(--letras-blancas);
-            border-radius: 20px;
+            border-radius: 50%;
+            margin: auto;
             display: block;
         }
     
