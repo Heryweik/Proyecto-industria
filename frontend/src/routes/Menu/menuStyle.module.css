@@ -57,3 +57,28 @@
     bottom: 0;
   }
 }
+
+@media (max-width: 575.98px) {
+  .containerFluid {
+  
+    .main {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 1rem;
+      padding-left: 4rem;
+      padding-right: 4rem;
+  
+      .card {
+        width: 100%;
+        height: 12rem;
+
+  
+        .texto {
+          font-size: 20px;
+        }
+      }
+  
+    }
+
+  }
+}
