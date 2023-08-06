@@ -123,6 +123,67 @@
       }
 }
 
+/* Modal */
+.ModalHeader {
+    background-color: var(--color-claro2) !important;
+    color: var(--letras-oscuras);
+    font-size: medium;
+    text-align: center;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+  
+  .Modal {
+    color: var(--letras-oscuras);
+    text-align: center;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  
+  }
+  
+  .modalFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    .boton1 {
+      background-color: var(--color-claro2);
+      border: none;
+      color: var(--letras-oscuras);
+      font-size: medium;
+      font-weight: 500;
+      height: 2.5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      border-radius: 15px;
+    }
+  
+    .boton1:hover {
+      background-color: var(--color-hover);
+    }
+  
+    .sesion {
+      border: none;
+      font-size: medium;
+      font-weight: 500;
+      height: 2.5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      background-color: var(--color-claro1);
+      color: var(--letras-blancas);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .sesion:hover {
+      background-color: var(--color-hover);
+    }
+  }
+
 /* Disenio responsivo */
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) { 

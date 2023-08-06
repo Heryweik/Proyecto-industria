@@ -27,13 +27,13 @@ function ModalSuscripciones(props) {
         <div className={style.plan}>
           <div className={style.card}>
             <div className={style.precio}>Gratis</div>
-            <h3>Principiante</h3>
+            <h3>FREE</h3>
             <p>5 min</p>
             <div className={style.elegir} onClick={props.onHide}>Elegir</div>
           </div>
           <div className={style.card}>
             <div className={style.precio}>5$</div>
-            <h3>Profesional</h3>
+            <h3>PRO</h3>
             <p>1 mes</p>
             <div className={style.elegir} onClick={props.onHide}>Elegir</div>
           </div>
@@ -72,7 +72,7 @@ export default function SignUp() {
         <div className={style.c4}></div>
 
         <form className={style.form}>
-          <Link to={"/"}>
+          <Link to={-1}>
             <FaChevronLeft className={style.icon} />
           </Link>
           <div className={style.img2}>
