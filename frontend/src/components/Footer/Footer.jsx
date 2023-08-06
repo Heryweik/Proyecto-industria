@@ -6,6 +6,8 @@ export default function Footer() {
     <div className={style.Nav}>
       
       <p style={{margin: '.8rem'}}>@Copyright</p>
+
+      <span>Tipo de suscripcion: VIP</span>
       
     </div>
   );

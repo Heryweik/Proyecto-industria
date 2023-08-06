@@ -209,6 +209,36 @@
       }
     }
 
+    .botonSus {
+      width: auto;
+      height: 10%;
+      border-radius: 20px;
+      background-color: var(--color-fondo1);
+      overflow: hidden;
+
+      .iSesion {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        border: none;
+        background-color: var(--color-claro2);
+        color: var(--letras-oscuras);
+        width: 100%;
+        height: 90%;
+        border-radius: 20px;
+        font-size: larger;
+        font-weight: 600;
+        transition: transform 0.2s ease, background-color 0.3s ease;
+      }
+
+      .iSesion:hover {
+        background-color: var(--color-claro1);
+      }
+
+      .iSesion:active {
+        transform: translateY(3px);
+      }
+    }
+
     .boton {
       width: auto;
       height: 10%;
@@ -238,6 +268,115 @@
         transform: translateY(3px);
       }
     }
+  }
+}
+
+/* Modal */
+.ModalHeader {
+  background-color: var(--color-claro2) !important;
+  color: var(--letras-oscuras);
+  font-size: medium;
+  text-align: center;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.Modal {
+  color: var(--letras-oscuras);
+  text-align: center;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+
+  .plan {
+    width: 60%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: 2rem;
+    gap: 6rem;
+
+    .card {
+        background-color: var(--color-claro1);
+        color: var(--letras-blancas);
+        box-shadow: 0.2rem 0.2rem .5rem var(--letras-oscuras)!important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        height: 100%;
+        width: 15rem;
+        gap: 1rem;
+        position: relative;
+        border-radius: 15px;
+
+        .precio {
+            position: absolute;
+            width: 50%;
+            height: 40%;
+            background-color: var(--color-claro2);
+            top: -50px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0.1rem 0.1rem .3rem var(--letras-oscuras)!important;
+            color: var(--letras-oscuras);
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .elegir {
+            position: absolute;
+            width: 40%;
+            height: 25%;
+            background-color: var(--color-claro2);
+            bottom: -25px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0.1rem 0.1rem .3rem var(--letras-oscuras)!important;
+            color: var(--letras-oscuras);
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .elegir:hover {
+            background-color: var(--color-hover);
+        }
+    }
+  }
+}
+
+.modalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .sesion {
+    border: none;
+    font-size: medium;
+    font-weight: 500;
+    height: 2.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: var(--color-claro1);
+    color: var(--letras-blancas);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sesion:hover {
+    background-color: var(--color-hover);
   }
 }
 
