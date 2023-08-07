@@ -25,7 +25,7 @@ export default function Servicios() {
               <div className={style.img}>
                 <img src={servicios} alt="" />
               </div>
-              <span className={style.texto}>Servicios</span>
+              <span className={style.texto}>Citas</span>
             </div>
           </Link>
           <Link to={"/proveedores"}>
@@ -33,7 +33,7 @@ export default function Servicios() {
               <div className={style.img}>
                 <img src={servicios} alt="" />
               </div>
-              <span className={style.texto}>Proveedores</span>
+              <span className={style.texto}>Administrar Citas</span>
             </div>
           </Link>
         </div>
