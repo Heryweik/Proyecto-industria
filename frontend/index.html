@@ -5,6 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
+
+    <link rel="manifest" href="./public/manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then((registration) => {
+            console.log('Service Worker registrado con éxito:', registration);
+          })
+          .catch((error) => {
+            console.log('Error al registrar el Service Worker:', error);
+          });
+      });
+    }
+  </script>
   </head>
   <body>
     <div id="root"></div>
