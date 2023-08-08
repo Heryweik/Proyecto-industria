@@ -34,15 +34,16 @@ export default function Home() {
       <div className={style.medium}>
         <div className={style.img}>
           <img src={logo} alt="" className={style.logo} />
-          <button id="install-button" style={{ display: 'none' }}>
-        Instalar PWA
-      </button>
+          
         </div>
       </div>
 
       <div
         className={`${style.medium} ${style.bienvenido}`}
       >
+        <button id="install-button" style={{ display: 'none' }}>
+        Instalar PWA
+      </button>
         <div className={style.c1}></div>
         <div className={style.c2}></div>
         <div className={style.c3}></div>
