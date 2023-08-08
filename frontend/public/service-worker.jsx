@@ -2,7 +2,7 @@
 const CACHE_NAME = 'PWA-Industria';
 const urlsToCache = [
   '/',
-  '/index.html',
+  '../src/main.jsx',
   // Agrega aquí los recursos estáticos que deseas cachear
 ];
 
