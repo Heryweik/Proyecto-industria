@@ -6,7 +6,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import { FaChevronLeft } from "react-icons/fa";
 import logo from "../../assets/img/logoC.jpeg";
 import lo from "../../assets/img/logo.jpeg";
-
+import { useForm } from "react-hook-form";
+import classNames from "classnames";
 /* Bootstrap */
 import Modal from "react-bootstrap/Modal";
 
@@ -55,7 +56,13 @@ function ModalSuscripciones(props) {
 }
 
 export default function SignUp() {
+  const { register, formState: { errors }, handleSubmit } = useForm();
+
   const [modalShow, setModalShow] = React.useState(false);
+
+  function insertar() {
+    // Aquí puedes manejar la lógica de inserción de datos
+  }
 
   return (
     <div className={style.containerFluid}>
@@ -71,7 +78,7 @@ export default function SignUp() {
         <div className={style.c3}></div>
         <div className={style.c4}></div>
 
-        <form className={style.form}>
+        <form className={style.form} onSubmit={handleSubmit(insertar)}>
           <Link to={-1}>
             <FaChevronLeft className={style.icon} />
           </Link>
@@ -79,24 +86,52 @@ export default function SignUp() {
             <img src={lo} alt="" className={style.logo} />
           </div>
           <h1 className={style.saludo}>Registrate</h1>
+          
           <div className={`${style.formInput}`}>
             <input
               type="text"
-              className={`form-control ${style.inNombre}`}
+              className={classNames("form-control", style.inNombre, {
+                [style.error]: errors.nombre
+              })}
               id="nombre"
               aria-describedby="emailHelp"
+              {...register("nombre", {
+                required: "Ingrese un nombre",
+                pattern: {
+                  value: /^(?!.*(.).*\1)[A-Za-z]+$/, // Expresión regular que solo permite letras y espacios
+                 message: "Ingreso numeros o un nombre no valido",
+                 
+                },
+                
+                minLength: { value: 3, message: "Ingrese más de 2 caracteres" },
+                maxLength: { value: 20, message: "No más de 20 caracteres" }
+              })}
             />
+            {errors.nombre && <p className={style.errorMessage}>🚫{errors.nombre.message}</p>}
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Nombre:
             </label>
           </div>
+          
           <div className={`${style.formInput}`}>
             <input
               type="text"
-              className={`form-control ${style.inNombre}`}
+              className={classNames("form-control", style.inNombre, {
+                [style.error]: errors.apellido
+              })}
               id="apellido"
               aria-describedby="emailHelp"
+              {...register("apellido", {
+                required: "Ingrese un apellido",
+                pattern: {
+                  value: /^(?!.*(.).*\1)[A-Za-z]+$/,
+                  message: "Ingreso numeros o un apellido no valido"
+                },
+                minLength: { value: 2, message: "Ingrese más de 1 caracter" },
+                maxLength: { value: 20, message: "No más de 20 caracteres" }
+              })}
             />
+            {errors.apellido && <p className={style.errorMessage}>🚫{errors.apellido.message}</p>}
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Apellido:
             </label>
@@ -105,36 +140,46 @@ export default function SignUp() {
           <div className={`${style.formInput}`}>
             <input
               type="email"
-              className={`form-control ${style.inNombre}`}
+              className={classNames("form-control", style.inNombre, {
+                [style.error]: errors.correo
+              })}
               id="correo"
               aria-describedby="emailHelp"
+              {...register("correo", {
+                required: "Ingrese un correo",
+                minLength: { value: 2, message: "Ingrese más de 2 caracteres" },
+                maxLength: { value: 50, message: "No más de 50 caracteres" },
+                pattern: {
+                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  message: "Ingrese un correo válido"
+                }
+              })}
             />
+            {errors.correo && <p className={style.errorMessage}>🚫{errors.correo.message}</p>}
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Correo:
             </label>
           </div>
+
           <div className={`${style.formInput}`}>
             <input
               type="password"
-              className={`form-control ${style.inNombre}`}
+              className={classNames("form-control", style.inNombre, {
+                [style.error]: errors.contra
+              })}
               id="contra"
+              {...register("contra", {
+                required: "Ingrese una contraseña",
+                minLength: { value: 6, message: "La contraseña debe tener al menos 6 caracteres" },
+                maxLength: { value: 20, message: "No más de 20 caracteres" }
+              })}
             />
+            {errors.contra && <p className={style.errorMessage}>🚫{errors.contra.message}</p>}
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Contrasenia:
             </label>
           </div>
-          {/* <div className={`${style.formInput}`}>
-            <select name="" id="cargo" className={`form-control ${style.inNombre}` }>
-              <option value="Elige una opcion"></option>
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-            </select>
-            <label className={`form-label mb-0 ${style.userLabel}`}>
-              Selecciona un cargo:
-            </label>
-          </div> */}
+    
 
           <div className={style.botonSus}>
             <button
@@ -150,17 +195,14 @@ export default function SignUp() {
             />
           </div>
 
-          
           <div disabled>
             <p>tipo de suscripcion elegida: </p>
           </div>
 
           <div className={style.boton}>
-            <Link to={"/menu"}>
-              <button className={style.iSesion} type="submit">
-                Registrarse
-              </button>
-            </Link>
+            <button className={style.iSesion} type="submit">
+              Registrarse
+            </button>
           </div>
 
           <div className={style.footer}>
