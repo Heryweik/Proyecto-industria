@@ -32,9 +32,6 @@ export default function Home() {
   return (
     <div className={style.containerFluid}>
       
-      <button id="install-button" style={{ display: 'none', zIndex: '100' }}>
-        Instalar PWA
-      </button>
       <div className={style.medium}>
         <div className={style.img}>
           <img src={logo} alt="" className={style.logo} />
@@ -45,6 +42,9 @@ export default function Home() {
       <div
         className={`${style.medium} ${style.bienvenido}`}
       >
+      <button id="install-button" style={{ display: 'none', zIndex: '100' }}>
+        Instalar PWA
+      </button>
         <div className={style.c1}></div>
         <div className={style.c2}></div>
         <div className={style.c3}></div>
