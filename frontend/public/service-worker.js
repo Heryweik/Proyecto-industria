@@ -1,7 +1,7 @@
 const CACHE_NAME = 'PWA-Industria';
 const urlsToCache = [
-  '/',
-  './index.html',  // Ajusta la ruta a la ubicación correcta de index.html
+  './index.html',  // Ruta relativa al index.html
+  './manifest.json', // Ruta relativa al manifest.json
   // Agrega aquí los recursos estáticos que deseas cachear
 ];
 
