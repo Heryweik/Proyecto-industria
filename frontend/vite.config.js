@@ -7,5 +7,12 @@ export default defineConfig({
   server: {
     host: true,
     port: 80,
+    proxy: {
+      '/deploy': {
+        target: 'http://localhost:80', // Ajusta el puerto si es necesario
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/deploy/, '/deploy.sh')
+      }
+    }
   },
 })
