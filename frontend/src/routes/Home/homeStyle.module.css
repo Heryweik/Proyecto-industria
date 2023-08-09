@@ -13,18 +13,19 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        background-color: #5dc8bf88;
-        height: 20%;
+        background-color: var(--color-claro2);
+        height: 7rem;
         width: 60%;
         border-radius: 20px;
+        padding: 2rem;
 
         .pwaB{
             display: block;
             margin: 0 auto;
-            margin-top: 5%;
             background-color: var(--color-claro1);
             color: var(--letras-blancas);
-            padding: 1rem;
+            width: 11rem;
+            height: 3rem;
             border: none;
             border-radius: 15px;
         }
