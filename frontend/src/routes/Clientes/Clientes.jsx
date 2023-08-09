@@ -107,7 +107,6 @@ function ModalAgregar(props) {
               errors.nombre && style.error
             }`}
             id="DNI"
-            aria-describedby="emailHelp"
             {...register("DNI", {
               required: "Por favor ingresa una DNI",
               pattern: {
@@ -129,7 +128,6 @@ function ModalAgregar(props) {
           type="text"
           className={`form-control ${style.inNombre}`}
           id="nombre"
-          aria-describedby="emailHelp"
           {...register("nombre", {
             required: "Por favor ingresaun nombre",
             pattern: {
@@ -151,7 +149,6 @@ function ModalAgregar(props) {
           type="text"
           className={`form-control ${style.inNombre}`}
           id="apellido"
-          aria-describedby="emailHelp"
           {...register("apellido", {
             required: "Por favor ingresa un apellido",
             pattern: {
@@ -173,19 +170,18 @@ function ModalAgregar(props) {
           type="number"
           className={`form-control ${style.inNombre}`}
           id="telefono"
-          aria-describedby="emailHelp"
           {...register("telefono", {
-            required: "Por favor ingresa un número de telefono",
+            required: "Por favor ingresa un número de teléfono",
             pattern: {
               value: /^\d{8}$/, 
               message: "Ingrese solo números",
             },
-            minLength: { value: 8, message: "Por favor ingresa un número de telefono"},
-            maxLength: { value: 8, message: "Por favor ingresa un número de telefono"},
+            minLength: { value: 8, message: "Por favor ingresa un número de teléfono"},
+            maxLength: { value: 8, message: "Por favor ingresa un número de teléfono"},
           })}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
-          Telefono:</label>
+          Teléfono:</label>
           {errors.telefono && (
             <span className={style.errorMessage}>{errors.telefono.message}</span>
           )}
@@ -217,10 +213,9 @@ function ModalAgregar(props) {
           type="text"
           className={`form-control ${style.inNombre}`}
           id="direccion"
-          aria-describedby="emailHelp"
           {...register("direccion", {
             required: "Por favor ingresa un dirección",
-            minLength: { value: 2, message: "Por favor ingresa de 2 caracteres" },
+            minLength: { value: 5, message: "Por favor ingresa de 5 caracteres" },
             maxLength: { value: 50, message:"Ingrese menos de 50 caracteres" },
           })}
         />
@@ -265,7 +260,7 @@ export default function Clientes() {
           
           <div>
             <OverlayTrigger
-              overlay={<Tooltip id="tooltip-disabled">Agregar usuario</Tooltip>}
+              overlay={<Tooltip id="tooltip-disabled">Agregar Clientes</Tooltip>}
             >
               <span className="d-inline-block">
                 <button type="button" className={`btn ${style.sesion}`} onClick={() => setModalShow2(true)}>
