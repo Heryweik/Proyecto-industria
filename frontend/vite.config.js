@@ -9,7 +9,7 @@ export default defineConfig({
     port: 80,
     proxy: {
       '/deploy': {
-        target: 'http://localhost:80', // Ajusta el puerto si es necesario
+        target: 'https://www.dentalservices.me',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/deploy/, '/deploy.sh')
       }
