@@ -3,7 +3,7 @@
     "short_name": "Dental Services",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "transparent",
+    "background_color": "#ffffff",
     "theme_color": "#000000",
     "icons": [
       {
