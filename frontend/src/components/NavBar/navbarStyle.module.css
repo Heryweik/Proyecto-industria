@@ -24,7 +24,8 @@
         }
 
         .logo2 {
-            width: 3rem;
+            width: 20px;
+            height: 3.2rem;
             display: none;
         }
 
@@ -357,7 +358,7 @@
             width: auto;
             background-color: var(--color-claro1);
             color: var(--letras-blancas);
-            border-radius: 20px;
+            border-radius: 50%;
             display: block;
         }
     
@@ -422,7 +423,7 @@
             width: auto;
             display: flex;
             align-items: center;
-            gap: 1px;
+            gap: .2px;
     
     
             .logo {
@@ -431,9 +432,9 @@
             }
 
             .logo2 {
-                width: 3.6rem;
+                width: 4.5rem;
                 display: block;
-                margin-right: -80px;
+                margin-right: -170px;
             }
 
             .boton {

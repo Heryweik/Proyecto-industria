@@ -26,7 +26,7 @@ function ModalCerrar(props) {
         <button onClick={props.onHide} className={style.boton1}>
           No
         </button>
-        <Link to={"/"}>
+        <Link to={"/"} style={{textDecoration: 'none'}}>
           <button className={style.sesion}>Si</button>
         </Link>
       </Modal.Footer>
