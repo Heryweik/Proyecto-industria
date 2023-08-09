@@ -11,7 +11,7 @@ export default defineConfig({
       '/deploy': {
         target: 'http://localhost:80',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/deploy/, 'deploy.sh')
+        rewrite: (path) => path.replace(/^\/deploy/, '/deploy.sh')
       }
     }
   },
