@@ -4,6 +4,32 @@
     box-sizing: border-box;
     display: flex;
     background-color: var(--color-fondo1);
+    position: relative;
+
+    .pwa {
+        position: absolute;
+        display: none;
+        z-index: 100;
+        background-color: #5dc8bf95;
+        height: 7rem;
+        width: 100%;
+        padding: 2rem;
+
+        .pwaB{
+            display: block;
+            margin: 0 auto;
+            background-color: var(--color-claro1);
+            color: var(--letras-blancas);
+            width: 11rem;
+            height: 3rem;
+            border: 2px solid var(--color-claro2);
+            border-radius: 15px;
+        }
+
+        .pwaB:hover {
+            background-color: var(--color-hover);
+        }
+    }
 }
 
 .medium {

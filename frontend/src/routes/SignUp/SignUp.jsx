@@ -107,10 +107,11 @@ export default function SignUp() {
                 maxLength: { value: 20, message: "No más de 20 caracteres" }
               })}
             />
-            {errors.nombre && <p className={style.errorMessage}>🚫{errors.nombre.message}</p>}
+            
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Nombre:
             </label>
+            {errors.nombre && <p className={style.errorMessage}>🚫{errors.nombre.message}</p>}
           </div>
           
           <div className={`${style.formInput}`}>
@@ -131,10 +132,11 @@ export default function SignUp() {
                 maxLength: { value: 20, message: "No más de 20 caracteres" }
               })}
             />
-            {errors.apellido && <p className={style.errorMessage}>🚫{errors.apellido.message}</p>}
+            
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Apellido:
             </label>
+            {errors.apellido && <p className={style.errorMessage}>🚫{errors.apellido.message}</p>}
           </div>
 
           <div className={`${style.formInput}`}>
@@ -155,11 +157,13 @@ export default function SignUp() {
                 }
               })}
             />
-            {errors.correo && <p className={style.errorMessage}>🚫{errors.correo.message}</p>}
+            
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Correo:
             </label>
+            {errors.correo && <p className={style.errorMessage} >🚫{errors.correo.message}</p>}
           </div>
+          
 
           <div className={`${style.formInput}`}>
             <input
@@ -174,11 +178,13 @@ export default function SignUp() {
                 maxLength: { value: 20, message: "No más de 20 caracteres" }
               })}
             />
-            {errors.contra && <p className={style.errorMessage}>🚫{errors.contra.message}</p>}
+            
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Contrasenia:
             </label>
+            {errors.contra && <p className={style.errorMessage}>🚫{errors.contra.message}</p>}
           </div>
+          
     
 
           <div className={style.botonSus}>
