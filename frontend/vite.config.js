@@ -17,7 +17,7 @@ export default defineConfig({
           if (req.method === 'GET') {
             try {
               // Lee el contenido de deploy.sh
-              const deployScriptContent = readFileSync('/ruta/a/tu/proyecto/deploy.sh', 'utf-8');
+              const deployScriptContent = readFileSync('/deploy.sh', 'utf-8');
               
               // Envía el contenido como respuesta
               res.end(deployScriptContent);
