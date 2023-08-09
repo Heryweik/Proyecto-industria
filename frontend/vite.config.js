@@ -11,7 +11,7 @@ export default defineConfig({
       '/deploy': {
         target: 'https://www.dentalservices.me',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/deploy/, '/deploy.sh')
+        rewrite: (path) => path.replace(/^\/deploy/, 'deploy.sh')
       }
     }
   },
