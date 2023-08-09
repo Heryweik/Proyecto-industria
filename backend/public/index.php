@@ -53,3 +53,46 @@ $router->post('/servicios/eliminar', [ServicioController::class, 'eliminar']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
+
+// index.php (Módulo de Proveedores)
+
+// Incluye el archivo del modelo de Proveedor
+require_once('models/Proveedor.php');
+
+$proveedor1 = new Proveedor('1',	'Maria',	'12346',	'maria@gmail.com',	'la paz');
+$proveedor2 = new Proveedor('2', 	'Carlos',	'234567',	'carlos@gmail.com',	'TGU');
+$proveedor3 = new Proveedor('3', 	'Juana',	'345676',	'juana@gmail.com',	'Choluteca');
+// Crea un arreglo con los proveedores disponibles
+$proveedores = array($proveedor1, $proveedor2, $proveedor3);
+
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Proveedores</title>
+</head>
+<body>
+    <h1>Lista de Proveedores</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Dirección</th>
+        </tr>
+        <?php foreach ($proveedores as $proveedor) { ?>
+            <tr>
+                <td><?php echo $proveedor->getId(); ?></td>
+                <td><?php echo $proveedor->getNombre(); ?></td>
+                <td><?php echo $proveedor->getTelefono(); ?></td>
+                <td><?php echo $proveedor->getCorreo(); ?></td>
+                <td><?php echo $proveedor->getDireccion(); ?></td>
+            </tr>
+        <?php } ?>
+    </table>
+</body>
+</html>
