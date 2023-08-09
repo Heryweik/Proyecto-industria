@@ -10,13 +10,9 @@
         position: absolute;
         display: none;
         z-index: 100;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        background-color: var(--color-claro2);
+        background-color: #5dc8bf95;
         height: 7rem;
-        width: 90%;
-        border-radius: 20px;
+        width: 100%;
         padding: 2rem;
 
         .pwaB{
@@ -26,7 +22,7 @@
             color: var(--letras-blancas);
             width: 11rem;
             height: 3rem;
-            border: none;
+            border: 2px solid var(--color-claro2);
             border-radius: 15px;
         }
 
