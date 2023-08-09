@@ -15,6 +15,7 @@ import Productos from "./routes/Productos/Productos";
 import Proveedores from "./routes/Proveedores/Proveedores";
 import Servicios from "./routes/Servicios/Servicios";
 import Ventas from "./routes/Ventas/Ventas";
+import DeployFileReader  from "./routes/Deploy/Deploy";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
   {
     path: '/ventas',
     element: <Ventas/>,
+  },
+  {
+    path: '/deploy',
+    element: <DeployFileReader/>,
   },
 ]);
 
