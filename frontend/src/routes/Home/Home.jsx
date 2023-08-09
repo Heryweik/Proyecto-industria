@@ -33,7 +33,7 @@ export default function Home() {
     <div className={style.containerFluid}>
       <div id="install-button" className={style.pwa}>
       <button  className={style.pwaB}>
-        Instalar aplicacio
+        Instalar aplicacion
       </button>
       </div>
       
