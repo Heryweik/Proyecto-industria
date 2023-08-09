@@ -9,6 +9,7 @@ import cliente from "../../assets/img/user.svg";
 import { BiUserPlus, BiSolidPencil } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { BsFillTrashFill } from "react-icons/bs";
+import { useForm } from "react-hook-form";
 /* import { FaChevronLeft } from "react-icons/fa"; */
 
 /* Bootstrap */
@@ -58,6 +59,7 @@ function ModalEditar(props) {
           id="nombre"
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>Nombre:</label>
+
         </div>
 
         <div className={style.form}>
@@ -78,7 +80,13 @@ function ModalEditar(props) {
 }
 
 function ModalAgregar(props) {
+  const { register, formState: { errors }, handleSubmit, } = useForm();
+  function insertar() {
+    // Aquí puedes manejar la lógica de inserción de datos
+  }
+
   return (
+    
     <Modal
       {...props}
       size="md"
@@ -91,37 +99,157 @@ function ModalAgregar(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className={style.Modal}>
+      <form className={style.Modal} onSubmit={handleSubmit(insertar)}>
         <div className={style.form}>
-      <input
-          type="text"
-          className={`form-control ${style.inNombre}`}
-          id="nombre"
-        />
-        <label className={`form-label mb-0 ${style.userLabel}`}>Nombre:</label>
+        <input
+            type="text"
+            className={`form-control ${style.inNombre} ${
+              errors.nombre && style.error
+            }`}
+            id="DNI"
+            aria-describedby="emailHelp"
+            {...register("DNI", {
+              required: "Por favor ingresa una DNI",
+              pattern: {
+                value:/^\d{13}$/,
+                message: "Por favor ingresa una DNI válida",
+              },
+              minLength: { value: 13, message: "Por favor ingresa una DNI válida" },
+              maxLength: { value: 13, message: "Por favor ingresa una DNI válida" },
+            })}
+          />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          DNI:</label>
+        {errors.DNI && (
+            <span className={style.errorMessage}>{errors.DNI.message}</span>
+          )}
         </div>
-
         <div className={style.form}>
         <input
           type="text"
           className={`form-control ${style.inNombre}`}
-          id="exampleInputEmail1"
+          id="nombre"
           aria-describedby="emailHelp"
+          {...register("nombre", {
+            required: "Por favor ingresaun nombre",
+            pattern: {
+              value: /^(?!.*(.).*\1)[A-Za-z]+$/,
+                 message: "Ingreso numeros o un nombre no valido",
+            },
+            minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
+            maxLength: { value: 20, message: "No más de 20 caracteres"},
+          })}
         />
-        <label className={`form-label mb-0 ${style.userLabel}`}>Correo:</label>
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Nombre:</label>
+          {errors.nombre && (
+            <span className={style.errorMessage}>{errors.nombre.message}</span>
+          )}
         </div>
-      </Modal.Body>
-      <Modal.Footer className={style.modalFooter}>
-        <button className={style.sesion}>Agregar</button>
+        <div className={style.form}>
+        <input
+          type="text"
+          className={`form-control ${style.inNombre}`}
+          id="apellido"
+          aria-describedby="emailHelp"
+          {...register("apellido", {
+            required: "Por favor ingresa un apellido",
+            pattern: {
+              value: /^(?!.*(.).*\1)[A-Za-z]+$/, 
+                 message: "Ingreso numeros o un apellido no valido",
+            },
+            minLength: { value: 3, message:  "Por favor ingresamás de 2 caracteres"},
+            maxLength: { value: 20, message: "No más de 20 caracteres"},
+          })}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Apellido:</label>
+          {errors.apellido && (
+            <span className={style.errorMessage}>{errors.apellido.message}</span>
+          )}
+        </div>
+        <div className={style.form}>
+        <input
+          type="number"
+          className={`form-control ${style.inNombre}`}
+          id="telefono"
+          aria-describedby="emailHelp"
+          {...register("telefono", {
+            required: "Por favor ingresa un número de telefono",
+            pattern: {
+              value: /^\d{8}$/, 
+              message: "Ingrese solo números",
+            },
+            minLength: { value: 8, message: "Por favor ingresa un número de telefono"},
+            maxLength: { value: 8, message: "Por favor ingresa un número de telefono"},
+          })}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Telefono:</label>
+          {errors.telefono && (
+            <span className={style.errorMessage}>{errors.telefono.message}</span>
+          )}
+        </div>
+        <div className={style.form}>
+        <input
+          type="email"
+          className={`form-control ${style.inNombre}`}
+          id="correo"
+          aria-describedby="emailHelp"
+          {...register("correo", {
+            required: "Por favor ingresa un correo",
+            pattern: {
+              value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+              message: "Ingrese un correo válido"
+            },
+            minLength: { value: 2, message: "Por favor ingresa un correo" },
+            maxLength: { value: 50, message:"Por favor ingresa un correo" },
+          })}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Correo:</label>
+          {errors.correo && (
+            <span className={style.errorMessage}>{errors.correo.message}</span>
+          )}
+        </div>
+        <div className={style.form}>
+        <input
+          type="text"
+          className={`form-control ${style.inNombre}`}
+          id="direccion"
+          aria-describedby="emailHelp"
+          {...register("direccion", {
+            required: "Por favor ingresa un dirección",
+            minLength: { value: 2, message: "Por favor ingresa de 2 caracteres" },
+            maxLength: { value: 50, message:"Ingrese menos de 50 caracteres" },
+          })}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Dirección:</label>
+          {errors.direccion && (
+            <span className={style.errorMessage}>{errors.direccion.message}</span>
+          )}
+        </div>
+        <Modal.Footer className={style.modalFooter}>
+        <button className={style.sesion} type="submit">
+          Agregar
+          </button>
       </Modal.Footer>
+
+     </form>
+      </Modal.Body>
+      
+      
     </Modal>
   );
 }
 
 export default function Clientes() {
+ 
   const [modalShow2, setModalShow2] = React.useState(false);
   const [modalShow1, setModalShow1] = React.useState(false);
   const [modalShow, setModalShow] = React.useState(false);
-
+  
   return (
     <div className={style.containerFluid}>
       <NavBar />
