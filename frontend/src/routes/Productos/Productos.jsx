@@ -37,6 +37,10 @@ function ModalEliminar(props) {
 }
 
 function ModalEditar(props) {
+  const { register, formState: { errors }, handleSubmit, } = useForm();
+  function insertar() {
+    // Aquí puedes manejar la lógica de inserción de datos
+  }
   return (
     <Modal
       {...props}
@@ -50,28 +54,130 @@ function ModalEditar(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className={style.Modal}>
+      <form className={style.Modal} onSubmit={handleSubmit(insertar)}>
         <div className={style.form}>
       <input
           type="text"
           className={`form-control ${style.inNombre}`}
           id="nombre"
+          {...register("nombre", {
+            required: "Por favor ingresa un nombre",
+            pattern: {
+              value: /^(?!.*(.).*\1)[A-Za-z]+$/,
+                 message: "Ingreso numeros o un nombre no valido",
+            },
+            minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
+            maxLength: { value: 20, message: "No más de 20 caracteres"},
+          })}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>Nombre:</label>
+        {errors.nombre && (
+            <span className={style.errorMessage}>{errors.nombre.message}</span>
+          )}
         </div>
-
+        <div className={style.form}>
+      <input
+          type="text"
+          className={`form-control ${style.inNombre}`}
+          id="marca"
+          {...register("marca", {
+            required: "Por favor ingresa una marca",
+            minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
+            maxLength: { value: 20, message: "No más de 20 caracteres"},
+          })}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>Marca:</label>
+        {errors.marca && (
+            <span className={style.errorMessage}>{errors.marca.message}</span>
+          )}
+        </div>
         <div className={style.form}>
         <input
           type="text"
           className={`form-control ${style.inNombre}`}
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
+          id="descripcion"
+          {...register("descripcion", {
+            required: "Por favor ingresa un descripción",
+            minLength: { value: 5, message: "Por favor ingresa de 5 caracteres" },
+            maxLength: { value: 50, message:"Ingrese menos de 50 caracteres" },
+          })}
         />
-        <label className={`form-label mb-0 ${style.userLabel}`}>Correo:</label>
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Descripción:</label>
+          {errors.descripcion && (
+            <span className={style.errorMessage}>{errors.descripcion.message}</span>
+          )}
         </div>
-      </Modal.Body>
+        <div className={style.form}>
+       <input
+          type="number"
+          className={`form-control ${style.inNombre}`}
+          id="cantidad"
+          {...register("cantidad", {
+            required: "Por favor ingresa un número de teléfono",
+            pattern: {
+              value: /^[0-9]+(?:\.[0-9]+)?$/, 
+              message: "Ingrese solo números",
+            },
+            minLength: { value: 0, message: "Por favor ingresa un número de teléfono"},
+            maxLength: { value: 10000, message: "Por favor ingresa un número de teléfono"},
+          })}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Cantidad Disponible:</label>
+          {errors.cantidad && (
+            <span className={style.errorMessage}>{errors.cantidad.message}</span>
+          )}
+      </div>
+      <div className={style.form}>
+       <input
+          type="number"
+          className={`form-control ${style.inNombre}`}
+          id="compra"
+          {...register("compra", {
+            required: "Por favor ingresa un precio",
+            pattern: {
+              value: /^[0-9]+(?:\.[0-9]+)?$/, 
+              message: "Ingrese solo números",
+            },
+            minLength: { value: 0, message: "Por favor ingresa un precio"},
+            maxLength: { value: 10000, message: "Por favor ingresa un precio"},
+          })}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Precio Compra:</label>
+          {errors.compra && (
+            <span className={style.errorMessage}>{errors.compra.message}</span>
+          )}
+      </div>
+      <div className={style.form}>
+       <input
+          type="number"
+          className={`form-control ${style.inNombre}`}
+          id="venta"
+          {...register("venta", {
+            required: "Por favor ingresa un precio",
+            pattern: {
+              value: /^[0-9]+(?:\.[0-9]+)?$/, 
+              message: "Ingrese solo números",
+            },
+            minLength: { value: 0, message: "Por favor ingresa un precio"},
+            maxLength: { value: 10000, message: "Por favor ingresa un precio"},
+          })}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Precio venta:</label>
+          {errors.venta && (
+            <span className={style.errorMessage}>{errors.venta.message}</span>
+          )}
+      </div>
+      
+     
       <Modal.Footer className={style.modalFooter}>
         <button className={style.sesion}>Actualizar informacion</button>
       </Modal.Footer>
+      </form>
+      </Modal.Body>
     </Modal>
   );
 }
@@ -153,7 +259,7 @@ function ModalAgregar(props) {
           type="number"
           className={`form-control ${style.inNombre}`}
           id="cantidad"
-          {...register("telefono", {
+          {...register("cantidad", {
             required: "Por favor ingresa un número de teléfono",
             pattern: {
               value: /^[0-9]+(?:\.[0-9]+)?$/, 

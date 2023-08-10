@@ -37,6 +37,10 @@ function ModalEliminar(props) {
 }
 
 function ModalEditar(props) {
+  const { register, formState: { errors }, handleSubmit, } = useForm();
+  function insertar() {
+    // Aquí puedes manejar la lógica de inserción de datos
+  }
   return (
     <Modal
       {...props}
@@ -51,30 +55,93 @@ function ModalEditar(props) {
       </Modal.Header>
       <Modal.Body className={style.Modal}>
       
-        <div className={style.form}>
-      <input
-          type="text"
-          className={`form-control ${style.inNombre}`}
-          id="nombre"
-        />
-        <label className={`form-label mb-0 ${style.userLabel}`}>Nombre:</label>
-        </div>
-
+      <form className={style.Modal} onSubmit={handleSubmit(insertar)}>
         <div className={style.form}>
         <input
           type="text"
           className={`form-control ${style.inNombre}`}
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
+          id="nombre"
+          {...register("nombre", {
+            required: "Por favor ingresa un nombre",
+            pattern: {
+              value: /^(?!.*(.).*\1)[A-Za-z]+$/,
+                 message: "Ingreso numeros o un nombre no valido",
+            },
+            minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
+            maxLength: { value: 20, message: "No más de 20 caracteres"},
+          })}
         />
-        <label className={`form-label mb-0 ${style.userLabel}`}>Correo:</label>
+        <label className={`form-label mb-0 ${style.userLabel}`}>Nombre:</label>
+        {errors.nombre && (
+            <span className={style.errorMessage}>{errors.nombre.message}</span>
+          )}
         </div>
-      </Modal.Body>
+        <div className={style.form}>
+       <input
+          type="number"
+          className={`form-control ${style.inNombre}`}
+          id="telefono"
+          {...register("telefono", {
+            required: "Por favor ingresa un número de teléfono",
+            pattern: {
+              value: /^\d{8}$/, 
+              message: "Ingrese solo números",
+            },
+            minLength: { value: 8, message: "Por favor ingresa un número de teléfono"},
+            maxLength: { value: 11, message: "Por favor ingresa un número de teléfono"},
+          })}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Teléfono:</label>
+          {errors.telefono && (
+            <span className={style.errorMessage}>{errors.telefono.message}</span>
+          )}
+        </div>
+        <div className={style.form}>
+        <input
+          type="text"
+          className={`form-control ${style.inNombre}`}
+          id="correo"
+          {...register("correo", {
+            required: "Por favor ingresa un correo",
+            pattern: {
+              value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+              message: "Ingrese un correo válido"
+            },
+            minLength: { value: 2, message: "Por favor ingresa un correo" },
+            maxLength: { value: 50, message:"Por favor ingresa un correo" },
+          })}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Correo:</label>
+          {errors.correo && (
+            <span className={style.errorMessage}>{errors.correo.message}</span>
+          )}
+        </div>
+        <div className={style.form}>
+       <input
+          type="text"
+          className={`form-control ${style.inNombre}`}
+          id="direccion"
+          {...register("direccion", {
+            required: "Por favor ingresa un dirección",
+            minLength: { value: 5, message: "Por favor ingresa de 5 caracteres" },
+            maxLength: { value: 50, message:"Ingrese menos de 50 caracteres" },
+          })}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>Dirección:</label>
+        {errors.direccion && (
+            <span className={style.errorMessage}>{errors.direccion.message}</span>
+          )}
+        </div>
+      
+     
       <Modal.Footer className={style.modalFooter}>
         <button className={style.sesion} type="submit">
           Actualizar informacion</button>
       </Modal.Footer>
-    
+      </form>
+      </Modal.Body>
     </Modal>
   );
 }
