@@ -149,7 +149,7 @@
         .tabla {
           display: grid;
           width: 100%;
-          grid-template-columns: repeat(5, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           grid-template-rows: repeat(2, 1fr);
           margin-top: 1rem;
           margin-bottom: 1rem;
@@ -215,7 +215,7 @@
     .tabla {
       display: grid;
       width: 100%;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       grid-template-rows: repeat(2, 1fr);
       margin-top: 1rem;
       margin-bottom: 1rem;
@@ -391,7 +391,7 @@
           .tabla {
             display: grid;
             width: 100%;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             grid-template-rows: repeat(2, 1fr);
             margin-top: 1rem;
             margin-bottom: 1rem;
@@ -488,7 +488,7 @@
           .tabla {
             display: grid;
             width: 100%;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             grid-template-rows: repeat(2, 1fr);
             margin-top: 1rem;
             margin-bottom: 1rem;
@@ -592,7 +592,7 @@
           .tabla {
             display: grid;
             width: 100%;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             grid-template-rows: repeat(2, 1fr);
             margin-top: .5rem;
             margin-bottom: .5rem;
