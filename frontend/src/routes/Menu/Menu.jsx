@@ -32,6 +32,14 @@ export default function Menu() {
           <span className={style.texto}>Proveedores</span>
         </div>
         </Link>
+        <Link to={"/empleados"}>
+        <div className={style.card}>
+          <div className={style.img}>
+            <img src={empleados} alt="" />
+          </div>
+          <span className={style.texto}>Empleados</span>
+        </div>
+        </Link>
         <Link to={"/productos"}>
         <div className={style.card}>
           <div className={style.img}>
@@ -45,7 +53,7 @@ export default function Menu() {
           <div className={style.img}>
             <img src={servicios} alt="" />
           </div>
-          <span className={style.texto}>Servicios</span>
+          <span className={style.texto}>Mantenimientos</span>
         </div>
         </Link>
         <Link to={"/ventas"}>
@@ -54,14 +62,6 @@ export default function Menu() {
             <img src={ventas} alt="" />
           </div>
           <span className={style.texto}>Ventas</span>
-        </div>
-        </Link>
-        <Link to={"/empleados"}>
-        <div className={style.card}>
-          <div className={style.img}>
-            <img src={empleados} alt="" />
-          </div>
-          <span className={style.texto}>Empleados</span>
         </div>
         </Link>
       </main>

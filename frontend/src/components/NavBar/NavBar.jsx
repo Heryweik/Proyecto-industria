@@ -57,6 +57,10 @@ export default function NavBar() {
             <Link to={"/proveedores"}>
               <button className={style.boton}>Proveedores</button>
             </Link>
+            
+            <Link to={"/empleados"}>
+              <button className={style.boton}>Empleados</button>
+            </Link>
             <Link to={"/productos"}>
               <button className={style.boton}>Productos</button>
             </Link>
@@ -65,9 +69,6 @@ export default function NavBar() {
             </Link>
             <Link to={"/ventas"}>
               <button className={style.boton}>Ventas</button>
-            </Link>
-            <Link to={"/empleados"}>
-              <button className={style.boton}>Empleados</button>
             </Link>
           </div>
 
@@ -97,7 +98,7 @@ export default function NavBar() {
       <div>
         <div className={style.acordeon}>
           <button className={style.titulo} onClick={toggleAcordeon}>
-            Servicios
+            Funciones
           </button>
           {abierto && (
             <div className={style.contenido}>
@@ -107,6 +108,10 @@ export default function NavBar() {
               <Link to={"/proveedores"}>
                 <button className={style.boton2}>Proveedores</button>
               </Link>
+              
+              <Link to={"/empleados"}>
+                <button className={style.boton2}>Empleados</button>
+              </Link>
               <Link to={"/productos"}>
                 <button className={style.boton2}>Productos</button>
               </Link>
@@ -115,9 +120,6 @@ export default function NavBar() {
               </Link>
               <Link to={"/ventas"}>
                 <button className={style.boton2}>Ventas</button>
-              </Link>
-              <Link to={"/empleados"}>
-                <button className={style.boton2}>Empleados</button>
               </Link>
             </div>
           )}

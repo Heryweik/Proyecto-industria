@@ -94,7 +94,14 @@ function ModalPedido(props) {
             Cantidad:
           </label>
         </div>
-
+        <div className={style.form} style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+          <span>
+            Subtotal: 
+          </span>
+          <span style={{fontWeight: 'bold'}}>
+            Total:
+          </span>
+        </div>
         
       </Modal.Body>
       <Modal.Footer className={style.modalFooter}>
@@ -155,10 +162,20 @@ function ModalHistorial(props) {
               className={style.celda}
               style={{
                 borderBottom: "1px solid black",
+                borderRight: "1px solid black",
                 fontWeight: "800",
               }}
             >
               Fecha
+            </div>
+            <div
+              className={style.celda}
+              style={{
+                borderBottom: "1px solid black",
+                fontWeight: "800",
+              }}
+            >
+              Total
             </div>
 
             {/* <!-- Filas de informacion --> */}
@@ -185,6 +202,12 @@ function ModalHistorial(props) {
             >
               20/08/2023
             </div>
+            
+            <div
+              className={style.celda}
+            >
+              700$
+            </div>
 
             {/* <!-- Filas de informacion --> */}
             <div
@@ -210,7 +233,11 @@ function ModalHistorial(props) {
             >
               20/08/2023
             </div>
-
+            <div
+              className={style.celda}
+            >
+              700$
+            </div>
           </div>
         </div>
       </Modal.Body>
