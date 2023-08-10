@@ -62,6 +62,17 @@ function ModalCitas(props) {
         </div>
 
         <div className={style.form}>
+          <input
+            type="text"
+            className={`form-control ${style.inNombre}`}
+            id="direccion"
+          />
+          <label className={`form-label mb-0 ${style.userLabel}`} style={{top: '40px'}}>
+            Direccion:
+          </label>
+        </div>
+
+        <div className={style.form}>
           <textarea
             type="text"
             className={`form-control ${style.inNombre}`}

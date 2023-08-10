@@ -39,6 +39,146 @@ function ModalEliminar(props) {
   );
 }
 
+function ModalHorario(props) {
+  return (
+    <Modal
+      {...props}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Body className={style.ModalHeader}>
+        <div className={style.container}>
+          <div className={style.tabla}>
+            {/* <!-- Cabeceras --> */}
+            <div
+              className={style.celda}
+              style={{
+                borderBottom: "1px solid black",
+                borderRight: "1px solid black",
+                fontWeight: "800",
+              }}
+            >
+              Empleado
+            </div>
+            <div
+              className={style.celda}
+              style={{
+                borderBottom: "1px solid black",
+                fontWeight: "800",
+              }}
+            >
+              Horario
+            </div>
+
+            {/* <!-- Filas de informacion --> */}
+            <div
+              className={style.celda}
+              style={{ borderRight: "1px solid black" }}
+            >
+              Yhonny APlixcano
+            </div>
+            <div
+              className={style.celda}
+            >
+              08:00am - 06:00pm
+            </div>
+
+            {/* <!-- Filas de informacion --> */}
+            <div
+              className={style.celda}
+              style={{ borderRight: "1px solid black" }}
+            >
+              PRO
+            </div>
+            <div
+              className={style.celda}
+            >
+              5
+            </div>
+
+          </div>
+        </div>
+      </Modal.Body>
+      <Modal.Footer className={style.modalFooter}>
+        <button onClick={props.onHide} className={style.boton1}>
+          Cerrar
+        </button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
+function ModalVacaciones(props) {
+  return (
+    <Modal
+      {...props}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Body className={style.ModalHeader}>
+        <div className={style.container}>
+          <div className={style.tabla}>
+            {/* <!-- Cabeceras --> */}
+            <div
+              className={style.celda}
+              style={{
+                borderBottom: "1px solid black",
+                borderRight: "1px solid black",
+                fontWeight: "800",
+              }}
+            >
+              Empleado
+            </div>
+            <div
+              className={style.celda}
+              style={{
+                borderBottom: "1px solid black",
+                fontWeight: "800",
+              }}
+            >
+              Fecha
+            </div>
+
+            {/* <!-- Filas de informacion --> */}
+            <div
+              className={style.celda}
+              style={{ borderRight: "1px solid black" }}
+            >
+              Yhonny APlixcano
+            </div>
+            <div
+              className={style.celda}
+            >
+              20/08/2023
+            </div>
+
+            {/* <!-- Filas de informacion --> */}
+            <div
+              className={style.celda}
+              style={{ borderRight: "1px solid black" }}
+            >
+              PRO
+            </div>
+            <div
+              className={style.celda}
+            >
+              5
+            </div>
+
+          </div>
+        </div>
+      </Modal.Body>
+      <Modal.Footer className={style.modalFooter}>
+        <button onClick={props.onHide} className={style.boton1}>
+          Cerrar
+        </button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
 function ModalEditar(props) {
   const { register, formState: { errors }, handleSubmit, } = useForm();
   function insertar() {
@@ -349,6 +489,8 @@ function ModalAgregar(props) {
 }
 
 export default function Empleados() {
+  const [modalShow4, setModalShow4] = React.useState(false);
+  const [modalShow3, setModalShow3] = React.useState(false);
   const [modalShow2, setModalShow2] = React.useState(false);
   const [modalShow1, setModalShow1] = React.useState(false);
   const [modalShow, setModalShow] = React.useState(false);
@@ -393,6 +535,27 @@ export default function Empleados() {
               <FiSearch />
             </button>
           </div>
+
+          <div className={style.filtro}>
+            <button
+              className={style.button}
+              onClick={() => setModalShow3(true)}
+            >
+              Ver horario laboral
+            </button>
+            <ModalHorario
+              show={modalShow3}
+              onHide={() => setModalShow3(false)}
+            />
+            <button className={style.button} onClick={() => setModalShow4(true)}>
+              Proximas vacaciones
+            </button>
+            <ModalVacaciones
+              show={modalShow4}
+              onHide={() => setModalShow4(false)}
+            />
+          </div>
+
           <div className={style.container}>
             <div className={style.tabla}>
               {/* <!-- Cabeceras --> */}
@@ -404,7 +567,37 @@ export default function Empleados() {
                   fontWeight: "800",
                 }}
               >
+                DNI
+              </div>
+              <div
+                className={style.celda}
+                style={{
+                  borderBottom: "1px solid black",
+                  borderRight: "1px solid black",
+                  fontWeight: "800",
+                }}
+              >
                 Nombre
+              </div>
+              <div
+                className={style.celda}
+                style={{
+                  borderBottom: "1px solid black",
+                  borderRight: "1px solid black",
+                  fontWeight: "800",
+                }}
+              >
+                Apellido
+              </div>
+              <div
+                className={style.celda}
+                style={{
+                  borderBottom: "1px solid black",
+                  borderRight: "1px solid black",
+                  fontWeight: "800",
+                }}
+              >
+                Telefono
               </div>
               <div
                 className={style.celda}
@@ -424,7 +617,7 @@ export default function Empleados() {
                   fontWeight: "800",
                 }}
               >
-                #Compras
+                Direccion
               </div>
               <div
                 className={style.celda}
@@ -446,6 +639,27 @@ export default function Empleados() {
               >
                 yhonny@gmail.com
               </div>
+
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
@@ -453,16 +667,16 @@ export default function Empleados() {
                 6
               </div>
               <div className={style.celda}>
-              <OverlayTrigger
-              overlay={<Tooltip id="tooltip-disabled">Editar</Tooltip>}
-            >
-                <button
-                  className={style.delete}
-                  onClick={() => setModalShow(true)}
-                  style={{ marginRight: "5%" }}
+                <OverlayTrigger
+                  overlay={<Tooltip id="tooltip-disabled">Editar</Tooltip>}
                 >
-                  <BiSolidPencil />
-                </button>
+                  <button
+                    className={style.delete}
+                    onClick={() => setModalShow(true)}
+                    style={{ marginRight: "5%" }}
+                  >
+                    <BiSolidPencil />
+                  </button>
                 </OverlayTrigger>
 
                 <ModalEditar
@@ -470,15 +684,15 @@ export default function Empleados() {
                   onHide={() => setModalShow(false)}
                 />
 
-<OverlayTrigger
-              overlay={<Tooltip id="tooltip-disabled">Eliminar</Tooltip>}
-            >
-                <button
-                  className={style.delete}
-                  onClick={() => setModalShow1(true)}
+                <OverlayTrigger
+                  overlay={<Tooltip id="tooltip-disabled">Eliminar</Tooltip>}
                 >
-                  <BsFillTrashFill />
-                </button>
+                  <button
+                    className={style.delete}
+                    onClick={() => setModalShow1(true)}
+                  >
+                    <BsFillTrashFill />
+                  </button>
                 </OverlayTrigger>
 
                 <ModalEliminar
@@ -494,6 +708,28 @@ export default function Empleados() {
               >
                 Yhonny Aplicano
               </div>
+
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}

@@ -6,7 +6,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 import producto from "../../assets/img/products.svg";
-import { BiUserPlus, BiSolidPencil } from "react-icons/bi";
+import { BiSolidPencil } from "react-icons/bi"; 
+import { AiOutlinePlus } from "react-icons/ai"; 
 import { FiSearch } from "react-icons/fi";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useForm } from "react-hook-form";
@@ -354,7 +355,7 @@ export default function Productos() {
             >
               <span className="d-inline-block">
                 <button type="button" className={`btn ${style.sesion}`} onClick={() => setModalShow2(true)}>
-                  <BiUserPlus />
+                  <AiOutlinePlus />
                 </button>
                 <ModalAgregar
                   show={modalShow2}
@@ -375,6 +376,16 @@ export default function Productos() {
               <FiSearch />
             </button>
           </div>
+
+          <div className={style.filtro}>
+            <button
+              className={style.button}
+            >
+              Ver productos en stock
+            </button>
+            
+          </div>
+
           <div className={style.container}>
             <div className={style.tabla}>
               {/* <!-- Cabeceras --> */}
@@ -398,6 +409,7 @@ export default function Productos() {
               >
                 Correo
               </div>
+              
               <div
                 className={style.celda}
                 style={{
@@ -406,7 +418,39 @@ export default function Productos() {
                   fontWeight: "800",
                 }}
               >
-                #Compras
+                Descripcion
+              </div>
+              
+              <div
+                className={style.celda}
+                style={{
+                  borderBottom: "1px solid black",
+                  borderRight: "1px solid black",
+                  fontWeight: "800",
+                }}
+              >
+                Cantidad disponible
+              </div>
+              
+              <div
+                className={style.celda}
+                style={{
+                  borderBottom: "1px solid black",
+                  borderRight: "1px solid black",
+                  fontWeight: "800",
+                }}
+              >
+                Precio compra
+              </div>
+              <div
+                className={style.celda}
+                style={{
+                  borderBottom: "1px solid black",
+                  borderRight: "1px solid black",
+                  fontWeight: "800",
+                }}
+              >
+                Precio venta
               </div>
               <div
                 className={style.celda}
@@ -422,6 +466,27 @@ export default function Productos() {
               >
                 Yhonny Aplicano
               </div>
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+              
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+              
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+              
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
@@ -476,6 +541,27 @@ export default function Productos() {
               >
                 Yhonny Aplicano
               </div>
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+              
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+              
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+              
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}

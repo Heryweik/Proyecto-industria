@@ -39,6 +39,190 @@ function ModalEliminar(props) {
   );
 }
 
+function ModalPedido(props) {
+
+  return (
+    <Modal
+      {...props}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton className={style.ModalHeader}>
+        <Modal.Title id="example-custom-modal-styling-title">
+          Detalles del pedido
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body className={style.Modal}>
+      <div className={style.form}>
+          <select
+            type="text"
+            className={`form-control ${style.inNombre}`}
+            id="nombre"
+          >
+          <option value=""></option>
+            <option value="value1">Value 1</option>
+            <option value="value2">Value 2</option>
+            </select>
+          <label className={`form-label mb-0 ${style.userLabel}`}>
+            Proveedor:
+          </label>
+        </div>
+
+        <div className={style.form}>
+        <select
+            type="text"
+            className={`form-control ${style.inNombre}`}
+            id="producto"
+          >
+          <option value=""></option>
+            <option value="value1">Value 1</option>
+            <option value="value2">Value 2</option>
+            </select>
+          <label className={`form-label mb-0 ${style.userLabel}`}>
+            Producto:
+          </label>
+        </div>
+
+        <div className={style.form}>
+          <input
+            type="text"
+            className={`form-control ${style.inNombre}`}
+            id="direccion"
+          />
+          <label className={`form-label mb-0 ${style.userLabel}`} style={{top: '40px'}}>
+            Cantidad:
+          </label>
+        </div>
+
+        
+      </Modal.Body>
+      <Modal.Footer className={style.modalFooter}>
+        <button className={style.sesion}>Realizar pedido</button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
+
+function ModalHistorial(props) {
+  return (
+    <Modal
+      {...props}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Body className={style.ModalHeader}>
+        <div className={style.container}>
+          <div className={style.tabla}>
+            {/* <!-- Cabeceras --> */}
+            <div
+              className={style.celda}
+              style={{
+                borderBottom: "1px solid black",
+                borderRight: "1px solid black",
+                fontWeight: "800",
+              }}
+            >
+              Proveedor
+            </div>
+            <div
+              className={style.celda}
+              style={{
+                borderBottom: "1px solid black",
+                borderRight: "1px solid black",
+                fontWeight: "800",
+              }}
+            >
+              Producto
+            </div>
+
+            
+            <div
+              className={style.celda}
+              style={{
+                borderBottom: "1px solid black",
+                borderRight: "1px solid black",
+                fontWeight: "800",
+              }}
+            >
+              Cantidad
+            </div>
+
+            
+            <div
+              className={style.celda}
+              style={{
+                borderBottom: "1px solid black",
+                fontWeight: "800",
+              }}
+            >
+              Fecha
+            </div>
+
+            {/* <!-- Filas de informacion --> */}
+            <div
+              className={style.celda}
+              style={{ borderRight: "1px solid black" }}
+            >
+              Yhonny APlixcano
+            </div>
+            <div
+              className={style.celda}
+              style={{ borderRight: "1px solid black" }}
+            >
+              cilla
+            </div>
+            <div
+              className={style.celda}
+              style={{ borderRight: "1px solid black" }}
+            >
+              2
+            </div>
+            <div
+              className={style.celda}
+            >
+              20/08/2023
+            </div>
+
+            {/* <!-- Filas de informacion --> */}
+            <div
+              className={style.celda}
+              style={{ borderRight: "1px solid black" }}
+            >
+              Yhonny APlixcano
+            </div>
+            <div
+              className={style.celda}
+              style={{ borderRight: "1px solid black" }}
+            >
+              Mesa
+            </div>
+            <div
+              className={style.celda}
+              style={{ borderRight: "1px solid black" }}
+            >
+              10
+            </div>
+            <div
+              className={style.celda}
+            >
+              20/08/2023
+            </div>
+
+          </div>
+        </div>
+      </Modal.Body>
+      <Modal.Footer className={style.modalFooter}>
+        <button onClick={props.onHide} className={style.boton1}>
+          Cerrar
+        </button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
 function ModalEditar(props) {
   const { register, formState: { errors }, handleSubmit, } = useForm();
   function insertar() {
@@ -258,6 +442,8 @@ function ModalAgregar(props) {
 }
 
 export default function Proveedores() {
+  const [modalShow4, setModalShow4] = React.useState(false);
+  const [modalShow3, setModalShow3] = React.useState(false);
   const [modalShow2, setModalShow2] = React.useState(false);
   const [modalShow1, setModalShow1] = React.useState(false);
   const [modalShow, setModalShow] = React.useState(false);
@@ -302,6 +488,27 @@ export default function Proveedores() {
               <FiSearch />
             </button>
           </div>
+
+          <div className={style.filtro}>
+            <button
+              className={style.button}
+              onClick={() => setModalShow3(true)}
+            >
+              Realizar pedido
+            </button>
+            <ModalPedido
+              show={modalShow3}
+              onHide={() => setModalShow3(false)}
+            />
+            <button className={style.button} onClick={() => setModalShow4(true)}>
+              Historial de pedidos
+            </button>
+            <ModalHistorial
+              show={modalShow4}
+              onHide={() => setModalShow4(false)}
+            />
+          </div>
+
           <div className={style.container}>
             <div className={style.tabla}>
               {/* <!-- Cabeceras --> */}
@@ -323,6 +530,16 @@ export default function Proveedores() {
                   fontWeight: "800",
                 }}
               >
+                Telefono
+              </div>
+              <div
+                className={style.celda}
+                style={{
+                  borderBottom: "1px solid black",
+                  borderRight: "1px solid black",
+                  fontWeight: "800",
+                }}
+              >
                 Correo
               </div>
               <div
@@ -333,7 +550,7 @@ export default function Proveedores() {
                   fontWeight: "800",
                 }}
               >
-                #Compras
+                Direccion
               </div>
               <div
                 className={style.celda}
@@ -349,6 +566,13 @@ export default function Proveedores() {
               >
                 Yhonny Aplicano
               </div>
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+              
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
@@ -403,6 +627,13 @@ export default function Proveedores() {
               >
                 Yhonny Aplicano
               </div>
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                yhonny@gmail.com
+              </div>
+              
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}

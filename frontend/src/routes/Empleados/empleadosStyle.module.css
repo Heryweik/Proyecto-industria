@@ -108,6 +108,31 @@
         }
       }
 
+      .filtro {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        .button {
+          background-color: var(--color-claro1);
+          border: none;
+          border-radius: 20px;
+          width: 30%;
+          height: 3rem;
+          font-size: larger;
+          color: var(--letras-blancas);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .button:hover {
+          background-color: var(--color-hover);
+        }
+      }
+
       .container {
         height: 100%;
         width: 100%;
@@ -123,7 +148,7 @@
         .tabla {
           display: grid;
           width: 100%;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(7, 1fr);
           grid-template-rows: repeat(2, 1fr);
           margin-top: 1rem;
           margin-bottom: 1rem;
@@ -173,6 +198,37 @@
   text-align: center;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+
+  .container {
+    height: 100%;
+    width: 100%;
+    border: 1px solid white;
+    background-color: var(--color-fondo2);
+    border-radius: 20px;
+    box-shadow: 0.3px 1px 5px 5px var(--color-claro1);
+    border: 3px solid var(--color-claro2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .tabla {
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      overflow-y: auto;
+    }
+
+    .celda {
+      padding: 5px;
+      /* overflow-x: auto; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 
 .Modal {
@@ -334,7 +390,7 @@
           .tabla {
             display: grid;
             width: 100%;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(7, 1fr);
             grid-template-rows: repeat(2, 1fr);
             margin-top: 1rem;
             margin-bottom: 1rem;
@@ -409,6 +465,18 @@
           }
         }
 
+        .filtro {
+          width: 100%;
+          gap: 1rem;
+  
+          .button {
+            width: 50%;
+            height: 3rem;
+            font-size: medium;
+          }
+  
+        }
+
         .container {
           height: 100%;
           width: 100%;
@@ -419,7 +487,7 @@
           .tabla {
             display: grid;
             width: 100%;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(7, 1fr);
             grid-template-rows: repeat(2, 1fr);
             margin-top: 1rem;
             margin-bottom: 1rem;
@@ -501,6 +569,17 @@
           }
         }
 
+        .filtro {
+          width: 100%;
+          gap: .5rem;
+  
+          .button {
+            width: 50%;
+            height: 2.5rem;
+            font-size: small;
+          }
+  
+        }
         .container {
           height: 100%;
           width: 100%;
@@ -511,7 +590,7 @@
           .tabla {
             display: grid;
             width: 100%;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(7, 1fr);
             grid-template-rows: repeat(2, 1fr);
             margin-top: .5rem;
             margin-bottom: .5rem;
