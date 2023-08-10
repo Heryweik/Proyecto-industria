@@ -199,6 +199,7 @@ function ModalHistorial(props) {
             </div>
             <div
               className={style.celda}
+              style={{ borderRight: "1px solid black" }}
             >
               20/08/2023
             </div>
@@ -230,6 +231,7 @@ function ModalHistorial(props) {
             </div>
             <div
               className={style.celda}
+              style={{ borderRight: "1px solid black" }}
             >
               20/08/2023
             </div>
