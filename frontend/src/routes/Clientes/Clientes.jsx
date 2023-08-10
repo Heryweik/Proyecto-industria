@@ -129,7 +129,7 @@ function ModalAgregar(props) {
           className={`form-control ${style.inNombre}`}
           id="nombre"
           {...register("nombre", {
-            required: "Por favor ingresaun nombre",
+            required: "Por favor ingres aun nombre",
             pattern: {
               value: /^(?!.*(.).*\1)[A-Za-z]+$/,
                  message: "Ingreso numeros o un nombre no valido",
@@ -177,7 +177,7 @@ function ModalAgregar(props) {
               message: "Ingrese solo números",
             },
             minLength: { value: 8, message: "Por favor ingresa un número de teléfono"},
-            maxLength: { value: 8, message: "Por favor ingresa un número de teléfono"},
+            maxLength: { value: 11, message: "Por favor ingresa un número de teléfono"},
           })}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
