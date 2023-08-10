@@ -12,7 +12,21 @@
     flex-direction: column;
     padding: 2rem;
     padding-left: 5rem;
-    padding-right: 5rem;
+    padding-right: 5rem;position: relative;
+
+    .icon {
+      position: absolute;
+      top: 1px;
+      left: 40px;
+      font-size: 25px;
+      cursor: pointer;
+      color: #000;
+      z-index: 10;
+  }
+
+  .icon:hover {
+    color: var(--color-claro1);
+}
 
     .head {
       display: flex;
@@ -436,8 +450,14 @@
     .main {
       min-height: calc(100vh - 11.2rem);
       padding: 1rem;
-      padding-left: 1rem;
-      padding-right: 1rem;
+      padding-left: .2rem;
+      padding-right: .2rem;
+
+      .icon {
+        top: 1px;
+        left: 10px;
+        font-size: 20px;
+    }
 
       .head {
 

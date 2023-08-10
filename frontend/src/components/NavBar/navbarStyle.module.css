@@ -21,7 +21,7 @@
 
         .logo {
             width: 12rem;
-            margin: auto;
+            margin-top: .25rem;
         }
 
         .logo2 {
@@ -201,8 +201,8 @@
     
     
             .logo {
-                width: 9rem;
-                margin-top: 6px;
+                width: 9.1rem;
+                margin-top: 8px;
             }
         }
     

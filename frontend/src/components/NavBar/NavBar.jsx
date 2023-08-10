@@ -61,7 +61,7 @@ export default function NavBar() {
               <button className={style.boton}>Productos</button>
             </Link>
             <Link to={"/servicios"}>
-              <button className={style.boton}>Servicios</button>
+              <button className={style.boton}>Mantenimientos</button>
             </Link>
             <Link to={"/ventas"}>
               <button className={style.boton}>Ventas</button>
@@ -111,7 +111,7 @@ export default function NavBar() {
                 <button className={style.boton2}>Productos</button>
               </Link>
               <Link to={"/servicios"}>
-                <button className={style.boton2}>Servicios</button>
+                <button className={style.boton2}>Mantenimientos</button>
               </Link>
               <Link to={"/ventas"}>
                 <button className={style.boton2}>Ventas</button>

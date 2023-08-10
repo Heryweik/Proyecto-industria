@@ -450,8 +450,14 @@
     .main {
       min-height: calc(100vh - 11.2rem);
       padding: 1rem;
-      padding-left: 1rem;
-      padding-right: 1rem;
+      padding-left: .2rem;
+      padding-right: .2rem;
+
+      .icon {
+        top: 1px;
+        left: 10px;
+        font-size: 20px;
+    }
 
       .head {
 

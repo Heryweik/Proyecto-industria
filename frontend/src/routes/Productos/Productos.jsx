@@ -10,6 +10,9 @@ import { BiUserPlus, BiSolidPencil } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { FaChevronLeft } from "react-icons/fa";
+
 /* Bootstrap */
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -336,7 +339,9 @@ export default function Productos() {
     <div className={style.containerFluid}>
       <NavBar />
       <main className={style.main}>
-        
+      <Link to={-1}>
+            <FaChevronLeft className={style.icon} />
+          </Link>
         <div className={style.head}>
           <div className={style.junt}>
           <img src={producto} alt="" className={style.img} />

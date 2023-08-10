@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-/* import { Link } from "react-router-dom"; */
+import { Link } from "react-router-dom";
 import React from "react";
 import style from "./clientesStyle.module.css";
 import "bootstrap/dist/css/bootstrap.css";
@@ -10,7 +10,7 @@ import { BiUserPlus, BiSolidPencil } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useForm } from "react-hook-form";
-/* import { FaChevronLeft } from "react-icons/fa"; */
+import { FaChevronLeft } from "react-icons/fa";
 
 /* Bootstrap */
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -363,9 +363,9 @@ export default function Clientes() {
     <div className={style.containerFluid}>
       <NavBar />
       <main className={style.main}>
-      {/* <Link to={-1}>
+      <Link to={-1}>
             <FaChevronLeft className={style.icon} />
-          </Link> */}
+          </Link>
         <div className={style.head}>
           <div className={style.junt}>
           <img src={cliente} alt="" className={style.img} />
