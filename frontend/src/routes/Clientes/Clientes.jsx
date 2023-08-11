@@ -69,15 +69,6 @@ function ModalSuscripciones(props) {
                 fontWeight: "800",
               }}
             >
-              Cantidad
-            </div>
-            <div
-              className={style.celda}
-              style={{
-                borderBottom: "1px solid black",
-                fontWeight: "800",
-              }}
-            >
               Total
             </div>
 
@@ -86,7 +77,7 @@ function ModalSuscripciones(props) {
               className={style.celda}
               style={{ borderRight: "1px solid black" }}
             >
-              FREE
+              Yhonny Yupanky
             </div>
             <div
               className={style.celda}
@@ -94,37 +85,22 @@ function ModalSuscripciones(props) {
             >
               10
             </div>
-            <div className={style.celda}>0$</div>
 
             {/* <!-- Filas de informacion --> */}
             <div
               className={style.celda}
               style={{ borderRight: "1px solid black" }}
             >
-              PRO
+              Aplicano
             </div>
             <div
               className={style.celda}
               style={{ borderRight: "1px solid black" }}
             >
-              5
+              23423
             </div>
-            <div className={style.celda}>50$</div>
 
-            {/* <!-- Filas de informacion --> */}
-            <div
-              className={style.celda}
-              style={{ borderRight: "1px solid black" }}
-            >
-              VIP
-            </div>
-            <div
-              className={style.celda}
-              style={{ borderRight: "1px solid black" }}
-            >
-              2
-            </div>
-            <div className={style.celda}>200$</div>
+            
           </div>
         </div>
       </Modal.Body>
@@ -529,6 +505,38 @@ function ModalAgregar(props) {
               </span>
             )}
           </div>
+
+          <div className={style.form}>
+            <input
+              type="number"
+              className={`form-control ${style.inNombre}`}
+              id="edad"
+              {...register("edad", {
+                required: "Por favor ingresa una edad",
+                pattern: {
+                  value: /^\d{8}$/,
+                  message: "Ingrese solo números",
+                },
+                minLength: {
+                  value: 1,
+                  message: "Por favor ingresa una edad",
+                },
+                maxLength: {
+                  value: 3,
+                  message: "Por favor ingresa una edad",
+                },
+              })}
+            />
+            <label className={`form-label mb-0 ${style.userLabel}`}>
+              Edad:
+            </label>
+            {errors.edad && (
+              <span className={style.errorMessage}>
+                {errors.edad.message}
+              </span>
+            )}
+          </div>
+
           <Modal.Footer className={style.modalFooter}>
             <button className={style.sesion} type="submit">
               Agregar
@@ -604,24 +612,23 @@ export default function Clientes() {
               className={style.button}
               onClick={() => setModalShow3(true)}
             >
-              Total de suscripciones
+              Total de compras
             </button>
             <ModalSuscripciones
               show={modalShow3}
               onHide={() => setModalShow3(false)}
             />
             <button className={style.button} onClick={toggleAcordeon}>
-              Filtrar por suscripcion
+              Filtrar por edad
             </button>
           </div>
 
           <div className={style.acordeon}>
             {abierto && (
               <div className={style.contenido}>
-                <button className={style.boton2}>FREE</button>
-                <button className={style.boton2}>PRO</button>
-                <button className={style.boton2}>VIP</button>
-                <button className={style.boton2}>Ninguna</button>
+                <button className={style.boton2}>0 - 18 años</button>
+                <button className={style.boton2}>19 - 59 años</button>
+                <button className={style.boton2}>60 - 60+ años </button>
               </div>
             )}
           </div>
@@ -689,6 +696,17 @@ export default function Clientes() {
               >
                 Direccion
               </div>
+              
+              <div
+                className={style.celda}
+                style={{
+                  borderBottom: "1px solid black",
+                  borderRight: "1px solid black",
+                  fontWeight: "800",
+                }}
+              >
+                Edad
+              </div>
               <div
                 className={style.celda}
                 style={{ borderBottom: "1px solid black", fontWeight: "800" }}
@@ -735,6 +753,13 @@ export default function Clientes() {
                 style={{ borderRight: "1px solid black" }}
               >
                 6
+              </div>
+              
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                20
               </div>
               <div className={style.celda}>
                 <OverlayTrigger
@@ -811,6 +836,13 @@ export default function Clientes() {
                 style={{ borderRight: "1px solid black" }}
               >
                 6
+              </div>
+              
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                20
               </div>
               <div className={style.celda}>
                 <button
