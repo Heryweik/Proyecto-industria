@@ -1,0 +1,19 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - Diseño
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to EC2
+        run: |
+          # Ejecuta el script de despliegue en tu instancia EC2
+          ssh ubuntu@dentalservices.me 'bash -s' < deploy.sh

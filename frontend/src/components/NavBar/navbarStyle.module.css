@@ -1,0 +1,522 @@
+.Nav {
+    width: 100%;
+    height: auto;
+    background-color: var(--color-fondo1);
+    color: var(--letras-oscuras);
+    padding: .8rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: flex;
+    flex-direction: column;
+    font-size: medium;
+    gap: .5rem;
+
+    .info {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+
+
+        .logo {
+            width: 12rem;
+            margin-top: .25rem;
+        }
+
+        .logo2 {
+            width: 20px;
+            height: 3.2rem;
+            display: none;
+        }
+
+        .boton {
+            background-color: transparent;
+            border: none;
+            color: var(--letras-oscuras);
+            font-size: medium;
+            font-weight: 500;
+            height: 2.5rem;
+        }
+
+        .boton:hover {
+            font-weight: 700;
+            border-bottom: 2px solid var(--color-claro2);
+            box-shadow: 1px var(--color-claro2);
+        }
+          
+    }
+
+    .nombre {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-weight: 800;
+
+        .usuario {
+            
+        padding: .5rem;
+        border-left: 2px dashed var(--color-claro2);
+        border-bottom: 2px dashed var(--color-claro2);
+        }
+    }
+
+    .sesion {
+        width: auto;
+        background-color: var(--color-claro1);
+        color: var(--letras-blancas);
+        border-radius: 20px;
+    }
+
+    .sesion:hover {
+        background-color: var(--color-hover);
+    }
+
+    .sesion2 {
+        width: auto;
+        background-color: var(--color-claro1);
+        color: var(--letras-blancas);
+        border-radius: 20px;
+        display: none;
+    }
+
+    .sesion2:hover {
+        background-color: var(--color-hover);
+    }
+
+    .acordeon {
+        width: 100%;
+        border-radius: 20px;
+        display: none;
+
+        .titulo {
+            background-color: var(--color-claro1);
+            border: none;
+            color: #333;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            outline: none;
+            border-radius: 20px;
+          }
+          
+          .contenido {
+            background-color: #f9f9f9;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+          }
+
+          .boton2 {
+            background-color: transparent;
+            border: none;
+            color: var(--letras-oscuras);
+            font-size: medium;
+            font-weight: 500;
+            height: 2.5rem;
+        }
+
+        .boton2:hover {
+            font-weight: 700;
+            border-bottom: 2px solid var(--color-claro2);
+            box-shadow: 1px var(--color-claro2);
+        }
+      }
+}
+
+/* Modal */
+.ModalHeader {
+    background-color: var(--color-claro2) !important;
+    color: var(--letras-oscuras);
+    font-size: medium;
+    text-align: center;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+  
+  .Modal {
+    color: var(--letras-oscuras);
+    text-align: center;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  
+  }
+  
+  .modalFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    .boton1 {
+      background-color: var(--color-claro2);
+      border: none;
+      color: var(--letras-oscuras);
+      font-size: medium;
+      font-weight: 500;
+      height: 2.5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      border-radius: 15px;
+    }
+  
+    .boton1:hover {
+      background-color: var(--color-hover);
+    }
+  
+    .sesion {
+      border: none;
+      font-size: medium;
+      font-weight: 500;
+      height: 2.5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      background-color: var(--color-claro1);
+      color: var(--letras-blancas);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .sesion:hover {
+      background-color: var(--color-hover);
+    }
+  }
+
+/* Disenio responsivo */
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .Nav {
+        padding: .8rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    
+        .info {
+            width: auto;
+            display: flex;
+            gap: .2rem;
+    
+    
+            .logo {
+                width: 9.1rem;
+                margin-top: 8px;
+            }
+        }
+    
+        .nombre {
+            font-size: 15px;
+    
+        }
+    
+        .sesion {
+            width: auto;
+            background-color: var(--color-claro1);
+            color: var(--letras-blancas);
+            border-radius: 20px;
+        }
+    
+        .sesion:hover {
+            background-color: var(--color-hover);
+        }
+    }
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .Nav {
+        padding: .8rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    
+        .info {
+            width: auto;
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+    
+    
+            .logo {
+                width: 10rem;
+            }
+
+            .boton {
+                display: none;
+            }
+    
+        }
+    
+        .nombre {
+            font-size: 15px;
+    
+        }
+    
+        .sesion {
+            width: auto;
+            background-color: var(--color-claro1);
+            color: var(--letras-blancas);
+            border-radius: 20px;
+        }
+    
+        .sesion:hover {
+            background-color: var(--color-hover);
+        }
+
+        .acordeon {
+            width: 100%;
+            border-radius: 20px;
+            display: block;
+    
+            .titulo {
+                background-color: var(--color-claro1);
+                border: none;
+                color: var(--letras-blancas);
+                cursor: pointer;
+                padding: 10px;
+                width: 100%;
+                text-align: left;
+                outline: none;
+                border-radius: 20px;
+                text-align: center;
+              }
+              
+              .contenido {
+                background-color: var(--letras-blancas);
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-left: 15px;
+                margin-right: 15px;
+              }
+    
+              .boton2 {
+                background-color: transparent;
+                border: none;
+                color: var(--letras-oscuras);
+                font-size: medium;
+                font-weight: 500;
+                height: 2.5rem;
+            }
+    
+            .boton2:hover {
+                font-weight: 700;
+                border-bottom: 2px solid var(--color-claro2);
+                box-shadow: 1px var(--color-claro2);
+            }
+          }
+    }
+ }
+
+ 
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) { 
+        
+    .Nav {
+        padding: .8rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    
+        .info {
+            width: auto;
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+    
+    
+            .logo {
+                width: 10rem;
+            }
+
+            .boton {
+                display: none;
+            }
+    
+        }
+    
+        .nombre {
+            font-size: 15px;
+    
+        }
+    
+        .sesion {
+            width: auto;
+            background-color: var(--color-claro1);
+            color: var(--letras-blancas);
+            border-radius: 20px;
+            display: none;
+        }
+    
+        .sesion:hover {
+            background-color: var(--color-hover);
+        }
+
+        .sesion2 {
+            width: auto;
+            background-color: var(--color-claro1);
+            color: var(--letras-blancas);
+            border-radius: 50%;
+            display: block;
+        }
+    
+        .sesion2:hover {
+            background-color: var(--color-hover);
+        }
+
+        .acordeon {
+            width: 100%;
+            border-radius: 20px;
+            display: block;
+    
+            .titulo {
+                background-color: var(--color-claro1);
+                border: none;
+                color: var(--letras-blancas);
+                cursor: pointer;
+                padding: 10px;
+                width: 100%;
+                text-align: left;
+                outline: none;
+                border-radius: 20px;
+                text-align: center;
+              }
+              
+              .contenido {
+                background-color: var(--letras-blancas);
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-left: 15px;
+                margin-right: 15px;
+              }
+    
+              .boton2 {
+                background-color: transparent;
+                border: none;
+                color: var(--letras-oscuras);
+                font-size: medium;
+                font-weight: 500;
+                height: 2.5rem;
+            }
+    
+            .boton2:hover {
+                font-weight: 700;
+                border-bottom: 2px solid var(--color-claro2);
+                box-shadow: 1px var(--color-claro2);
+            }
+          }
+    }
+}
+
+
+@media (max-width: 575.98px) {
+    .Nav {
+        padding: .8rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    
+        .info {
+            width: auto;
+            display: flex;
+            align-items: center;
+            gap: .2px;
+    
+    
+            .logo {
+                width: 10rem;
+                display: none;
+            }
+
+            .logo2 {
+                width: 4.5rem;
+                display: block;
+                margin-right: -170px;
+            }
+
+            .boton {
+                display: none;
+            }
+    
+        }
+    
+        .nombre {
+            font-size: 15px;
+            gap: .1rem;
+    
+        }
+    
+        .sesion {
+            width: auto;
+            background-color: var(--color-claro1);
+            color: var(--letras-blancas);
+            border-radius: 20px;
+            display: none;
+        }
+    
+        .sesion:hover {
+            background-color: var(--color-hover);
+        }
+
+        .sesion2 {
+            width: auto;
+            background-color: var(--color-claro1);
+            color: var(--letras-blancas);
+            border-radius: 50%;
+            margin: auto;
+            display: block;
+        }
+    
+        .sesion2:hover {
+            background-color: var(--color-hover);
+        }
+
+        .acordeon {
+            width: 100%;
+            border-radius: 20px;
+            display: block;
+    
+            .titulo {
+                background-color: var(--color-claro1);
+                border: none;
+                color: var(--letras-blancas);
+                cursor: pointer;
+                padding: 10px;
+                width: 100%;
+                text-align: left;
+                outline: none;
+                border-radius: 20px;
+                text-align: center;
+              }
+              
+              .contenido {
+                background-color: var(--letras-blancas);
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-left: 15px;
+                margin-right: 15px;
+              }
+    
+              .boton2 {
+                background-color: transparent;
+                border: none;
+                color: var(--letras-oscuras);
+                font-size: medium;
+                font-weight: 500;
+                height: 2.5rem;
+            }
+    
+            .boton2:hover {
+                font-weight: 700;
+                border-bottom: 2px solid var(--color-claro2);
+                box-shadow: 1px var(--color-claro2);
+            }
+          }
+    }
+ }
