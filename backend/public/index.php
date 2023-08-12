@@ -1,24 +1,21 @@
 <?php
 
 require_once __DIR__ . '/../includes/app.php';
-require_once _DIR_ . '/../includes/app.php';
-require_once('../controllers/ClienteController.php');
+//require_once('../controllers/ClienteController.php');
 require_once('../controllers/ProductoController.php');
 require_once('../controllers/AdminController.php');
-require_once('../controllers/ApiController.php');
-require_once('../controllers/ApiController.php');
-require_once('../controllers/CategoriaController.php');
+require_once('../controllers/APIController.php');
+//require_once('../controllers/CategoriaController.php');
 require_once('../controllers/CitaController.php');
 require_once('../controllers/LoginController.php');
 require_once('../controllers/ProveedorController.php');
 require_once('../controllers/ServicioController.php');
 
-
-require_once('../Models/Clientes.php');
+//require_once('../Models/Clientes.php');
 require_once('../Models/Producto.php');
 require_once('../Models/Usuario.php');
 require_once('../Models/Proveedor.php');
-require_once('../Models/Categoria.php');
+//require_once('../Models/Categoria.php');
 require_once('../Models/Cita.php');
 require_once('../Models/AdminCita.php');
 require_once('../Models/CitaServicio.php');
@@ -31,7 +28,7 @@ use Controllers\LoginController;
 //use Controllers\AdminController;
 //use Controllers\ServicioController;
 
-use MVC\Router;
+require_once('../Router.php');
 
 $router = new Router();
 // INICIAR SESION
@@ -78,10 +75,8 @@ $router->post('/servicios/eliminar', [ServicioController::class, 'eliminar']);
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
 
-// index.php (Módulo de Proveedores)
-
-// Incluye el archivo del modelo de Proveedor
-require_once('models/Proveedor.php');
+// (Módulo de Proveedores)
+require_once('../Models/Proveedor.php');
 
 $proveedor1 = new Proveedor('1',	'Maria',	'12346',	'maria@gmail.com',	'la paz');
 $proveedor2 = new Proveedor('2', 	'Carlos',	'234567',	'carlos@gmail.com',	'TGU');
