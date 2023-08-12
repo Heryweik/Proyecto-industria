@@ -1,12 +1,36 @@
 <?php
 
 require_once __DIR__ . '/../includes/app.php';
+require_once _DIR_ . '/../includes/app.php';
+require_once('../controllers/ClienteController.php');
+require_once('../controllers/ProductoController.php');
+require_once('../controllers/AdminController.php');
+require_once('../controllers/ApiController.php');
+require_once('../controllers/ApiController.php');
+require_once('../controllers/CategoriaController.php');
+require_once('../controllers/CitaController.php');
+require_once('../controllers/LoginController.php');
+require_once('../controllers/ProveedorController.php');
+require_once('../controllers/ServicioController.php');
+
+
+require_once('../Models/Clientes.php');
+require_once('../Models/Producto.php');
+require_once('../Models/Usuario.php');
+require_once('../Models/Proveedor.php');
+require_once('../Models/Categoria.php');
+require_once('../Models/Cita.php');
+require_once('../Models/AdminCita.php');
+require_once('../Models/CitaServicio.php');
+require_once('../Models/ActiveRecord.php');
+require_once('../Models/Servicio.php');
 
 //use Controllers\APIController;
 //use Controllers\CitaController;
 use Controllers\LoginController;
 //use Controllers\AdminController;
 //use Controllers\ServicioController;
+
 use MVC\Router;
 
 $router = new Router();
