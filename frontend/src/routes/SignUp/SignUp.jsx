@@ -180,7 +180,7 @@ export default function SignUp() {
             />
             
             <label className={`form-label mb-0 ${style.userLabel}`}>
-              Contrasenia:
+              Contraseña:
             </label>
             {errors.contra && <p className={style.errorMessage}>🚫{errors.contra.message}</p>}
           </div>

@@ -21,7 +21,7 @@ export default function LogIn() {
         <div className={style.c2}></div>
         <div className={style.c3}></div>
         <div className={style.c4}></div>
-        
+
         <form className={style.form}>
           <Link to={"/"}>
             <FaChevronLeft className={style.icon} />
@@ -31,7 +31,7 @@ export default function LogIn() {
         </div>
           <h1 className={style.saludo}>Iniciar sesion</h1>
           <div className={`${style.formInput}`}>
-            
+
             <input
               type="text"
               className={`form-control ${style.inNombre}`}
@@ -46,7 +46,7 @@ export default function LogIn() {
               className={`form-control ${style.inNombre}`}
               id="exampleInputPassword1"
             />
-            <label className={`form-label mb-0 ${style.userLabel}`}>Contrasenia:</label>
+            <label className={`form-label mb-0 ${style.userLabel}`}>Contraseña:</label>
           </div>
           <div className={style.boton}>
             <Link to={"/menu"}>
