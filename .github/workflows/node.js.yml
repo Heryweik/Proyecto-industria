@@ -19,12 +19,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Cambiar al directorio frontend
-      run: cd frontend
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm i
-    - run: npm run build --if-present
+      
+    - name: Cambiar al directorio frontend
+      run: cd frontend
+    - run: sudo npm i
+    - run: sudo npm run dev
