@@ -5,7 +5,7 @@ const pool = mysql.createPool({
     user: 'admin',
     password: 'admin123',
     port: 3306,
-    database: 'Industria'
+    database: 'Industria1'
 });
 
 const controller = {};
@@ -46,9 +46,6 @@ controller.edit = (req, res) => {
     const { id } = req.params;
     req.getConnection((err, conn) => {
       conn.query("SELECT * FROM cliente WHERE id = ?", [id], (err, rows) => {
-        /*res.render('clientes_edit', {
-          data: rows[0]
-        })*/
       });
     });
 };

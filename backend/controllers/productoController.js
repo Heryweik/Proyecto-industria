@@ -5,7 +5,7 @@ const pool = mysql.createPool({
     user: 'admin',
     password: 'admin123',
     port: 3306,
-    database: 'Industria'
+    database: 'Industria1'
 });
 
 const controller = {};
@@ -41,6 +41,34 @@ controller.save = (req, res) => {
         });
     });
 
+};
+
+controller.edit = (req, res) => {
+    const { id } = req.params;
+    req.getConnection((err, conn) => {
+      conn.query("SELECT * FROM producto WHERE id = ?", [id], (err, rows) => {
+      });
+    });
+};
+
+controller.update = (req, res) => {
+    const { id } = req.params;
+    const newproducto = req.body;
+    req.getConnection((err, conn) => {
+
+    conn.query('UPDATE producto set ? where id = ?', [newproducto, id], (err, rows) => {
+      res.redirect('/');
+    });
+    });
+};
+
+controller.delete = (req, res) => {
+    const { id } = req.params;
+    req.getConnection((err, connection) => {
+      connection.query('DELETE FROM producto WHERE id = ?', [id], (err, rows) => {
+        res.redirect('/');
+      });
+    });
 };
 
 module.exports = controller;

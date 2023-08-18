@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const myConnection = require('express-myconnection');
 
 const app = express();
@@ -25,7 +25,7 @@ app.use(myConnection(mysql, {
     user: 'admin',
     password: 'admin123',
     port: 3306,
-    database: 'Industria'
+    database: 'Industria1'
 },'single'));
 
 app.use(express.urlencoded({extended: false}));
