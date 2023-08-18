@@ -506,37 +506,6 @@ function ModalAgregar(props) {
             )}
           </div>
 
-          <div className={style.form}>
-            <input
-              type="number"
-              className={`form-control ${style.inNombre}`}
-              id="edad"
-              {...register("edad", {
-                required: "Por favor ingresa una edad",
-                pattern: {
-                  value: /^\d{8}$/,
-                  message: "Ingrese solo números",
-                },
-                minLength: {
-                  value: 1,
-                  message: "Por favor ingresa una edad",
-                },
-                maxLength: {
-                  value: 3,
-                  message: "Por favor ingresa una edad",
-                },
-              })}
-            />
-            <label className={`form-label mb-0 ${style.userLabel}`}>
-              Edad:
-            </label>
-            {errors.edad && (
-              <span className={style.errorMessage}>
-                {errors.edad.message}
-              </span>
-            )}
-          </div>
-
           <Modal.Footer className={style.modalFooter}>
             <button className={style.sesion} type="submit">
               Agregar
