@@ -5,7 +5,7 @@ name: Depliegue de aplicacion en AWS
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "actions" ]
 
 jobs:
   build:
@@ -24,8 +24,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-      
-    - name: Cambiar al directorio frontend
-      run: cd frontend
     - run: sudo npm i
     - run: sudo npm run dev
