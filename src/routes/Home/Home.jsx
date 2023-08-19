@@ -57,7 +57,7 @@ export default function Home() {
           <img src={logo} alt="" className={style.logo} />
         </div>
         <div>
-          <h1 className={style.saludo}>Bienvenidoss Industria</h1>
+          <h1 className={style.saludo}>Bienvenidoss Industr</h1>
         </div>
         <div className={style.boton}>
           <Link to={"/login"}>
