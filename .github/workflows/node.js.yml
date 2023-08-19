@@ -25,4 +25,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm i
-    - run: sudo npm run dev
+    - run: npm run dev
