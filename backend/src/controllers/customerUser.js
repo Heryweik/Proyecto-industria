@@ -78,29 +78,14 @@ controller.getUser = (req, res) => {
     })
 }
 
-controller.getRol = (req, res) => {
-    const { id } = req.params
-    let sql = `select bit_rol from USER where id_user=${id}`
-    conection.query(sql, (err, rows, fields) => {
-        if (err) res.json({rol:false, msg:err.sqlMessage});
-        else {
-            if(rows[0].bit_rol[0] == 0){
-                res.json({rol:true, msg:"Tiene privilegios administrador"})
-            }else{
-                res.json({rol:false, msg:"No tiene privilegios de administrador"})
-            }
-        }
-    })
-
-}
-
 //funcion para insertar un usuario
 controller.postUser = (req, res) => {
-    const { fk_id_department, var_email, var_name, var_lastname, tex_password, bit_status, var_phone } = req.body
+    const { fk_id_department, var_email, var_name, var_lastname, tex_password, bit_rol, bit_status, var_phone } = req.body
     let sql1 = `SELECT id_user from USER where var_email='${var_email}'`
     //verificar que el correo no ha sido registrado
-    let sql = `insert into USER(registration_date,fk_id_department,var_email,var_name,var_lastname,tex_password,bit_rol,bit_status,var_phone) values(CURRENT_TIMESTAMP(),${fk_id_department},'${var_email}','${var_name}',
-    '${var_lastname}','${tex_password}',1,${bit_status},'${var_phone}')`
+    let sql = `insert into USER(fk_id_department,var_email,var_name,var_lastname,tex_password,bit_rol,bit_status,var_phone) values(${fk_id_department},'${var_email}','${var_name}',
+    '${var_lastname}','${tex_password}',${bit_rol},${bit_status},'${var_phone}')`
+    //try {
     conection.query(sql1, (err, rows, fields) => {
         if (err) res.send({ status: '0', id: "" }); //error en consulta
         else if (rows.length == 0) {
@@ -303,6 +288,29 @@ controller.updateUser = (req, res) => {
     })
 }
 
+controller.productUser = (req, res) => {
+    const { id } = req.params
+    let sql1 = `SELECT product.id_product,photographs.id_photographs,photographs.var_name AS var_name_photo,fk_id_user,fk_id_department,product.var_name,text_description,dou_price,publication_date`
+        + ` from product LEFT OUTER JOIN  photographs ON photographs.fk_id_product=product.id_product where `
+    sql1 += `product.fk_id_user=${id} group by product.id_product ORDER BY publication_date DESC`
+
+    conection.query(sql1, (err, rows, fields) => {
+        if (err) res.json(err);//posible error en consulta
+        else {
+            const currency = function(number){
+                return new Intl.NumberFormat('en-IN', {minimumFractionDigits: 2}).format(number);
+            };
+            const rows2 = rows
+                .map(row => ({
+                    ...row,
+                    dou_price: currency(row.dou_price)
+
+                }))
+
+            res.json(rows2)//todo salio bien
+        }
+    })
+}
 /////////////////SUSCRIBIR USUARIO A CATEGORIA/////////////////////////
 
 controller.subscribeUser = (req, res) => {
@@ -410,6 +418,47 @@ controller.getSubscriptions = (req, res) => {
     })
 
 }
+
+//////////////////////LISTAR PRODUCTOS FAVORITOS/////////////////////////////////
+controller.getWishlist = (req, res) => {
+    const { id_user } = req.params
+
+    sql1 = `SELECT * FROM user WHERE id_user=${id_user}`
+
+
+    sql3 = `SELECT pr.id_product,pr.var_name, pr.text_description, pr.dou_price, ph.id_photographs,ph.var_name as var_name_photo FROM product pr
+        INNER JOIN wish_list ON pr.id_product= wish_list.fk_id_product 
+        INNER JOIN photographs ph ON  pr.id_product=ph.fk_id_product
+        WHERE wish_list.fk_id_user=${id_user} AND bit_availability = 1 group by pr.id_product ORDER BY pr.publication_date DESC`
+
+    conection.query(sql1, (err, rows, fields) => {
+        if (err) res.json({ status: '0', error: err.sqlMessage })
+        else {
+            if (rows.length != 0) { //encontro al usuario
+                conection.query(sql3, (err, rows, fields) => {
+                    if (err) res.json({ status: '0', error: err.sqlMessage })//posible error en consulta a BDD
+                    else {
+                        if (rows.length != 0) {
+                                const currency = function(number){
+                                    return new Intl.NumberFormat('en-IN', {minimumFractionDigits: 2}).format(number);
+                                };
+                                const rows2 = rows
+                                .map(row => ({
+                                    ...row,
+                                    dou_price: currency(row.dou_price)
+                
+                                }))
+
+                            res.json({ status: '200', msg: rows2 })
+                        }
+                        else { res.json({ status: '202', msg: "No hay productos en la lista de deseos" }) }
+                    }
+                })
+            } else { res.json({ status: '201', msg: "Usuario no existe o es incorrecto" }) }
+        }
+    })
+}
+
 
 //////////////////////////// DAR DE BAJA FAVORITO //////////////////////////////////////////
 
@@ -521,12 +570,16 @@ controller.avgQualif = (req, res) => {
 
 controller.qualifications = (req, res) => {
     //constate
-    const { fk_id_user_review, fk_id_user_qualified, tin_score } = req.body;
+    const { fk_id_user_qualified,
+        fk_id_user_review, tin_score } = req.body;
     //variables de consulta
+
+    let sql1=`SELECT * FROM qualification WHERE fk_id_user_review=${fk_id_user_review} `
 
     let sql15 = `SELECT * FROM user WHERE id_user = ${fk_id_user_review}`
     let sql16 = `SELECT * FROM user WHERE id_user=${fk_id_user_qualified} `
-    let sql17 = `CALL sp_rateUser(${fk_id_user_review},${fk_id_user_qualified},${tin_score})`
+    let sql17 = `INSERT INTO QUALIFICATION(fk_id_user_qualified,fk_id_user_review,tin_score) 
+    VALUES(${fk_id_user_qualified},${fk_id_user_review},${tin_score})`
 
     //conexion de usuario 1 o consulta 1
     conection.query(sql15, (err, rows, fields) => {
@@ -541,53 +594,29 @@ controller.qualifications = (req, res) => {
                         res.json({ status: '3', error: err.sqlMessage })
                     } else
                         if (rows.length != 0) {
-                            conection.query(sql17, (err, rows, fields) => {
+                            conection.query(sql1, (err, rows, fields) => {//revisa si ya fue calificado el usuario
                                 if (err) {
-                                    res.json({ status: '4', error: err.sqlMessage })
-                                } else {
-                                    res.json({ status: '200', msg: rows[0][0].msg })
-                                }
+                                    res.json({ status: '0', error: err.sqlMessage })
+                                } else
+                                    if (rows.length == 0) {
+                                        conection.query(sql17, (err, rows, fields) => {
+                                            if (err) {
+                                                res.json({ status: '4', error: err.sqlMessage })
+                                            } else {
+                                                res.json({ status: '200', msg: 'Se agrego calificacion' })
+                                            }
+                                        })
+                                    } else res.json({ status: '203', msg: 'Este usuario ya fue calificado' })
                             })
+                            //Conexion calificacion calificacion 
 
                         } else {
-                            res.json({ status: '2', msg: 'El vendedos no se encuetra' })
+                            res.json({ status: '2', msg: 'el usuario calificador no se encuetra' })
                         }
                 })
             } else {
-                res.json({ status: '1', msg: 'El cliente no se encuetra' })
+                res.json({ status: '1', msg: 'no se encuentra el usuario calificado' })
             }
-        }
-    })
-}
-//============== Traer calificación individual ==========
-controller.getOneQualification = (req, res) => {
-    const{fk_id_user_review, fk_id_user_qualified} = req.body
-    let sql = `SELECT tin_score FROM QUALIFICATION WHERE fk_id_user_review =${fk_id_user_review}
-            AND fk_id_user_qualified =${fk_id_user_qualified} LIMIT 1`
-    
-    conection.query(sql, (err, rows, fields) => {
-        if (err) {
-            res.json({ status: -1, error: err.sqlMessage })
-        }else{
-            if (rows.length != 0) {
-                res.json({status: 200, msg:""+ rows[0].tin_score})
-            }else{
-                res.json({status: -2, msg:"Este cliente aun no ha calificado a este vendedor"})
-            }
-            
-        }
-    })
-
-}
-
-controller.isQualifying = (req, res) => {
-    const{id_chat} = req.params
-    let sql = `SELECT fn_isQualifying(${id_chat}) AS isQualifying`
-    conection.query(sql, (err, rows, fields) => {
-        if (err) {
-            res.json({ status: -1, error: err.sqlMessage })
-        }else{
-            res.json({status: 200, msg:""+rows[0].isQualifying})
         }
     })
 }
@@ -725,6 +754,81 @@ controller.vista = (req, res) => {
 
     })
 }
+/*
+controller.PudProducto=(req,res)=>{
+    const{id}=req.params
+
+    const{fk_id_user,fk_id_department,fk_id_product_category,fk_id_product_status,var_name,text_description,
+        dou_price,bit_availability,publication_date,expiration_date} = req.body;
+
+        let sql22=`SELECT * FROM user WHERE id_user = ${fk_id_user}`
+        let sql23=`SELECT * FROM DEPARTMENT WHERE id_department = ${fk_id_department}`
+        let sql24=`SELECT * FROM PRODUCT_CATEGORY WHERE id_product_category = ${fk_id_product_category}`
+        let sql25=`SELECT * FROM PRODUCT_STATUS WHERE id_product_status = ${fk_id_product_status}`
+
+
+        let sql26 = `update PRODUCT set 
+        fk_id_user=${fk_id_user},
+        fk_id_department=${fk_id_department},
+        fk_id_product_category=${fk_id_product_category},
+        fk_id_product_status=${fk_id_product_status} ` +
+        `var_name='${var_name}', ` +
+        `text_description='${text_description}', ` +
+        `dou_price=${dou_price}, ` +
+        `bit_availability=${bit_availability}, ` +
+        `publication_date='${publication_date}', ` +
+        `expiration_date='${expiration_date}' where id_user = ${id}`
+
+        conection.query(sql22,(err,rows,fields)=>{
+          if(err){  res.json({status:'0',erorr:err.sqlMessage});
+        }else{
+            if(rows.length!=0){
+                conection.query(sql23,(err,rows,fields)=>{
+                    if(err){
+                        res.json({status:'1',error:err.sqlMessage})
+                    }else{
+                        if(rows.length!=0){
+                            conection.query(sql24,(err,rows,fields)=>{
+                                if(err){
+                                    res.json({status:'2',error:err.sqlMessage})
+                                }else{
+                                    if(rows.length!=0){
+                                        conection.query(sql25,(err,rows,fields)=>{
+                                            if(err){
+                                                res.json({status:'3',error:err.sqlMessage})
+                                            }else{
+                                                if(rows.length!=0){
+                                                    conection.query(sql26,(err,rows,fields)=>{
+                                                        if(err){
+                                                            res.json({status:'4',error:err.sqlMessage})
+                                                        }else{
+                                                            res.json({status:'200', msg:'Se modifico correctamente'})
+                                                        }
+                                                    })
+
+                                                }
+                                            }
+                                        })
+
+                                    }
+                                }
+                            })
+                        }
+
+
+                    }
+                })
+            }
+        }
+
+
+        })
+        
+
+}
+*/
+
+
 //Crear Mensaje
 controller.addMessage = (req, res) => {
     const{fk_id_chat,fk_id_user,text_contents}=req.body
@@ -781,19 +885,20 @@ controller.listarMenssage =(req, res)=>{
 
 }
 
-
-controller.deleteUserTotal=(req, res)=>{
+//Listar Denuncias
+controller.listarDenuncia =(req, res)=>{
     const{id}=req.params
 
-    let sql29=`call borrarUs(${id})`
+    let sql28=`call listDenuncias12(${id})`
 
-    conection.query(sql29, (err,rows,fields)=>{
+    conection.query(sql28, (err,rows,fields)=>{
         if(err){
             res.json({ status:'0', error: err.sqlMessage})
         }else{
-            res.json({status:'200',msg:rows})
+            res.json({status:'200', msg:rows})
         }
     })
+    
 }
 
 

@@ -14,14 +14,14 @@ function newChat(req, res){
     let sql = `CALL sp_newChat(${fk_id_product},${fk_id_user_buyer},${fk_id_user_seller})`
 
     if (fk_id_user_buyer==fk_id_user_seller) {
-        //console.log('hola, son iguales')
+        console.log('hola, son iguales')
         res.emit('newchatresponse', {status:'201',msg: "No se puede mandar mensajes a su propio usuario"})
     }else{
     conection.query(sql1,(err,rows,fields)=>{ // Comprueba si existe el producto
         if(err){
             res.emit('newchatresponse', {status:'1',msg: err.sqlMessage})
         }else{
-            //console.log("hola user:"+fk_id_user_buyer+"   user:"+fk_id_user_seller+"   product"+fk_id_product)
+            console.log("hola user:"+fk_id_user_buyer+"   user:"+fk_id_user_seller+"   product"+fk_id_product)
             if(rows.length!=0){ 
                 conection.query(sql2,(err,rows,fields)=>{ // Comprueba si existe el usuario comprador
                     if(err){
@@ -128,7 +128,7 @@ function getChats(req,res){
 //Crear Mensaje
 function addMessage(req, res){
     const{fk_id_chat,fk_id_user,text_contents}=req
-    //console.log(fk_id_chat+"    "+fk_id_user+"    "+text_contents);
+    console.log(fk_id_chat+"    "+fk_id_user+"    "+text_contents);
     let sql27 = `SELECT * FROM CHAT WHERE id_chat = ${fk_id_chat}`
     let sql28 = `SELECT * FROM user WHERE id_user = ${fk_id_user}`
     let sql29 = `CALL sp_sendMessage('${text_contents}',${fk_id_chat},${fk_id_user})`
@@ -178,7 +178,7 @@ function addMessage(req, res){
 
 //Listado de mensaje
 function listMessages(req, res){
-    //console.log(req)
+    console.log(req)
     const{id,idUser} = req
     let sql27=`call listMessage(${id},${idUser})`
     conection.query(sql27, (err,rows, fields)=>{
@@ -193,7 +193,7 @@ function listMessages(req, res){
 
 //Listado de mensaje v2
 function listMessagesv2(req, res){
-    //console.log(req)
+    console.log(req)
     const{id,idUser} = req
     let sql27=`call listMessage(${id},${idUser})`
     conection.query(sql27, (err,rows, fields)=>{
@@ -207,7 +207,7 @@ function listMessagesv2(req, res){
 
 //Listado de mensaje v2
 function listMessagesv3(req, res){
-    //console.log(req)
+    console.log(req)
     const{id,idUser} = req
     let sql27=`call listMessage(${id},${idUser})`
     conection.query(sql27, (err,rows, fields)=>{

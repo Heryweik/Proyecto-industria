@@ -30,9 +30,6 @@ routers.get('/adminTest', customerA.test)
 //Get User Para recuperar datos a un id Especifico /se debe especificar el id en la ruta/
 routers.get('/user/:id',customerU.getUser)
 
-//Get que retorna true si es admin y false si no lo es
-routers.get('/userRol/:id',customerU.getRol)
-
 //Agregar usuario (body -> json)
 routers.post('/user',customerU.postUser)
 
@@ -69,7 +66,7 @@ routers.post('/credential/confirm', customerU.confirmaCodigo)
 //trae los productos disponible segun los diferentes filtros
 routers.post('/productFiltering',customerO.productFiltering)
 
-routers.get('/productUser/:id',customerO.productUser)
+routers.get('/productUser/:id',customerU.productUser)
 
 //Agregar un producto
 routers.post('/newProduct',customerO.postProduct)
@@ -92,15 +89,12 @@ routers.get('/getSubscriptions/:id_user', customerU.getSubscriptions)
 //dar de baja favorito
 routers.post('/deleteFav',customerU.deleteFavorite)
 //listar favoritos
-routers.get('/getFavs/:id_user', customerO.getWishlist)
+routers.get('/getFavs/:id_user', customerU.getWishlist)
 //agregar a favoritos
 routers.post('/addFav', customerU.addFavorite)
 
 //Agrega calificacion
 routers.post('/addcalifications',customerU.qualifications)
-
-//Traer calificación individual
-routers.post('/individualScore',customerU.getOneQualification)
 
 //Agregar comentario
 routers.post('/adddenuncia',customerU.denuncia)
@@ -129,7 +123,7 @@ routers.get('/chat/:id_user',customerC.getChats)
 
 //Traer ultimo mensaje del chat y la cantidad de mensajes no leidos
 routers.get('/chat/lastMessage/:id_chat',customerC.getlastMessage)
-
+*/
 
 //routers.put('/editorImagenes/:id',customerU.PudProducto)
 
@@ -138,7 +132,6 @@ routers.post('/addMessage' , customerU.addMessage)
 
 //Lista Mensaje
 routers.get('/getMessage/:id',customerU.listarMenssage)
-*/
 
 //editar producto
 routers.put('/editProduct/:id_product',customerO.editProduct)
@@ -150,65 +143,12 @@ routers.get('/getProdMod/:id_producto',customerO.getProductoModal)
 routers.get('/prom/:fk_id_user_qualified', customerU.avgQualif)
 //promedio estrellas
 
+
 routers.get('/imagenes/:fk_id_product', customerO.imagenes)
 
 routers.post('/deleteFiles',customerO.updatePhotos)
 
-//obtener datos de grafica de categorias
-routers.get('/categoryChart/:fk_id_product_category',customerA.productsCategory)
-
-//agregar una categoria
-routers.post('/admin/addCategory', customerA.addCategory)
-
-//actualizar una categoria
-routers.post('/admin/updateCategory', customerA.updateCategory)
-
-//traer una categoria
-routers.get('/admin/getCategory/:id_product_category', customerA.getOneCategory)
-
-//eliminar categoria
-routers.put('/admin/deleteCategory', customerA.deleteCategory)
-
-//listar denuncias
-routers.get('/admin/getDenuncias/:id',customerA.listarDenuncia)
-
-//Eliminar usuario y productos por el id de usuario
-routers.delete('/deleUser/:id',customerU.deleteUserTotal)
-
-//Modificar Estado del usuario
-routers.delete('/admin/updateEstado/:id',customerA.cambiarEstado)
-
-//ListadoUsuario 
-routers.get('/admin/listUser',customerA.listadoUsuario)
-//listadoNumeroDenunciasPor usuario
-routers.get('/admin/numDenun/:id',customerA.listadoUsuarioDenun)
-
-//Eliminar Denuncia de usuario
-routers.delete('/admin/deleteDenuncia/:id',customerA.eliminarDenuncia)
-
-//obtener datos de grafica de registrados
-routers.post('/registerChart',customerA.amountUserRegister)
-
-//obtener datos de grafica de categorias
-routers.get('/categoryChart',customerA.amountCategory)
-
-//Trae el tiempo de expiración de los productos
-routers.get('/product/expiryTime',customerA.getExpiryTime)
-
-//Actualiza el plazo de expiración de los productos
-routers.get('/product/expiryTime/:days',customerA.setExpiryTime)
-
-//agregar vista
-routers.get('/views',customerO.views)
-
-routers.post('/getviews',customerA.getViews)
-
-//trae si un chat tiene suficientes comentarios para activar la calificación
-routers.get('/chat/isQualifying/:id_chat',customerU.isQualifying)
-
-
-
+routers.get('/getDenuncias/:id',customerU.listarDenuncia)
 //exportacion de rutas
 module.exports = routers
-
- 
+//module.exports=app

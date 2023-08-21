@@ -12,6 +12,7 @@ controller.test = (req,res) => {
     res.send('get routes')
 }
 
+
 controller.getDepartament = (req,res) =>{
     let sql =`select * from DEPARTMENT`
     conection.query(sql,(err,rows,fields) =>{
@@ -46,12 +47,13 @@ controller.getComplaintCategories = (req,res) =>{
 controller.postProduct = (req,res) =>{
     const {fk_id_user, fk_id_department, fk_id_product_category, fk_id_product_status, var_name, text_description, dou_price} = req.body
     let sql=`insert into PRODUCT(fk_id_user, fk_id_department, fk_id_product_category, fk_id_product_status, var_name,
-        int_views, text_description, dou_price, publication_date, expiration_date) 
+        int_views, text_description, dou_price, bit_availability, publication_date, expiration_date) 
         values(${fk_id_user},${fk_id_department}, ${fk_id_product_category}, ${fk_id_product_status}, '${var_name}',
-        0,'${text_description}',${dou_price},CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, interval (SELECT fn_getExpiryTime()) day))`
+        0,'${text_description}',${dou_price},1,CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, interval 60 day))`
 
     let sql1=`select last_insert_id() AS id`
     
+        console.log(sql)
     conection.query(sql,(err,rows,fields)=>{
         if(err){ res.send({status: '0', id:""})
             console.log(err)
@@ -65,64 +67,17 @@ controller.postProduct = (req,res) =>{
     })    
 }
 
-//Funcion para dar formato a los precios
-function formatoPrecio(precio){
-
-    var centavos = ""
-    var entero = ""
-
-    arregloPrecio = ("" + precio).split(".")
-  
-    if(arregloPrecio.length>1){
-       
-        if(arregloPrecio[1].length>2){
-            centavos = arregloPrecio[1].substring(0,2);
-        }else if(arregloPrecio[1].length==2){
-            centavos = arregloPrecio[1]
-        }else if(arregloPrecio[1].length==1){
-            centavos = arregloPrecio[1] + "0"
-        }else{
-            centavos = "00"
-        }
-        
-    }else{
-        centavos = "00"
-    }
-
-    if(arregloPrecio[0].length%3!=0 && arregloPrecio[0].length>3){
-        entero = arregloPrecio[0].substring(0, arregloPrecio[0].length%3) + ","
-    }else if(arregloPrecio[0].length%3!=0){
-        entero = arregloPrecio[0].substring(0, arregloPrecio[0].length%3)
-    }
-
-    let cont=0
-    for(var i = (arregloPrecio[0].length%3); i < arregloPrecio[0].length ; i++){
-
-
-        if(cont%3==0 && cont!=0){
-            entero += ","
-        }
-        entero += arregloPrecio[0].substring(i,i+1)
-        cont++
-
-    }
-
-    return entero +"."+ centavos;
-
-}
-
 controller.productFiltering = (req,res) =>{
     const{fk_id_department,fk_id_product_category,dou_price,id_user}=req.body
     let sql1 = `SELECT product.id_product,if(wl.fk_id_user is NULL,"false","true") as whishlist,photographs.id_photographs,`
-        +`photographs.var_name AS var_name_photo,product.fk_id_user,product.fk_id_department,product.var_name,text_description,dou_price,publication_date`
+        +`photographs.var_name AS var_name_photo,product.fk_id_user,fk_id_department,product.var_name,text_description,dou_price,publication_date`
         + ` from product LEFT OUTER JOIN  photographs ON photographs.fk_id_product=product.id_product `
-        +`LEFT OUTER JOIN  wish_list wl ON wl.fk_id_product=product.id_product AND wl.fk_id_user=${id_user}`+
-        ` INNER JOIN user ON user.id_user = product.fk_id_user where `
-    if(fk_id_department!="") sql1 += `product.fk_id_department = ${fk_id_department} AND `
-    if(fk_id_product_category!="")  sql1 += `product.fk_id_product_category=${fk_id_product_category} AND `
-    if(dou_price!="") sql1 +=  `product.dou_price <= ${dou_price} AND `
-    sql1 += `bit_availability = 1 and user.bit_status=1 group by product.id_product ORDER BY publication_date DESC`
-    
+        +`LEFT OUTER JOIN  wish_list wl ON wl.fk_id_product=product.id_product AND wl.fk_id_user=${id_user}  where `
+    if(fk_id_department!="") sql1 += `fk_id_department = ${fk_id_department} AND `
+    if(fk_id_product_category!="")  sql1 += `fk_id_product_category=${fk_id_product_category} AND `
+    if(dou_price!="") sql1 +=  `dou_price <= ${dou_price} AND `
+    sql1 += `bit_availability = 1 group by product.id_product ORDER BY publication_date DESC`
+
     
     conection.query(sql1,(err,rows,fields)=>{
         if(err) res.json(err);//posible error en consulta
@@ -131,10 +86,13 @@ controller.productFiltering = (req,res) =>{
             
             //Funcion para dar formato a los precios
 
+            const currency = function(number){
+                return new Intl.NumberFormat('en-IN', {minimumFractionDigits: 2}).format(number);
+            };
             const rows2 = rows
                 .map(row => ({
                     ...row,
-                    dou_price: formatoPrecio(row.dou_price)
+                    dou_price: currency(row.dou_price)
 
                 }))
 
@@ -230,7 +188,11 @@ controller.getProducto=(req,res)=>{
         else{
             
             //Funcion para dar formato a los precios
-            rows[0].dou_price = formatoPrecio(rows[0].dou_price)
+            const currency = function(number){
+                return new Intl.NumberFormat('en-IN', {minimumFractionDigits: 2}).format(number);
+            };
+            console.log(currency(rows[0].dou_price))
+            rows[0].dou_price = currency(rows[0].dou_price)
 
             res.json(rows)
         }
@@ -249,79 +211,6 @@ controller.getProductImages=(req,res)=>{
         }
     })
 }
-
-controller.productUser = (req, res) => {
-    const { id } = req.params
-    let sql1 = `SELECT product.id_product,photographs.id_photographs,photographs.var_name AS var_name_photo,fk_id_user,fk_id_department,`
-        + ` product.var_name,text_description,dou_price,publication_date, expiration_date, bit_availability, product_category.var_name AS categoria`
-        + ` from product LEFT OUTER JOIN  photographs ON photographs.fk_id_product=product.id_product INNER JOIN product_category ON product_category.id_product_category= product.fk_id_product_category where `
-    sql1 += `product.fk_id_user=${id} group by product.id_product ORDER BY publication_date DESC`
-
-    conection.query(sql1, (err, rows, fields) => {
-        if (err) res.json(err);//posible error en consulta
-        else {
-
-            //console.log(rows[0].bit_availability[0])
-
-            const isAvailable = (dato)=>{
-                if(dato == 0){
-                    return false
-                }else{
-                    return true
-                }
-            }
-
-            const rows2 = rows
-                .map(row => ({
-                    ...row,
-                    dou_price: formatoPrecio(row.dou_price),
-                    expiration_date: new Date(row.expiration_date).toLocaleString(),
-                    bit_availability: isAvailable(row.bit_availability[0])
-                }))
-
-            res.json(rows2)//todo salio bien
-        }
-    })
-}
-
-//////////////////////LISTAR PRODUCTOS FAVORITOS/////////////////////////////////
-controller.getWishlist = (req, res) => {
-    const { id_user } = req.params
-
-    sql1 = `SELECT * FROM user WHERE id_user=${id_user}`
-
-
-    sql3 = `SELECT pr.id_product,pr.var_name, pr.text_description, pr.dou_price, ph.id_photographs,ph.var_name as var_name_photo FROM product pr
-        INNER JOIN wish_list ON pr.id_product= wish_list.fk_id_product 
-        INNER JOIN photographs ph ON  pr.id_product=ph.fk_id_product
-        INNER JOIN user ON user.id_user = pr.fk_id_user
-        WHERE wish_list.fk_id_user=${id_user} AND bit_availability = 1 and user.bit_status=1 group by pr.id_product ORDER BY pr.publication_date DESC`
-
-    conection.query(sql1, (err, rows, fields) => {
-        if (err) res.json({ status: '0', error: err.sqlMessage })
-        else {
-            if (rows.length != 0) { //encontro al usuario
-                conection.query(sql3, (err, rows, fields) => {
-                    if (err) res.json({ status: '0', error: err.sqlMessage })//posible error en consulta a BDD
-                    else {
-                        if (rows.length != 0) {
-                                const rows2 = rows
-                                .map(row => ({
-                                    ...row,
-                                    dou_price: formatoPrecio(row.dou_price)
-                
-                                }))
-
-                            res.json({ status: '200', msg: rows2 })
-                        }
-                        else { res.json({ status: '202', msg: "No hay productos en la lista de deseos" }) }
-                    }
-                })
-            } else { res.json({ status: '201', msg: "Usuario no existe o es incorrecto" }) }
-        }
-    })
-}
-
 
 controller.editProduct=(req,res)=>{
     const{id_product}=req.params
@@ -375,13 +264,20 @@ controller.updatePhotos=(req,res)=>{
 controller.getProductoModal=(req,res)=>{
     const{id_producto}=req.params
 
-    let sql1=`SELECT p.id_product,  p.var_name , p.text_description,  p.dou_price, 
-    p.fk_id_product_category, p.fk_id_product_status, p.fk_id_department , product_category.var_name AS categoria FROM product p INNER JOIN product_category ON product_category.id_product_category= p.fk_id_product_category
+    let sql1=`SELECT p.id_product,  p.var_name , p.text_description,  p.dou_price,
+    p.fk_id_product_category, p.fk_id_product_status, p.fk_id_department FROM product p
     WHERE id_product=${id_producto}`
 
     conection.query(sql1,(err,rows,fields)=>{
         if(err) return res.json({status:'0', msg:err.sqlMessage});
         else{
+            //Funcion para dar formato a los precios
+            const currency = function(number){
+                return new Intl.NumberFormat('en-IN', {minimumFractionDigits: 2}).format(number);
+            };
+            console.log(currency(rows[0].dou_price))
+            rows[0].dou_price = currency(rows[0].dou_price)
+
             res.json(rows)
         }
     })
@@ -405,16 +301,6 @@ controller.imagenes=(req,res)=>{
     })
     
   //  const data= fs2.readFileSync(path.join(__dirname, '..\\dbimagesProducts\\'+))
-}
-
-controller.views=(req,res)=>{
-    let sql=`CALL verifiacionVisitas()`
-    conection.query(sql,(err,rows,fields)=>{
-        if(err) res.json({status:'0', msg:err.sqlMessage});
-        else{
-            res.json({status:'200', msg:'Vista agregada'})
-        }
-    })
 }
 
 module.exports = controller
