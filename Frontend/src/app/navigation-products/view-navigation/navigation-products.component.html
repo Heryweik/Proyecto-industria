@@ -1,0 +1,29 @@
+<!--Agregar navbar-->
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <img src="../../../assets/Imagenes/LOGO2.png" alt="logo_empresa">
+        </div>
+    <nav class="menu">
+        <div>
+            <a *ngIf="toDisplay" data-bs-toggle="modal" data-bs-target="#myModal">Subir Producto</a>
+            <a routerLink='subscriptions' routerLinkActive="active" *ngIf="toDisplay">Suscripciones</a>
+            <a routerLink='wishlist' routerLinkActive="active" *ngIf="toDisplay">Lista de Deseos</a>
+            <a routerLink='published' routerLinkActive="active" *ngIf="toDisplay">Publicados</a>
+            <a routerLink='../navigationProducts' routerLinkActive="active" *ngIf="toDisplay">Ver Productos</a>
+                </div>
+            <a *ngIf="toDisplay" routerLink='chats' style="padding: 2px 25px;"><i class="fa-solid fa-envelope" style="font-size: 22px;"></i></a>
+            <a routerLink='' routerLinkActive="active" (click)="eliminaToken()">Salir</a>
+        
+    </nav>
+    </div>
+</header>
+
+<!--Se intercambiara por los dierentes componentes-->
+<router-outlet></router-outlet>
+
+<!--Modal para agregar productos-->
+<new-products></new-products>
+
+<!--footer-->
+<app-footer [url1]="ruta"></app-footer>

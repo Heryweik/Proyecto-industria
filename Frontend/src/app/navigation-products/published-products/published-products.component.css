@@ -1,0 +1,355 @@
+/*//////////texto/////////////*/
+
+.container1 h1{
+    text-align: center;
+    color: #252f37;
+    margin-top: 50px;
+}
+
+.h4-class{
+    margin-left: 150px;
+    color: #252f37;
+    display: flex;
+    margin-top:20px;
+    font-size: 22px;
+    padding-left: 15px;
+}
+ h5{
+    color: #252f37;
+ }
+
+/*BTN SUSCRIBIRSE*/
+.btn-suscribe{
+    width: 10%;
+    letter-spacing: 1px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    background-color: #FAA11D;
+    cursor: pointer;
+    height: 32px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+
+
+/**/
+.container3{
+    display:flex;
+    background-color: white;
+}
+
+.container1{
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    height: 50px;
+    width: 100%;
+    PADDING-top: 50px;
+    PADDING-BOTTOM: 65PX
+}
+/*//filtros///*/
+
+
+
+.carousel-container{
+    background-color:#DBEDF5;
+    display: flex;
+    margin-top: 10PX;
+}
+
+
+/*///////cards PRODUCTS//////////*/
+
+
+body{
+    margin: 0;
+    font-family:Nunito Sans;
+    }
+    h3{
+    text-align: left;
+    padding-left: 10px;
+    font-size: 18px;
+    margin: 0;
+    padding-top: 10px;
+    }
+    a{
+    text-decoration: none;
+    }
+    .gallery{
+        display: block;
+    flex-direction: column;
+    
+    flex-wrap:nowrap;
+    width: 100%;
+    
+    justify-content: center;
+    align-items: center;
+    margin:  0;
+    MARGIN-LEFT: 50PX;
+    MARGIN-RIGHT: 50PX;
+    }
+    .content{
+    width: 22%;
+    margin: 15px;
+    box-sizing: border-box;
+    float: left;
+    
+    border-radius:10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: .4s;
+    background-color: white;
+    }
+    .content:hover{
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+    transform: translate(0px, -8px);
+    transition: .6s;
+    }
+    img{
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    }
+    
+    h6{
+    font-size: 14px;
+    text-align: left;
+    padding-left: 8px;
+    color: #222f3e;
+    margin: 0;
+    margin-top: 20px;
+    }
+.delete{
+        background-color: #d9534f;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    width: 50%;
+    padding: 8px;
+    border:0px;
+    outline: none;
+    cursor: pointer;
+    margin-top: 5px;
+    height: 35px;
+    border-bottom-right-radius: 10px;
+    
+    }    
+    .delete:hover{
+        cursor: pointer;
+    background: red;
+    color: white;
+    }
+    .buy{
+    background-color: #252f37;
+    text-align: center;
+    height: 35px;
+    font-size: 16px;
+    color: #fff;
+    width: 50%;
+    padding: 8px;
+    border:0px;
+    outline: none;
+    cursor: pointer;
+    margin-top: 5px;
+    border-bottom-left-radius: 10px;
+    }
+    .buy:hover{
+        cursor: pointer;
+    background: #000;
+    color: white;
+    }
+    @media(max-width: 1000px){
+    .content{
+    width: 29%;
+    }
+    }
+    @media(max-width: 750px){
+    .content{
+    width: 100%;
+    }
+    }
+    /*icono de favoritos*/
+#fav-icon{
+    padding-left: 95px;
+    padding-top: 15px;
+    color:red;
+    
+}
+
+
+.h5-descrip{
+    margin-left: 15px;
+    color:#252f37;
+    font-size: 14px;
+}
+table{
+    table-layout: fixed;
+    width: 200px;
+    margin-top: 15px;
+}
+
+ .name-col {
+    
+    width: 150px;
+    word-wrap: break-word;
+}
+.icon-col{
+    width: 40px;
+    word-wrap: break-word;
+}
+
+p{
+    margin-top: 10px;
+    margin-right: 10px;
+    text-align: center;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+
+/*------------------------------------------modal---------------------------------------------------*/
+.ng-touched.ng-invalid:is(input,.selector, :checked),
+.ng-dirty.ng-invalid:is(input,.selector, :checked){
+    outline: 2px solid red;
+}
+
+.ng-dirty.ng-invalid:is(input,.selector, :checked){
+    outline: 2px solid red;
+}
+
+
+.inputs-container{
+    border: 1px solid #E1E1E1;
+    border-radius: 5px;
+    padding: 17px;
+
+    background: #fff;
+
+
+
+}
+
+.prou{
+    height: 15cm;
+}
+
+
+
+form{
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    margin: 0 auto;
+    width: 350px;
+
+
+}
+.form{
+
+    align-content: center;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+}
+
+.input-file2{
+    align-content: space-around;
+    image-rendering: auto;
+
+}
+
+.container-form{
+  display: flex;
+flex-direction: row;
+justify-content: flex-start;
+align-items: flex-start;
+align-content: stretch;
+  width: 100%;
+}
+
+.container-icon{
+  padding-top: 5px;
+}
+
+.container-part-form{
+  width: 100%;
+}
+
+.input{
+  height: 28px;
+  margin-bottom: auto;
+}
+
+.errors-container{
+  font-size: 12px;
+  margin-bottom: 3px;
+  color: rgb(22, 22, 22);
+}
+
+
+.modal-body{
+  align-items: center;
+
+  background-color: rgb(252, 252, 252);
+}
+
+.container-images{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.pre-imagen{
+  width: 62px;
+  height: 62px;
+  background-size: cover;
+  margin: 2px;
+  border-style: outset;
+  border-color: unset;
+}
+
+.pre-imagen:hover .deleteFile{
+  opacity: 100;
+}
+
+.pre-imagen:hover .deleteFile:hover{
+  color: red;
+}
+
+.deleteFile{
+  width: 25px;
+  height: 29px;
+  text-align: center;
+  margin-left: auto;
+  font-size: 19px;
+  font-weight: bold;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.content-upload-image{
+  display:inline-block;
+  vertical-align:top;
+  display: flex;
+  height: 247px;
+  justify-content: center;
+}
+
+.table>:not(caption)>*>* {
+  border-bottom:none
+}
+
+#imagen-p{
+    height: 220px;
+    width: 300px;
+}

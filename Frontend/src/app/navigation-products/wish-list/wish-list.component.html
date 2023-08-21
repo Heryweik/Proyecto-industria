@@ -1,0 +1,164 @@
+<div class="title-wishlist">
+    <h1 class="title-wishlist-text">Lista de Deseos</h1>
+</div>
+
+<h2 *ngIf="error" class="text-emphy-product">{{afterGet.msg}}</h2>
+
+<div *ngIf="!(error)" class="carousel-container">
+    <div class="gallery">
+
+        <div class="content" *ngFor="let item of afterGet.msg | slice:desde:hasta">
+            <img [src]="'http://localhost:3000/' + item.var_name_photo" alt="">
+            <div class="content-inf">
+                <div class="content-inf-text">
+                    <h4 style="font-size: 18px; text-align:left">{{item.var_name}}</h4>
+                </div>
+                <div style="width:20px">
+                    <i (click)="removeProduct(item.id_product.toString())" class="fa-solid fa-heart icon-product"></i>
+                </div>
+            </div>
+            <h6>L.{{item.dou_price}}</h6>
+
+            <h6 *ngIf="">{{afterDelete.msg}}</h6>
+
+            <!-- (click)="cargarProducto(item.id_product)"-->
+            <button class="ver" (click)="set(item.id_product.toString())"
+                (click)="sumaVista(item.id_product.toString())" (click)="cargarProducto(item.id_product.toString())"
+                (click)="cargarImagenes(item.id_product.toString())" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">Ver</button>
+        </div>
+    </div>
+</div>
+
+<h3 *ngIf="errorDelete" class="text-emphy-product">{{afterDelete.msg}}</h3>
+
+<mat-paginator *ngIf="!(error)" [length]="afterGet.msg.length" [pageSize]="pageSize" (page)="cambiarPagina($event)">
+</mat-paginator>
+
+<!--modal-->
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="ngOnInit()"
+                    (click)="hideComment()"></button>
+            </div>
+
+            <div class="modal-body" *ngFor="let item of producto">
+                <table style=" width:100%">
+                    <tr style="width: 100%;">
+                        <td style="width: 50%;">
+                            <div class="gallery">
+                                <div class="content">
+                                    <div id="carouselExampleControlsNoTouching" class="carousel slide"
+                                        data-bs-touch="false">
+
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img [src]="'http://localhost:3000/'+firstImage" class="d-block w-100"
+                                                    alt="...">
+                                            </div>
+                                            <div class="carousel-item" *ngFor="let image of images.slice(1)">
+                                                <img [src]="'http://localhost:3000/'+image.var_name"
+                                                    class="d-block w-100" alt="...">
+                                            </div>
+                                        </div>
+
+                                        <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+
+                                        <button class="carousel-control-next" type="button"
+                                            data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td style="width: 50%; padding-left: 40px; position: absolute;">
+                            <h3 style="margin-bottom: 20px; margin: 50px,0; margin-top: 100px;">{{item.titulo}}</h3>
+                            <p><strong>Precio: </strong>L. {{item.dou_price}}</p>
+                            <p><strong>Descripcion: </strong>{{item.text_description}}</p>
+                            <p><strong>Estado:</strong> {{item.estado}}</p>
+                            <p><strong>Categoria:</strong> {{item.categoria}}</p>
+                            <p class="location-P"><i class="fa-solid fa-location-dot"></i> {{item.departamento}}</p>
+                            <p class="views-p"><i class="fa-solid fa-eye"></i> {{item.int_views}}</p>
+
+                            <hr>
+                            <div class="seller-container" style="display: flex; margin-top: 20px; text-align: center;">
+                                <h4 style="font-size: 20px; "><strong>{{item.nombre}} {{item.apellido}} </strong> </h4>
+
+                                <div class="star-widget" style="margin-left: 90px; display: inline-block; ">
+                                    <input type="radio" name="rate" id="rate-5">
+                                    <label for="rate-5" class="fas fa-star"
+                                        [ngStyle]="{'color': cond1 ? '#fd4': 'gray'}"></label>
+                                    <input type="radio" name="rate" id="rate-4">
+                                    <label for="rate-4" class="fas fa-star"
+                                        [ngStyle]="{'color': cond2 ? '#fd4': 'gray'}"></label>
+                                    <input type="radio" name="rate" id="rate-3">
+                                    <label for="rate-3" class="fas fa-star"
+                                        [ngStyle]="{'color': cond3 ? '#fd4': 'gray'}"></label>
+                                    <input type="radio" name="rate" id="rate-2">
+                                    <label for="rate-2" class="fas fa-star"
+                                        [ngStyle]="{'color': cond4 ? '#fd4': 'gray'}"></label>
+                                    <input type="radio" name="rate" id="rate-1">
+                                    <label for="rate-1" class="fas fa-star"
+                                        [ngStyle]="{'color': cond5 ? '#fd4': 'gray'}"></label>
+                                </div>
+                                <p style="text-align: left; display: inline-block; margin-left: 10px;"
+                                    class="p-califica"> {{promedio}} de 5</p>
+                            </div>
+                            <div>
+                                <!-- <p style="color: red; text-align: center;">{{paragraph}}</p>-->
+                                <div class="btn-options">
+                                    <button (click)="showComment()" (click)="loadComments(item.id_product.toString())"
+                                        type="submit" class="cbtn" style="background-color: #252f37">Ver
+                                        Comentarios</button>
+                                    <button *ngIf="item.fk_id_user != user" type="submit" class="cbtn" 
+                                        data-bs-dismiss="modal" aria-label="Close" (click)="newChat(item.fk_id_user,item.id_product)"
+                                        style="background-color: #93BEE2; margin-left: 10px;">Contactar</button>
+                                    <button *ngIf="item.fk_id_user != user" type="submit" class="cbtn"
+                                        style="background-color: #FAA11D; margin-left: 10px;">Denunciar</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div [hidden]="bool" class="div-comments">
+
+                    <hr>
+                    <h6 style="text-align: left; font-size:20px"><strong>{{totalComments}} comentarios</strong> </h6>
+
+                    <form [formGroup]="commentForm" class="user-comment"
+                        style="display: flex; margin-top: 30px; margin-bottom: 50px; ">
+                        <input [(ngModel)]="comentario.text_contents" id="input-comment" type="text"
+                            placeholder="Agrega un comentario" formControlName="comentario">
+                        <button type="submit" (click)="addComment()"
+                            [disabled]="!comentario.text_contents">Comentar</button>
+                    </form>
+
+
+                    <div class="comments" *ngFor="let comment of comments">
+                        <div class="content" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+                            <p style="font-size: 14px;"><i class="fa-solid fa-user"></i> <strong> {{comment.var_name}}
+                                    {{comment.var_lastname}}</strong></p>
+                            <p style="font-size: 14px">{{comment.text_contents}}</p>
+                            <p style="font-size:11px; text-align: right;">{{date}}</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

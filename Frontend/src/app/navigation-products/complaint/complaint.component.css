@@ -1,0 +1,108 @@
+.ng-touched.ng-invalid:is(input,.selector, :checked),
+.ng-dirty.ng-invalid:is(input,.selector, :checked){
+    outline: 2px solid red;
+}
+
+.ng-dirty.ng-invalid:is(input,.selector, :checked){
+    outline: 2px solid red;
+}
+
+.form-select{
+  width: 75%;
+}
+
+.div-select{
+  border: 1px;
+  display: inline-block;
+  width: auto;
+  margin: 0 20px;
+}
+
+.label{
+  font-size: 20px;
+}
+
+.form{
+    align-content: center;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+
+}
+
+
+.errors-container{
+  font-size: 12px;
+  margin-bottom: 3px;
+  color: rgb(22, 22, 22);
+}
+
+
+.desciption{
+  width: 100%;
+}
+
+.cbtn1{
+  text-align: center;
+  font-size: 16px;
+  background-color: #646464;
+  color: #fff;
+  width: 100%;
+  padding: 10px;
+  border:0px;
+  outline: none;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 5px;
+  border-radius: 10px;
+  margin-top: 0px;
+width: 100px;
+}
+
+.cbtn1:hover {
+  cursor: pointer;
+  background: #7e7e7e;
+
+}
+
+.cbtn1:active {
+box-shadow: 0 0 10px rgb(150, 150, 150);
+top: 3px;
+}
+
+
+.cbtn2{
+    text-align: center;
+    font-size: 16px;
+    background-color: brown;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    border:0px;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 5px;
+    border-radius: 10px;
+    margin-top: 0px;
+  width: 100px;
+}
+
+.cbtn2:hover {
+  cursor: pointer;
+  background: rgb(179, 41, 41);
+
+}
+
+.cbtn2:active {
+  box-shadow: 0 0 10px #f07373;
+  top: 3px;
+}
+
+.titulo{
+  font-size: 30px;
+  text-align: center;
+  color: #252f37;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}

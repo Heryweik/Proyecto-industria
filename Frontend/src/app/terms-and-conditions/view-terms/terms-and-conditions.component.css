@@ -1,0 +1,134 @@
+.header{
+    width: 100%;
+    
+    height: 75px;
+    background-image:linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%) ;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 4);
+}
+.container{
+    width: 90%;
+    
+    max-width: 1200px;
+    margin: auto;
+}
+ul li a{
+    text-decoration: none;
+    color: inherit;
+    transition: all 50ms ease;
+}
+ul li a:hover{
+    color: #7DE2FC;
+}
+ul li{
+    display: inline-block;
+    padding: 0 15px;
+}
+
+.logo img{
+    float: left;
+    margin-top: 5px;
+    line-height: 50px;
+    height: 65px;
+    width: 180px;
+}
+.logo h1{
+    color: #252F37;
+    font-weight: 400;
+    font-size: 24px;
+    cursor: default;
+}
+.menu{
+    
+    float: right;
+    line-height: 75px;
+}
+.menu a{
+    color: #252F37;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 50px;
+    line-height: normal;
+    font-size: 18px;
+    transition: all 500ms ease;
+    border-bottom: 1px solid transparent;
+    font-weight: 600;
+}
+.columna{
+    height: 50px;
+}
+.menu a:hover{
+    background-color: #5E6A72;
+    color: #FFF;
+    border-bottom: 4px solid #FFF;
+}
+
+#encabezado{
+    /*padding-left: 110px;*/
+    padding-top: 90px;
+    text-align: center;
+    
+    
+}
+
+#parrafo{
+    font-size: larger;
+    padding-left: 170px;
+    padding-top: 15px;
+    
+}
+
+.venta img {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 820px;
+    top: 170px;
+
+}
+
+
+.flex {
+    display: flex;
+    justify-content: center;
+    float: right;
+    
+}
+
+.header1{
+    width: 100%;
+    
+    height: 35px;
+    background-image:linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%) ;
+    position: relative;
+    top: 21px;
+    left: 0;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 4);
+    margin-top: 200px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+footer{
+    position: relative;
+    margin-top: 0px;
+    width: 100%;
+    /* height: 80px;*/ 
+    /*padding: 30px;*/
+    clear: both;
+    background: #000;
+    text-align: center;
+    display: block;
+    color: #FFF;
+}
+
+.term-container{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    width: 700px;
+}

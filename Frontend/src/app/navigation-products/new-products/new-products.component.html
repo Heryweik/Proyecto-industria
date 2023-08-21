@@ -1,0 +1,182 @@
+<!-- Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header text-center">
+        <h5 class="modal-title w-100">Articulo en Venta </h5>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body" style="padding-top: 0px;">
+        <br>
+
+        <form class="div_padre" [formGroup]="productoForm">
+
+          <div class="div_padre">
+            <div class="form-group">
+              <label [for]="archivos.length<10?'imagenn':''">
+                <div class="content-upload-image">
+                  <img title="imagen" 
+                  [src]="archivos.length<10?'../../../assets/Imagenes/fotoImagenes.png':'../../../assets/Imagenes/no-image-produ.png'" 
+                  [style]="archivos.length<10?'cursor: pointer;':'cursor: not-allowed'">
+                </div>
+                <div style="display:inline-block;width: 100%;">
+                  <h6 style="font-size: 13px;;text-align: center;">
+                    La foto es requerida(Máximo 10 imágenes)
+                  </h6>
+                </div>
+              </label>
+              <input accept="image/*" id="imagenn" style="display: none; visibility: none;" class="form-control-file"
+                (change)="capturarFile($event)" type="file" placeholder="seleccciona" multiple>
+            </div>
+            <!--Previsializacion-->
+            <div class="container-images">
+              <div class="pre-imagen" *ngFor="let item of srcArray" [style]="'background-image: url('+item.img+');'">
+                <h5 class="deleteFile" (click)="deleteFile(item.id)">x</h5>
+              </div>
+            </div>
+          </div>
+          <br>
+          <!--Boton para subir el archivo-->
+          <div class="form">
+            <div class="form-floating mb-3 mt-3">
+              <input type="text" id="titulo" class="form-control form-control-lg" [(ngModel)]="producto.var_name"
+                placeholder="Escribe el titulo" formControlName="titulo" name="titulo" #titulo required
+                formControlName="titulo">
+              <label for="titulo">Título</label>
+            </div>
+            <div class="errors-container"
+              *ngIf="tituloControl.invalid && (tituloControl.touched || tituloControl.dirty)">
+              <p class="errors-msg" class="fs-6" text *ngIf="tituloControl.hasError('required')">El campo es obligatorio
+              </p>
+              <p class="errors-msg" class="fs-6" *ngIf="tituloControl.hasError('minlength')">Nombre es muy corto</p>
+              <p class="errors-msg" class="fs-6" *ngIf="tituloControl.hasError('maxLength')">Nombre es muy largo</p>
+
+            </div>
+
+          </div>
+
+          <div class="form">
+            <div class="form-floating mb-3 mt-3">
+              <input type="text" id="precio" class="form-control form-control-lg" [(ngModel)]="producto.dou_price"
+                placeholder="precio" #precio required formControlName="precio">
+              <label for="precio">Precio</label>
+            </div>
+            <div class="errors-container"
+              *ngIf="precioControl.invalid && (precioControl.touched || precioControl.dirty)">
+              <p class="errors-msg" *ngIf="precioControl.hasError('required')">El campo es obligatorio</p>
+
+
+            </div>
+          </div>
+
+
+          <div class="form">
+            <div class="form-floating mb-3 mt-3">
+              <select class="form-select" [(ngModel)]="producto.fk_id_product_category" id="categoria" name="categoria"
+                required formControlName="categoria">
+                <option *ngFor="let category of categories" [value]="category.id_product_category">
+                  {{category.var_name}}
+                </option>
+              </select>
+              <label class="nom" for="categoria">Categoria de Producto</label>
+            </div>
+            <div class="errors-container"
+              *ngIf="categoriaControl.invalid && (categoriaControl.touched || categoriaControl.dirty)">
+              <p class="errors-msg" class="fs-6" *ngIf="categoriaControl.hasError('required')">El campo es obligatorio
+                selecciona una opcion</p>
+
+            </div>
+          </div>
+
+          <div class="form">
+            <div class="form-floating mb-3 mt-3">
+              <select class="form-select" [(ngModel)]="producto.fk_id_product_status" name="estado" id="estado"
+                formControlName="estado">
+                <option value="1">Nuevo</option>
+                <option value="2">Usado</option>
+              </select>
+              <label for="Estado">Estado del producto</label>
+            </div>
+            <div class="errors-container"
+              *ngIf="estadoControl.invalid && (estadoControl.touched || estadoControl.dirty)">
+              <p class="errors-msg" class="fs-6" *ngIf="estadoControl.hasError('required')">El campo es obligatorio</p>
+
+            </div>
+          </div>
+
+          <div class="form">
+            <div class="form-floating mb-3 mt-3">
+              <textarea class="form-control form-control-lg" id="descripcion" [(ngModel)]="producto.text_description"
+                rows="2" placeholder="descripcion" style="height: 150px;font-size: 17px;" required formControlName="decripcion"></textarea>
+              <label for="descripcion">Descripcion del Producto</label>
+            </div>
+            <div class="errors-container"
+              *ngIf="descripcionControl.invalid && (descripcionControl.touched || descripcionControl.dirty)">
+              <p class="errors-msg" class="fs-6" *ngIf="descripcionControl.hasError('required')">El campo es obligatorio
+              </p>
+              <p class="errors-msg" class="fs-6" *ngIf="descripcionControl.hasError('minlength')">La descripcion es muy
+                corta</p>
+              <p class="errors-msg" class="fs-6" *ngIf="descripcionControl.hasError('maxLength')">La descripcion es muy
+                largo</p>
+
+            </div>
+          </div>
+
+          <div class="form">
+            <table class="table">
+              <thead class="table">
+                <tr>
+                  <div >
+                    <td class="tbl-col-nombre">Ubicación</td>
+                    <td class="tbl-col-depto">
+                      <select class="form-select" [(ngModel)]="producto.fk_id_department" name="Departamento"
+                        formControlName="ubicacion" id="ubicacion">
+                        <option value="1">Atlántida</option>
+                        <option value="2">Colón</option>
+                        <option value="3">Comayagua</option>
+                        <option value="4">Copán</option>
+                        <option value="5">Cortés</option>
+                        <option value="6">Choluteca</option>
+                        <option value="7">El Paraíso</option>
+                        <option value="8">Francisco Morazán</option>
+                        <option value="9">Gracias a Dios</option>
+                        <option value="10">Intibucá</option>
+                        <option value="11">Islas de la Bahía</option>
+                        <option value="12">La Paz</option>
+                        <option value="13">Lempira</option>
+                        <option value="14">Ocotepeque</option>
+                        <option value="15">Olancho</option>
+                        <option value="16">Santa Bárbara</option>
+                        <option value="17">Valle</option>
+                        <option value="18">Yoro</option>
+                      </select>
+                      <div class="errors-container"
+                        *ngIf="ubicacionControl.invalid && (ubicacionControl.touched || ubicacionControl.dirty)">
+                        <p class="errors-msg" class="fs-6" *ngIf="ubicacionControl.hasError('required')">El campo es
+                          obligatorio selecciona una opción</p>
+
+                      </div>
+                    </td>
+                  </div>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <!--Boton para subir el archivo y cerrar el modal-->
+        <button type="button" onclick="document.getElementById('titulo').value = ''; document.getElementById('precio').value = '';
+          document.getElementById('categoria').value='';document.getElementById('categoria').value='';document.getElementById('estado').value='';
+          document.getElementById('descripcion').value='';document.getElementById('ubicacion').value=''"
+          class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" type="submit" (click)="subirArchivo()"
+          onclick="document.getElementById('titulo').value = ''; document.getElementById('precio').value = '';
+          document.getElementById('categoria').value='';document.getElementById('categoria').value='';document.getElementById('estado').value='';
+          document.getElementById('descripcion').value='';document.getElementById('ubicacion').value=''">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

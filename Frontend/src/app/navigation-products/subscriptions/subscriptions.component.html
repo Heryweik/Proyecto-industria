@@ -1,0 +1,29 @@
+
+    <div class="carousel-container" >
+        <div  class="gallery" >
+            <div class="container1">
+                <h1>Mis suscripciones</h1>
+            </div>
+            <div class="content" *ngFor="let subscription of UserSubscription">
+                <table align="center">
+                        <td><h3>{{subscription.var_name}}</h3></td>
+                </table>    
+                <button class="btn-unsubscribe" (click)="anularSuscripcion('' + subscription.id_product_category)">ANULAR SUSCRIPCIÓN</button>
+            </div>
+    </div>
+
+    <div  class="carousel-container2">
+        <div  class="gallery">
+            <div class="container1">
+                <h1>Categorías disponibles</h1>
+            </div>
+            <div *ngFor="let category of categories">
+                <div  class="content2" *ngIf="!UserSubscriptionID.includes(category.id_product_category)">
+                    <table align="center">
+                        <td><h3>{{category.var_name}}</h3></td>
+                    </table>    
+                    <button class="btn-suscribe" (click)="suscribirse('' + category.id_product_category)">SUSCRIBIRME</button>
+                </div>
+            </div>
+    </div>
+

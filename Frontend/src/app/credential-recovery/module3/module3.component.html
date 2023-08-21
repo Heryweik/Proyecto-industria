@@ -1,0 +1,28 @@
+<div id="hola">
+    <img src="../../../assets/Imagenes/key.png" alt="">
+</div>
+
+<div id="formDiv">
+    <h1>Restablecer la</h1>
+    <h1>contraseña</h1>
+    <form [formGroup]="credential" method="PUT">
+        <h3>Nueva Contraseña</h3>
+        <input [(ngModel)]="update.tex_password" type="password" formControlName="password" placeholder="Escribe tu contraseña" name="password" formControlName="password" required>
+        <div *ngIf="passControl.invalid && (passControl.touched || passControl.dirty)">
+            <p *ngIf="passControl.hasError('required')">El campo es obligatorio</p>
+            <p *ngIf="passControl.hasError('pattern')">Debe tener minimo 8 caracteres, Use minusculas, mayusculas, numeros y simbolos[@$!%*?&-/_|]</p>
+        </div>
+        <h3>Vuelve a escribir la contraseña</h3>
+        <input [(ngModel)]="update.tex_pass_ver" type="password" formControlName="confirmPassword" placeholder="Escribe de nuevo tu contraseña" name="confirmPassword" required>
+        <div *ngIf="passValidateControl.invalid && (passValidateControl.touched || passValidateControl.dirty)">
+            <p *ngIf="passValidateControl.hasError('required')">El campo es obligatorio</p>
+        </div>
+        <div *ngIf="match('password','confirmPassword')">
+            <p> Las contraseñas no coinciden </p>
+        </div>
+        <div *ngIf="validate">
+            <p> Hubo un errror al cambiar la contraseña, intentelo de nuevo</p>
+        </div>
+        <button (click)="updatePassword()" type="submit" [disabled]="credential.invalid">Restablecer contraseña</button>
+    </form>
+</div>

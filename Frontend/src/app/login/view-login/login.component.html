@@ -1,0 +1,38 @@
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <img src="../../../assets/Imagenes/LOGO2.png" alt="logo_empresa">
+    </div>
+    <nav class="menu">
+      <a href="" routerLinkActive="/landing">Inicio</a>
+    </nav>
+  </div>
+</header>
+
+<div class="login-box">
+  <img src="../../../assets/Imagenes/Logo.png" class="avatar" alt="Avatar Image">
+  <h1>Inicio de sesion</h1>
+  <form [formGroup]="loginForm" method="POST">
+    <!-- USERNAME INPUT -->
+    <label for="email">Correo</label>
+    <input style="margin:0px;" [(ngModel)]="login.var_email" formControlName="email" name="email"  type="email" placeholder="Ingrese el Correo">
+    <div class="errors-container" *ngIf="emailControl.invalid && (emailControl.touched || emailControl.dirty)">
+      <p class="errors-msg" *ngIf="emailControl.hasError('required')">El campo es obligatorio</p>
+      <p class="errors-msg" *ngIf="emailControl.hasError('email')">No es un email valido.</p>
+    </div>
+    <!-- PASSWORD INPUT -->
+    <label style="margin-top:20px" for="password">Contraseña</label>
+    <input style="margin:0px;" [(ngModel)]="login.tex_password" formControlName="password" name="password" type="password" placeholder="Ingrese la Contraseña">
+    <div class="errors-container" *ngIf="passControl.invalid && (passControl.touched || passControl.dirty)">
+      <p class="errors-msg" *ngIf="passControl.hasError('required')">El campo es obligatorio</p>
+    </div>
+    <div class="errors-container" *ngIf="error || incorrect || deleteUser">
+      <p class="errors-msg" *ngIf="error">Ocurrió un error al Iniciar sesión</p>
+      <p class="errors-msg" *ngIf="incorrect">El correo o la contraseña son incorrectos</p>
+      <p class="errors-msg" *ngIf="deleteUser">El usuario registrado por esta cuenta, ha sido dado de baja.</p>
+    </div>
+    <input style="margin-top:20px;" (click)="autenticar()" type="submit" [disabled]="loginForm.invalid" value="Iniciar Sesion">
+    <a routerLink="credential"> ¿Olvidaste tu contraseña?</a><br>
+    <a routerLink="../register">¿No tienes una cuenta?</a>
+  </form>
+</div>
