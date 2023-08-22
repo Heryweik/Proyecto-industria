@@ -9,7 +9,11 @@ const myConnection = require('express-myconnection');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: ['http://52.73.89.207:8080', 'http://localhost:8082'], // Agrega las URL permitidas
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+}));
 app.use(express.json()); /* Hacemos que reciba informacion tipo json */
 app.use(bodyParser.urlencoded({ extended: true }));
 
