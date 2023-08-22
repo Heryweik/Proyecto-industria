@@ -38,31 +38,31 @@ const router = createBrowserRouter([
     element: <SignUp/>,
   },
   {
-    path: '/menu',
+    path: '/menu/:id',
     element: <Menu/>,
   },
   {
-    path: '/clientes',
+    path: '/clientes/:id',
     element: <Clientes/>,
   },
   {
-    path: '/empleados',
+    path: '/empleados/:id',
     element: <Empleados/>,
   },
   {
-    path: '/proveedores',
+    path: '/proveedores/:id',
     element: <Proveedores/>,
   },
   {
-    path: '/productos',
+    path: '/productos/:id',
     element: <Productos/>,
   },
   {
-    path: '/servicios',
+    path: '/servicios/:id',
     element: <Servicios/>,
   },
   {
-    path: '/ventas',
+    path: '/ventas/:id',
     element: <Ventas/>,
   },
   {

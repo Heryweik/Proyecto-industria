@@ -37,6 +37,7 @@ controller.save = (req, res) => {
         DNI: req.body.DNI,
         nombre: req.body.nombre,
         apellido: req.body.apellido,
+        telefono: req.body.telefono,
         correo: req.body.correo,
         direccion: req.body.direccion,
         edad: req.body.edad
@@ -87,6 +88,7 @@ controller.update = (req, res) => {
             DNI: req.body.DNI,
             nombre: req.body.nombre,
             apellido: req.body.apellido,
+            telefono: req.body.telefono,
             correo: req.body.correo,
             direccion: req.body.direccion,
             edad: req.body.edad
@@ -109,9 +111,23 @@ controller.update = (req, res) => {
 controller.delete = (req, res) => {
     const { id } = req.params;
     req.getConnection((err, connection) => {
-      connection.query('DELETE FROM Usuarios WHERE usuario_id = ?', [id], (err, rows) => {
-        res.redirect('');
-      });
+        if (err) {
+            console.error('Error en la conexión a la base de datos:', err);
+            return res.status(500).json({ error: 'Error en la conexión a la base de datos' });
+        }
+
+        connection.query('DELETE FROM Clientes WHERE cliente_id = ?', [id], (err, result) => {
+            if (err) {
+                console.error('Error al eliminar el cliente:', err);
+                return res.status(500).json({ error: 'Error al eliminar el cliente' });
+            }
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ error: 'Cliente no encontrado' });
+            }
+
+            res.status(200).json({ message: 'Cliente eliminado correctamente' });
+        });
     });
 };
 

@@ -10,13 +10,16 @@ import servicios from "../../assets/img/services.svg";
 import ventas from "../../assets/img/ventas.svg";
 import product from "../../assets/img/products.svg";
 import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 export default function Menu() {
+  const { id } = useParams(); /* Obtenemos el id que viene en la URL */
+
   return (
     <div className={style.containerFluid}>
       <NavBar />
       <main className={style.main}>
-        <Link to={"/clientes"}>
+        <Link to={"/clientes/" + id}>
           <div className={style.card}>
             <div className={style.img}>
               <img src={cliente} alt="" />
@@ -24,7 +27,7 @@ export default function Menu() {
             <span className={style.texto}>Clientes</span>
           </div>
         </Link>
-        <Link to={"/proveedores"}>
+        <Link to={"/proveedores/" + id}>
         <div className={style.card}>
           <div className={style.img}>
             <img src={provee} alt="" />
@@ -32,7 +35,7 @@ export default function Menu() {
           <span className={style.texto}>Proveedores</span>
         </div>
         </Link>
-        <Link to={"/empleados"}>
+        <Link to={"/empleados/" + id}>
         <div className={style.card}>
           <div className={style.img}>
             <img src={empleados} alt="" />
@@ -40,7 +43,7 @@ export default function Menu() {
           <span className={style.texto}>Empleados</span>
         </div>
         </Link>
-        <Link to={"/productos"}>
+        <Link to={"/productos/" + id}>
         <div className={style.card}>
           <div className={style.img}>
             <img src={product} alt="" />
@@ -48,7 +51,7 @@ export default function Menu() {
           <span className={style.texto}>Productos</span>
         </div>
         </Link>
-        <Link to={"/servicios"}>
+        <Link to={"/servicios/" + id}>
         <div className={style.card}>
           <div className={style.img}>
             <img src={servicios} alt="" />
@@ -56,7 +59,7 @@ export default function Menu() {
           <span className={style.texto}>Mantenimientos</span>
         </div>
         </Link>
-        <Link to={"/ventas"}>
+        <Link to={"/ventas/" + id}>
         <div className={style.card}>
           <div className={style.img}>
             <img src={ventas} alt="" />

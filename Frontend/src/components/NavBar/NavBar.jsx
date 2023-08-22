@@ -8,10 +8,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FaPowerOff } from "react-icons/fa";
 
+import { useParams } from 'react-router-dom';
+
 /* Bootstrap */
 import Modal from "react-bootstrap/Modal";
 
 function ModalCerrar(props) {
+
   return (
     <Modal
       {...props}
@@ -35,6 +38,9 @@ function ModalCerrar(props) {
 }
 
 export default function NavBar() {
+  
+  const { id } = useParams();
+
   const [modalShow, setModalShow] = React.useState(false);
   const [abierto, setAbierto] = useState(false);
 
@@ -47,27 +53,27 @@ export default function NavBar() {
       <div>
         <div className={style.info}>
           <div style={{ display: "flex", gap: "1rem" }}>
-            <Link to={"/menu"}>
+            <Link to={"/menu/" + id}>
               <img src={logo} alt="" className={style.logo} />
               <img src={logo2} alt="" className={style.logo2} />
             </Link>
-            <Link to={"/clientes"}>
+            <Link to={"/clientes/" + id}>
               <button className={style.boton}>Clientes</button>
             </Link>
-            <Link to={"/proveedores"}>
+            <Link to={"/proveedores/" + id}>
               <button className={style.boton}>Proveedores</button>
             </Link>
             
-            <Link to={"/empleados"}>
+            <Link to={"/empleados/" + id}>
               <button className={style.boton}>Empleados</button>
             </Link>
-            <Link to={"/productos"}>
+            <Link to={"/productos/" + id}>
               <button className={style.boton}>Productos</button>
             </Link>
-            <Link to={"/servicios"}>
+            <Link to={"/servicios/" + id}>
               <button className={style.boton}>Mantenimientos</button>
             </Link>
-            <Link to={"/ventas"}>
+            <Link to={"/ventas/" + id}>
               <button className={style.boton}>Ventas</button>
             </Link>
           </div>

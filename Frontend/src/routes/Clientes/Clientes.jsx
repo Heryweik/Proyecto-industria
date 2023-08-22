@@ -17,27 +17,10 @@ import { useState } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
+import { useParams } from 'react-router-dom';
 
-function ModalEliminar(props) {
-  return (
-    <Modal
-      {...props}
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Body className={style.ModalHeader}>
-        <h4>Deseas eliminar este usuario?</h4>
-      </Modal.Body>
-      <Modal.Footer className={style.modalFooter}>
-        <button onClick={props.onHide} className={style.boton1}>
-          No
-        </button>
-        <button className={style.sesion}>Si</button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function ModalSuscripciones(props) {
   return (
@@ -123,6 +106,54 @@ function ModalEditar(props) {
     // Aquí puedes manejar la lógica de inserción de datos
   }
 
+  const { cliente, onHide, onClienteAdded } = props;
+
+  const [DNI, setDNI] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [edad, setEdad] = useState('');
+
+  useEffect(() => {
+    if (cliente) {
+      // Poblar los estados con la información del cliente que se va a editar
+      setDNI(cliente.DNI || '');
+      setNombre(cliente.nombre || '');
+      setApellido(cliente.apellido || '');
+      setTelefono(cliente.telefono || '');
+      setCorreo(cliente.correo || '');
+      setDireccion(cliente.direccion || '');
+      setEdad(cliente.edad || '');
+    }
+  }, [cliente]);
+
+  const { id } = useParams();
+
+  const handleEditClientes = async () => {
+    try {
+      const response = await axios.put(`http://localhost:3000/clientes/update/${cliente.cliente_id}`, {
+        usuario_id: id,
+        DNI,
+        nombre,
+        apellido,
+        telefono,
+        correo,
+        direccion,
+        edad
+      });
+      
+      console.log(response.data.message); // Manejar la respuesta del servidor
+
+      onClienteAdded(); /* Recargamos tabla */
+      onHide(); /* cerramos modal */
+      
+    } catch (error) {
+      console.error('Error al agregar cliente:', error);
+    }
+  };
+
   return (
     <Modal
       {...props}
@@ -159,6 +190,8 @@ function ModalEditar(props) {
                   message: "Por favor ingresa una DNI válida",
                 },
               })}
+              value={DNI}
+              onChange={(e) => setDNI(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>DNI:</label>
             {errors.DNI && (
@@ -182,6 +215,8 @@ function ModalEditar(props) {
                 },
                 maxLength: { value: 20, message: "No más de 20 caracteres" },
               })}
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Nombre:
@@ -209,6 +244,8 @@ function ModalEditar(props) {
                 },
                 maxLength: { value: 20, message: "No más de 20 caracteres" },
               })}
+              value={apellido}
+              onChange={(e) => setApellido(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Apellido:
@@ -239,6 +276,8 @@ function ModalEditar(props) {
                   message: "Por favor ingresa un número de teléfono",
                 },
               })}
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Teléfono:
@@ -267,6 +306,8 @@ function ModalEditar(props) {
                   message: "Por favor ingresa un correo",
                 },
               })}
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Correo:
@@ -293,6 +334,8 @@ function ModalEditar(props) {
                   message: "Ingrese menos de 50 caracteres",
                 },
               })}
+              value={direccion}
+              onChange={(e) => setDireccion(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Dirección:
@@ -303,9 +346,41 @@ function ModalEditar(props) {
               </span>
             )}
           </div>
+          <div className={style.form}>
+            <input
+              type="number"
+              className={`form-control ${style.inNombre}`}
+              id="edad"
+              {...register("edad", {
+                required: "Por favor ingresa una edad",
+                pattern: {
+                  value: /^\d{8}$/,
+                  message: "Ingrese solo números",
+                },
+                minLength: {
+                  value: 1,
+                  message: "Por favor ingresa una edad",
+                },
+                maxLength: {
+                  value: 3,
+                  message: "Por favor ingresa una edad",
+                },
+              })}
+              value={edad}
+              onChange={(e) => setEdad(e.target.value)}
+            />
+            <label className={`form-label mb-0 ${style.userLabel}`}>
+              Edad:
+            </label>
+            {errors.edad && (
+              <span className={style.errorMessage}>
+                {errors.edad.message}
+              </span>
+            )}
+          </div>
 
           <Modal.Footer className={style.modalFooter}>
-            <button className={style.sesion} type="submit">
+            <button className={style.sesion} type="button" onClick={handleEditClientes}>
               Actualizar informacion
             </button>
           </Modal.Footer>
@@ -324,6 +399,48 @@ function ModalAgregar(props) {
   function insertar() {
     // Aquí puedes manejar la lógica de inserción de datos
   }
+
+  /* Consumo backend */
+  const [DNI, setDNI] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [edad, setEdad] = useState('');
+
+  const { id } = useParams();
+
+  const handleClientes = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/Clientes/add', {
+        usuario_id: id,
+        DNI,
+        nombre,
+        apellido,
+        telefono,
+        correo,
+        direccion,
+        edad
+      });
+      
+      console.log(response.data.message); // Manejar la respuesta del servidor
+
+      props.onClienteAdded(); /* Recargamos tabla */
+      props.onHide(); /* cerramos modal */
+
+      setDNI('');
+      setNombre('');
+      setApellido('');
+      setTelefono('');
+      setCorreo('');
+      setDireccion('');
+      setEdad('');
+      
+    } catch (error) {
+      console.error('Error al agregar cliente:', error);
+    }
+  };
 
   return (
     <Modal
@@ -361,6 +478,8 @@ function ModalAgregar(props) {
                   message: "Por favor ingresa una DNI válida",
                 },
               })}
+              value={DNI}
+              onChange={(e) => setDNI(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>DNI:</label>
             {errors.DNI && (
@@ -384,6 +503,8 @@ function ModalAgregar(props) {
                 },
                 maxLength: { value: 20, message: "No más de 20 caracteres" },
               })}
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Nombre:
@@ -411,6 +532,8 @@ function ModalAgregar(props) {
                 },
                 maxLength: { value: 20, message: "No más de 20 caracteres" },
               })}
+              value={apellido}
+              onChange={(e) => setApellido(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Apellido:
@@ -441,6 +564,8 @@ function ModalAgregar(props) {
                   message: "Por favor ingresa un número de teléfono",
                 },
               })}
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Teléfono:
@@ -469,6 +594,8 @@ function ModalAgregar(props) {
                   message: "Por favor ingresa un correo",
                 },
               })}
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Correo:
@@ -495,6 +622,8 @@ function ModalAgregar(props) {
                   message: "Ingrese menos de 50 caracteres",
                 },
               })}
+              value={direccion}
+              onChange={(e) => setDireccion(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Dirección:
@@ -526,6 +655,8 @@ function ModalAgregar(props) {
                   message: "Por favor ingresa una edad",
                 },
               })}
+              value={edad}
+              onChange={(e) => setEdad(e.target.value)}
             />
             <label className={`form-label mb-0 ${style.userLabel}`}>
               Edad:
@@ -538,7 +669,7 @@ function ModalAgregar(props) {
           </div>
 
           <Modal.Footer className={style.modalFooter}>
-            <button className={style.sesion} type="submit">
+            <button className={style.sesion} type="button" onClick={handleClientes}>
               Agregar
             </button>
           </Modal.Footer>
@@ -550,14 +681,65 @@ function ModalAgregar(props) {
 
 export default function Clientes() {
   const [modalShow3, setModalShow3] = React.useState(false);
-  const [modalShow2, setModalShow2] = React.useState(false);
-  const [modalShow1, setModalShow1] = React.useState(false);
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow2, setModalShow2] = React.useState(false);/* 
+  const [modalShow, setModalShow] = React.useState(false); */
 
   const [abierto, setAbierto] = useState(false);
 
   const toggleAcordeon = () => {
     setAbierto(!abierto);
+  };
+
+  /* Consumo backend */
+  const { id } = useParams();
+  console.log('ID del usuario:', id);
+
+  const [clientes, setClientes] = useState([]);
+
+  const fetchClientes = () => {
+    axios.get(`http://localhost:3000/clientes/${id}`)
+      .then(response => {
+        // Actualizar el estado con los datos obtenidos
+        setClientes(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener los clientes:', error);
+      });
+  };
+
+
+  const handleEliminarCliente = async (cliente_id) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/clientes/delete/${cliente_id}`);
+      console.log(response.data); // Manejar la respuesta del servidor, si es necesario
+      setClientes(clientes.filter(cliente => cliente.cliente_id !== cliente_id));
+    } catch (error) {
+      console.error('Error al eliminar el cliente:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchClientes();
+  }, []);
+
+  const onClienteAdded = () => {
+    fetchClientes(); // Recargar la lista de clientes
+  };
+
+  const [modalShowList, setModalShowList] = useState(Array(clientes.length).fill(false));
+  const [clienteEdit, setClienteEdit] = useState(null);
+
+  const handleEditClick = (index, cliente) => {
+    const newModalShowList = [...modalShowList];
+    newModalShowList[index] = true;
+    setModalShowList(newModalShowList);
+    setClienteEdit(cliente);
+  };
+
+  const handleCloseModal = (index) => {
+    const newModalShowList = [...modalShowList];
+    newModalShowList[index] = false;
+    setModalShowList(newModalShowList);
   };
 
   return (
@@ -590,6 +772,7 @@ export default function Clientes() {
                 <ModalAgregar
                   show={modalShow2}
                   onHide={() => setModalShow2(false)}
+                  onClienteAdded={onClienteAdded}
                 />
               </span>
             </OverlayTrigger>
@@ -715,51 +898,53 @@ export default function Clientes() {
               </div>
 
               {/* <!-- Filas de informacion --> */}
+              {clientes.map((cliente, index) => (
+                <React.Fragment key={cliente.cliente_id}>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                Yhonny Aplicano
+                {cliente.DNI}
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                yhonny@gmail.com
-              </div>
-
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
+                {cliente.nombre}
               </div>
 
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                yhonny@gmail.com
+                {cliente.apellido} 
               </div>
 
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                yhonny@gmail.com
+                {cliente.telefono}
+              </div>
+
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                {cliente.correo}
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                6
+                {cliente.direccion}
               </div>
               
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                20
+                {cliente.edad}
               </div>
               <div className={style.celda}>
                 <OverlayTrigger
@@ -767,7 +952,7 @@ export default function Clientes() {
                 >
                   <button
                     className={style.delete}
-                    onClick={() => setModalShow(true)}
+                    onClick={() => handleEditClick(index, cliente)}
                     style={{ marginRight: "5%" }}
                   >
                     <BiSolidPencil />
@@ -775,8 +960,11 @@ export default function Clientes() {
                 </OverlayTrigger>
 
                 <ModalEditar
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
+                  /* show={modalShow} */
+                  show={modalShowList[index]}
+                  onHide={() => handleCloseModal(index)}
+                  cliente={clienteEdit}
+                  onClienteAdded={onClienteAdded}
                 />
 
                 <OverlayTrigger
@@ -784,86 +972,17 @@ export default function Clientes() {
                 >
                   <button
                     className={style.delete}
-                    onClick={() => setModalShow1(true)}
+                    onClick={() => handleEliminarCliente(cliente.cliente_id)}
                   >
                     <BsFillTrashFill />
                   </button>
                 </OverlayTrigger>
 
-                <ModalEliminar
-                  show={modalShow1}
-                  onHide={() => setModalShow1(false)}
-                />
               </div>
+              </React.Fragment>
+              ))}
 
-              {/* <!-- Filas de informacion --> */}
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                Yhonny Aplicano
-              </div>
-
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                6
-              </div>
               
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                20
-              </div>
-              <div className={style.celda}>
-                <button
-                  className={style.delete}
-                  onClick={() => setModalShow(true)}
-                  style={{ marginRight: "5%" }}
-                >
-                  <BiSolidPencil />
-                </button>
-                <ModalEditar
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />
-
-                <button
-                  className={style.delete}
-                  onClick={() => setModalShow(true)}
-                >
-                  <BsFillTrashFill />
-                </button>
-              </div>
             </div>
           </div>
         </div>

@@ -7,6 +7,6 @@ router.get('/', clienteController.list);
 router.post('/add', clienteController.save);
 router.get('/:id', clienteController.edit);
 router.put('/update/:id', clienteController.update);
-router.get('/delete/:id', clienteController.delete);
+router.delete('/delete/:id', clienteController.delete);
 
 module.exports = router;

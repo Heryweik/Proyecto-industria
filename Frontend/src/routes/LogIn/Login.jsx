@@ -26,7 +26,7 @@ export default function LogIn() {
 
       // Si la respuesta es exitosa, redirige al usuario a la pantalla "menu"
       if (response.data.message === 'Inicio de sesión exitoso') {
-        navigate('/menu');
+        navigate('/menu/' + response.data.idUsuario);
         setShowAlert2(true);
       } 
       

@@ -30,7 +30,8 @@ controller.login = (req, res) => {
                 // Credenciales válidas, iniciar sesión
                 const user = results[0];
                 req.session.userId = user.usuario_id;
-                res.json({ message: 'Inicio de sesión exitoso' });
+                res.json({ message: 'Inicio de sesión exitoso',
+            idUsuario: user.usuario_id });
             } else {
                 res.status(401).json({ error: 'Credenciales inválidas' });
             }

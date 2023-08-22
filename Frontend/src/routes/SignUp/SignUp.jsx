@@ -87,7 +87,7 @@ export default function SignUp() {
         navigate('/login');
       } 
     } catch (error) {
-      console.error('Error de inicio de sesión:', error);
+      console.error('Error de creacion de cuenta:', error);
     }
   };
 
