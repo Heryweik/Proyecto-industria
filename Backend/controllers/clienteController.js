@@ -5,110 +5,114 @@ const pool = mysql.createPool({
     user: 'admin',
     password: 'admin123',
     port: 3306,
-    database: 'Industria1'
+    database: 'DentalServices'
 });
 
 const controller = {};
 
 controller.list = (req, res) => {
-  pool.getConnection((err, conn) => {
-      if (err) {
-          res.json(err);
-          return;
-      }
+    pool.getConnection((err, conn) => {
+        if (err) {
+            res.json(err);
+            return;
+        }
 
-      conn.query('SELECT * FROM Clientes', (err, clientes) => {
-          conn.release();
+        conn.query('SELECT * FROM Clientes', (err, usuarios) => {
+            conn.release();
 
-          if (err) {
-              res.json(err);
-              return;
-          }
+            if (err) {
+                res.json(err);
+                return;
+            }
 
-          console.log(clientes);
-          res.json(clientes);
-      });
-  });
+            console.log(usuarios);
+            res.json(usuarios);
+        });
+    });
 };
 
 controller.save = (req, res) => {
-  const data = {
-      nombre: req.body.nombre,
-      apellido: req.body.apellido,
-      correo: req.body.correo,
-      contrasenia: req.body.contrasenia,
-      suscripcion: req.body.suscripcion
-  };
+    const data = {
+        usuario_id: req.body.usuario_id,
+        DNI: req.body.DNI,
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        correo: req.body.correo,
+        direccion: req.body.direccion,
+        edad: req.body.edad
+    };
 
-  req.getConnection((err, conn) =>{
-      conn.query('INSERT INTO Usuarios SET ?', [data], (err, usuario) => {
-          console.log(usuario);
-          res.send('works')
-      });
-  });
+    req.getConnection((err, conn) =>{
+        conn.query('INSERT INTO Clientes SET ?', [data], (err, usuario) => {
+            console.log(usuario);
+            res.send({ message:'works'})
+        });
+    });
 
 };
 
 controller.edit = (req, res) => {
-  pool.getConnection((err, conn) => {
-      if (err) {
-          res.json(err);
-          return;
-      }
+    pool.getConnection((err, conn) => {
+        if (err) {
+            res.json(err);
+            return;
+        }
 
-      const { id } = req.params;
+        const { id } = req.params;
 
-      conn.query("SELECT * FROM Usuarios WHERE usuario_id = ?", [id], (err, usuarios) => {
-          conn.release();
+        conn.query("SELECT * FROM Clientes WHERE usuario_id = ?", [id], (err, usuarios) => {
+            conn.release();
 
-          if (err) {
-              res.json(err);
-              return;
-          }
+            if (err) {
+                res.json(err);
+                return;
+            }
 
-          console.log(usuarios);
-          res.json(usuarios);
-      });
-  });
+            console.log(usuarios);
+            res.json(usuarios);
+        });
+    });
 };
 
 controller.update = (req, res) => {
-  pool.getConnection((err, conn) => {
-      if (err) {
-          res.json(err);
-          return;
-      }
+    pool.getConnection((err, conn) => {
+        if (err) {
+            res.json(err);
+            return;
+        }
 
-      const { id } = req.params;
-      const newusuario = {
-          nombre: req.body.nombre,
-          apellido: req.body.apellido,
-          correo: req.body.correo,
-          contrasenia: req.body.contrasenia,
-          suscripcion: req.body.suscripcion
-      };
+        const { id } = req.params;
+        const newcliente = {
+            usuario_id: req.body.usuario_id,
+            DNI: req.body.DNI,
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            correo: req.body.correo,
+            direccion: req.body.direccion,
+            edad: req.body.edad
+        };
 
-      conn.query('UPDATE Usuarios set ? where usuario_id = ?', [newusuario, id], (err, usuarios) => {
-          conn.release();
+        conn.query('UPDATE Clientes set ? where cliente_id = ?', [newcliente, id], (err, usuarios) => {
+            conn.release();
 
-          if (err) {
-              res.json(err);
-              return;
-          }
+            if (err) {
+                res.json(err);
+                return;
+            }
 
-          console.log(usuarios);
-          res.json(usuarios);
-      });
-  });
+            console.log(usuarios);
+            res.json(usuarios);
+        });
+    });
 };
 
 controller.delete = (req, res) => {
-  const { id } = req.params;
-  req.getConnection((err, connection) => {
-    connection.query('DELETE FROM Usuarios WHERE usuario_id = ?', [id], (err, rows) => {
-      res.redirect('');
+    const { id } = req.params;
+    req.getConnection((err, connection) => {
+      connection.query('DELETE FROM Usuarios WHERE usuario_id = ?', [id], (err, rows) => {
+        res.redirect('');
+      });
     });
-  });
 };
 
 module.exports = controller;

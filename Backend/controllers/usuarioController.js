@@ -1,5 +1,4 @@
 const mysql = require('mysql2');
-const bcrypt = require('bcrypt'); // Para el hash de contraseñas
 
 const pool = mysql.createPool({
     host: 'bd-proyecto.cs5mqlupmen8.us-east-1.rds.amazonaws.com',
