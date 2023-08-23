@@ -18,26 +18,10 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
 
-function ModalEliminar(props) {
-  return (
-    <Modal
-      {...props}
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Body className={style.ModalHeader}>
-        <h4>Deseas eliminar este proveedor?</h4>
-      </Modal.Body>
-      <Modal.Footer className={style.modalFooter}>
-        <button onClick={props.onHide} className={style.boton1}>
-          No
-        </button>
-        <button className={style.sesion}>Si</button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
 
 function ModalPedido(props) {
 
@@ -95,9 +79,6 @@ function ModalPedido(props) {
           </label>
         </div>
         <div className={style.form} style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
-          <span>
-            Subtotal: 
-          </span>
           <span style={{fontWeight: 'bold'}}>
             Total:
           </span>
@@ -178,37 +159,7 @@ function ModalHistorial(props) {
               Total
             </div>
 
-            {/* <!-- Filas de informacion --> */}
-            <div
-              className={style.celda}
-              style={{ borderRight: "1px solid black" }}
-            >
-              Yhonny APlixcano
-            </div>
-            <div
-              className={style.celda}
-              style={{ borderRight: "1px solid black" }}
-            >
-              cilla
-            </div>
-            <div
-              className={style.celda}
-              style={{ borderRight: "1px solid black" }}
-            >
-              2
-            </div>
-            <div
-              className={style.celda}
-              style={{ borderRight: "1px solid black" }}
-            >
-              20/08/2023
-            </div>
             
-            <div
-              className={style.celda}
-            >
-              700$
-            </div>
 
             {/* <!-- Filas de informacion --> */}
             <div
@@ -257,6 +208,46 @@ function ModalEditar(props) {
   function insertar() {
     // Aquí puedes manejar la lógica de inserción de datos
   }
+
+  const { proveedor, onHide, onProveedorAdded } = props;
+
+  const [nombre, setNombre] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [direccion, setDireccion] = useState('');
+
+  useEffect(() => {
+    if (proveedor) {
+      // Poblar los estados con la información del cliente que se va a editar
+      setNombre(proveedor.nombre || '');
+      setTelefono(proveedor.telefono || '');
+      setCorreo(proveedor.correo || '');
+      setDireccion(proveedor.direccion || '');
+    }
+  }, [proveedor]);
+
+  const { id } = useParams();
+
+  const handleEditProveedor = async () => {
+    try {
+      const response = await axios.put(`http://localhost:3000/proveedores/update/${proveedor.proveedor_id}`, {
+        usuario_id: id,
+        nombre,
+        telefono,
+        correo,
+        direccion
+      });
+      
+      console.log(response.data.message); // Manejar la respuesta del servidor
+
+      onProveedorAdded(); /* Recargamos tabla */
+      onHide(); /* cerramos modal */
+      
+    } catch (error) {
+      console.error('Error al agregar cliente:', error);
+    }
+  };
+
   return (
     <Modal
       {...props}
@@ -286,6 +277,8 @@ function ModalEditar(props) {
             minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
             maxLength: { value: 20, message: "No más de 20 caracteres"},
           })}
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>Nombre:</label>
         {errors.nombre && (
@@ -306,6 +299,8 @@ function ModalEditar(props) {
             minLength: { value: 8, message: "Por favor ingresa un número de teléfono"},
             maxLength: { value: 11, message: "Por favor ingresa un número de teléfono"},
           })}
+          value={telefono}
+          onChange={(e) => setTelefono(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Teléfono:</label>
@@ -327,6 +322,8 @@ function ModalEditar(props) {
             minLength: { value: 2, message: "Por favor ingresa un correo" },
             maxLength: { value: 50, message:"Por favor ingresa un correo" },
           })}
+          value={correo}
+          onChange={(e) => setCorreo(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Correo:</label>
@@ -344,6 +341,8 @@ function ModalEditar(props) {
             minLength: { value: 5, message: "Por favor ingresa de 5 caracteres" },
             maxLength: { value: 50, message:"Ingrese menos de 50 caracteres" },
           })}
+          value={direccion}
+          onChange={(e) => setDireccion(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>Dirección:</label>
         {errors.direccion && (
@@ -353,7 +352,7 @@ function ModalEditar(props) {
       
      
       <Modal.Footer className={style.modalFooter}>
-        <button className={style.sesion} type="submit">
+        <button className={style.sesion} type="button" onClick={handleEditProveedor}>
           Actualizar informacion</button>
       </Modal.Footer>
       </form>
@@ -367,6 +366,39 @@ function ModalAgregar(props) {
   function insertar() {
     // Aquí puedes manejar la lógica de inserción de datos
   }
+
+  /* Consumo backend */
+  const [nombre, setNombre] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [direccion, setDireccion] = useState('');
+
+  const { id } = useParams();
+
+  const handleProveedores = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/proveedores/add', {
+        usuario_id: id,
+        nombre,
+        telefono,
+        correo,
+        direccion
+      });
+      
+      console.log(response.data.message); // Manejar la respuesta del servidor
+
+      props.onProveedorAdded(); /* Recargamos tabla */
+      props.onHide(); /* cerramos modal */
+
+      setNombre('');
+      setTelefono('');
+      setCorreo('');
+      setDireccion('');
+      
+    } catch (error) {
+      console.error('Error al agregar proveedor:', error);
+    }
+  };
 
   return (
     <Modal
@@ -396,6 +428,8 @@ function ModalAgregar(props) {
             minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
             maxLength: { value: 20, message: "No más de 20 caracteres"},
           })}
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>Nombre:</label>
         {errors.nombre && (
@@ -416,6 +450,8 @@ function ModalAgregar(props) {
             minLength: { value: 8, message: "Por favor ingresa un número de teléfono"},
             maxLength: { value: 11, message: "Por favor ingresa un número de teléfono"},
           })}
+          value={telefono}
+          onChange={(e) => setTelefono(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Teléfono:</label>
@@ -437,6 +473,8 @@ function ModalAgregar(props) {
             minLength: { value: 2, message: "Por favor ingresa un correo" },
             maxLength: { value: 50, message:"Por favor ingresa un correo" },
           })}
+          value={correo}
+          onChange={(e) => setCorreo(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Correo:</label>
@@ -454,6 +492,8 @@ function ModalAgregar(props) {
             minLength: { value: 5, message: "Por favor ingresa de 5 caracteres" },
             maxLength: { value: 50, message:"Ingrese menos de 50 caracteres" },
           })}
+          value={direccion}
+          onChange={(e) => setDireccion(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>Dirección:</label>
         {errors.direccion && (
@@ -462,7 +502,7 @@ function ModalAgregar(props) {
         </div>
       
       <Modal.Footer className={style.modalFooter}>
-        <button className={style.sesion} type="submit" >Agregar</button>
+        <button className={style.sesion} type="button" onClick={handleProveedores} >Agregar</button>
     </Modal.Footer>
     </form>
     </Modal.Body>
@@ -474,8 +514,57 @@ export default function Proveedores() {
   const [modalShow4, setModalShow4] = React.useState(false);
   const [modalShow3, setModalShow3] = React.useState(false);
   const [modalShow2, setModalShow2] = React.useState(false);
-  const [modalShow1, setModalShow1] = React.useState(false);
-  const [modalShow, setModalShow] = React.useState(false);
+
+  /* Consumo backend */
+  const { id } = useParams();
+
+  const [proveedores, setProveedores] = useState([]);
+
+  const fetchProveedores = () => {
+    axios.get(`http://localhost:3000/proveedores/${id}`)
+      .then(response => {
+        // Actualizar el estado con los datos obtenidos
+        setProveedores(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener los Proveedores:', error);
+      });
+  };
+
+  const handleEliminarProveedor = async (proveedor_id) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/proveedores/delete/${proveedor_id}`);
+      console.log(response.data); // Manejar la respuesta del servidor, si es necesario
+      setProveedores(proveedores.filter(proveedor => proveedor.proveedor_id !== proveedor_id));
+    } catch (error) {
+      console.error('Error al eliminar el Proveedor:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProveedores();
+  }, []);
+
+  const onProveedorAdded = () => {
+    fetchProveedores(); // Recargar la lista de clientes
+  };
+
+  /* Para editar */
+  const [modalShowList, setModalShowList] = useState(Array(proveedores.length).fill(false));
+  const [proveedorEdit, setProveedorEdit] = useState(null);
+
+  const handleProveedorClick = (index, cliente) => {
+    const newModalShowList = [...modalShowList];
+    newModalShowList[index] = true;
+    setModalShowList(newModalShowList);
+    setProveedorEdit(cliente);
+  };
+
+  const handleCloseModal = (index) => {
+    const newModalShowList = [...modalShowList];
+    newModalShowList[index] = false;
+    setModalShowList(newModalShowList);
+  };
 
   return (
     <div className={style.containerFluid}>
@@ -501,6 +590,7 @@ export default function Proveedores() {
                 <ModalAgregar
                   show={modalShow2}
                   onHide={() => setModalShow2(false)}
+                  onProveedorAdded={onProveedorAdded}
                 />
               </span>
             </OverlayTrigger>
@@ -589,30 +679,32 @@ export default function Proveedores() {
               </div>
 
               {/* <!-- Filas de informacion --> */}
+              {proveedores.map((proveedor, index) => (
+                <React.Fragment key={proveedor.proveedor_id}>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                Yhonny Aplicano
+                {proveedor.nombre}
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                yhonny@gmail.com
+                {proveedor.telefono}
               </div>
               
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                yhonny@gmail.com
+                {proveedor.correo}
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                6
+                {proveedor.direccion}
               </div>
               <div className={style.celda}>
               <OverlayTrigger
@@ -620,7 +712,7 @@ export default function Proveedores() {
             >
                 <button
                   className={style.delete}
-                  onClick={() => setModalShow(true)}
+                  onClick={() => handleProveedorClick(index, proveedor)}
                   style={{ marginRight: "5%" }}
                 >
                   <BiSolidPencil />
@@ -628,73 +720,26 @@ export default function Proveedores() {
                 </OverlayTrigger>
 
                 <ModalEditar
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
+                  show={modalShowList[index]}
+                  onHide={() => handleCloseModal(index)}
+                  proveedor={proveedorEdit}
+                  onProveedorAdded={onProveedorAdded}
                 />
 
-<OverlayTrigger
+              <OverlayTrigger
               overlay={<Tooltip id="tooltip-disabled">Eliminar</Tooltip>}
             >
                 <button
                   className={style.delete}
-                  onClick={() => setModalShow1(true)}
+                  onClick={() => handleEliminarProveedor(proveedor.proveedor_id)}
                 >
                   <BsFillTrashFill />
                 </button>
                 </OverlayTrigger>
+              </div>
+              </React.Fragment>
+              ))}
 
-                <ModalEliminar
-                  show={modalShow1}
-                  onHide={() => setModalShow1(false)}
-                />
-              </div>
-
-              {/* <!-- Filas de informacion --> */}
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                Yhonny Aplicano
-              </div>
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-              
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                6
-              </div>
-              <div className={style.celda}>
-                <button
-                  className={style.delete}
-                  onClick={() => setModalShow(true)}
-                  style={{ marginRight: "5%" }}
-                >
-                  <BiSolidPencil />
-                </button>
-                <ModalEditar
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />
-
-                <button
-                  className={style.delete}
-                  onClick={() => setModalShow(true)}
-                >
-                  <BsFillTrashFill />
-                </button>
-              </div>
             </div>
           </div>
         </div>

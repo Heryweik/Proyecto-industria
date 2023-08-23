@@ -14,7 +14,82 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
 
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
 function ModalCitas(props) {
+  /* Consumo backend */
+  const [cliente, setCliente] = useState('');
+  const [fecha_hora, setFecha_hora] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [descripcion, setDescripcion] = useState('');
+  const [empleado, setEmpleado] = useState('');
+
+  const { id } = useParams();
+
+  const handleMantenimientos = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/servicios/add', {
+        usuario_id: id,
+        cliente,
+        fecha_hora,
+        descripcion,
+        direccion,
+        empleado
+      });
+      
+      console.log(response.data.message); // Manejar la respuesta del servidor
+
+      props.onMantenimientoAdded(); /* Recargamos tabla */
+      props.onHide(); /* cerramos modal */
+
+      setCliente('');
+      setFecha_hora('');
+      setDescripcion('');
+      setDireccion('');
+      setEmpleado('');
+      
+    } catch (error) {
+      console.error('Error al agregar mantenimiento:', error);
+    }
+  };
+
+  /* Cliente */
+  const [clientes, setClientes] = useState([]);
+
+  const fetchClientes = () => {
+    axios.get(`http://localhost:3000/clientes/${id}`)
+      .then(response => {
+        // Actualizar el estado con los datos obtenidos
+        setClientes(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener los clientes:', error);
+      });
+  };
+
+  useEffect(() => {
+    fetchClientes();
+  }, []);
+
+  /* Empleado */
+  const [empleados, setEmpleados] = useState([]);
+
+  const fetchEmpleados = () => {
+    axios.get(`http://localhost:3000/empleados/${id}`)
+      .then(response => {
+        // Actualizar el estado con los datos obtenidos
+        setEmpleados(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener los empleados:', error);
+      });
+  };
+
+  useEffect(() => {
+    fetchEmpleados();
+  }, []);
 
   return (
     <Modal
@@ -34,17 +109,22 @@ function ModalCitas(props) {
             type="text"
             className={`form-control ${style.inNombre}`}
             id="nombre"
+            value={cliente}
+            onChange={(e) => setCliente(e.target.value)}
           >
           <option value=""></option>
-            <option value="value1">Value 1</option>
-            <option value="value2">Value 2</option>
+          {clientes.map((cliente) => (
+                <React.Fragment key={cliente.cliente_id}>
+            <option value={cliente.nombre}>{cliente.nombre}</option>
+            </React.Fragment>
+          ))}
             </select>
           <label className={`form-label mb-0 ${style.userLabel}`}>
             Cliente:
           </label>
         </div>
 
-        <Link to={"/Clientes"} style={{textDecoration: 'none'}}>
+        <Link to={"/Clientes/" + id} style={{textDecoration: 'none'}}>
         <button className={style.sesion}>
           Nuevo cliente
         </button>
@@ -55,6 +135,8 @@ function ModalCitas(props) {
             type="datetime-local"
             className={`form-control ${style.inNombre}`}
             id="nombre"
+            value={fecha_hora}
+            onChange={(e) => setFecha_hora(e.target.value)}
           />
           <label className={`form-label mb-0 ${style.userLabel}`}>
             Fecha y hora:
@@ -66,6 +148,8 @@ function ModalCitas(props) {
             type="text"
             className={`form-control ${style.inNombre}`}
             id="direccion"
+            value={direccion}
+            onChange={(e) => setDireccion(e.target.value)}
           />
           <label className={`form-label mb-0 ${style.userLabel}`} style={{top: '40px'}}>
             Direccion:
@@ -79,6 +163,8 @@ function ModalCitas(props) {
             id="exampleInputEmail1"
             style={{height: 'auto'}}
             rows="4" cols="20"
+            value={descripcion}
+            onChange={(e) => setDescripcion(e.target.value)}
           />
           <label className={`form-label mb-0 ${style.userLabel}`} style={{top: '40px'}}>
             Descripcion:
@@ -90,10 +176,15 @@ function ModalCitas(props) {
             type="text"
             className={`form-control ${style.inNombre}`}
             id="empleado"
+            value={empleado}
+            onChange={(e) => setEmpleado(e.target.value)}
           >
           <option value=""></option>
-            <option value="value1">Value 1</option>
-            <option value="value2">Value 2</option>
+          {empleados.map((empleado) => (
+                <React.Fragment key={empleado.empleado_id}>
+            <option value={empleado.nombre}>{empleado.nombre}</option>
+            </React.Fragment>
+          ))}
             </select>
           <label className={`form-label mb-0 ${style.userLabel}`}>
             Empleado:
@@ -101,7 +192,7 @@ function ModalCitas(props) {
         </div>
       </Modal.Body>
       <Modal.Footer className={style.modalFooter}>
-        <button className={style.sesion}>Crear cita</button>
+        <button className={style.sesion} type="button" onClick={handleMantenimientos}>Crear cita</button>
       </Modal.Footer>
     </Modal>
   );
@@ -109,6 +200,43 @@ function ModalCitas(props) {
 
 export default function Servicios() {
   const [modalShow, setModalShow] = React.useState(false);
+
+  
+
+  const { id } = useParams();
+
+  const [mantenimientos, setMantenimientos] = useState([]);
+  const [hechos, setHechos] = useState([]);
+
+  const fetchMantenimientos = () => {
+    axios.get(`http://localhost:3000/servicios/${id}`)
+      .then(response => {
+        // Actualizar el estado con los datos obtenidos
+        setMantenimientos(response.data);
+        // Inicializar el array hechos con la misma longitud que mantenimientos y valores iniciales a false
+        setHechos(new Array(response.data.length).fill(false));
+      })
+      .catch(error => {
+        console.error('Error al obtener los mantenimientos:', error);
+      });
+  };
+
+  useEffect(() => {
+    fetchMantenimientos();
+  }, []);
+
+  const onMantenimientoAdded = () => {
+    fetchMantenimientos(); // Recargar la lista de clientes
+  };
+
+  const handleMarcarHecho = (index) => {
+    // Copiar el array de estados actuales
+    const nuevosHechos = [...hechos];
+    // Cambiar el estado del botón en la posición index
+    nuevosHechos[index] = true;
+    // Actualizar el estado
+    setHechos(nuevosHechos);
+  };
 
   return (
     <div className={style.containerFluid}>
@@ -127,7 +255,8 @@ export default function Servicios() {
         <button className={style.sesion} onClick={() => setModalShow(true)}>
           Nueva cita
         </button>
-        <ModalCitas show={modalShow} onHide={() => setModalShow(false)} />
+        <ModalCitas show={modalShow} onHide={() => setModalShow(false)}
+        onMantenimientoAdded={onMantenimientoAdded} />
 
         <div className={style.body}>
           <div className={style.container}>
@@ -192,83 +321,54 @@ export default function Servicios() {
               </div>
 
               {/* <!-- Filas de informacion --> */}
+              {mantenimientos.map((mantenimiento, index) => (
+                <React.Fragment key={mantenimiento.mantenimiento_id}>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                Yhonny Aplicano
+                {mantenimiento.cliente}
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                23/04/2023 10:30 Am
+                {mantenimiento.fecha_hora}
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                UNAH
+                {mantenimiento.direccion}
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                Mantenimiento de una silla
+                {mantenimiento.descripcion}
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                Carlos Alberto
+                {mantenimiento.empleado}
               </div>
               <div className={style.celda}>
-                <OverlayTrigger
-                  overlay={
-                    <Tooltip id="tooltip-disabled">Marcar como hecho</Tooltip>
-                  }
-                >
-                  <button className={style.delete}>
-                    <AiOutlineCheck />
-                  </button>
-                </OverlayTrigger>
+              {hechos[index] ? (
+                  <p>Mantenimiento hecho</p>
+                ) : (
+                  <OverlayTrigger
+                    overlay={<Tooltip id={`tooltip-${index}`}>Marcar como hecho</Tooltip>}
+                  >
+                    <button className={style.delete} onClick={() => handleMarcarHecho(index)}>
+                      <AiOutlineCheck />
+                    </button>
+                  </OverlayTrigger>
+                )}
               </div>
+              </React.Fragment>
+              ))}
 
-              {/* <!-- Filas de informacion --> */}
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                Yhonny Aplicano
-              </div>
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                23/04/2023 10:45 Pm
-              </div>
-              
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                UNAH
-              </div>
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                dsahkjdsha kjdhaksjdh kajshd kjash
-              </div>
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                asdkajhsd akjsh 
-              </div>
-              <div className={style.celda}>
-                <span>Mantenimiento hecho!</span>
-              </div>
             </div>
           </div>
         </div>

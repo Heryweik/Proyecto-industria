@@ -69,20 +69,7 @@ function ModalSuscripciones(props) {
               10
             </div>
 
-            {/* <!-- Filas de informacion --> */}
-            <div
-              className={style.celda}
-              style={{ borderRight: "1px solid black" }}
-            >
-              Aplicano
-            </div>
-            <div
-              className={style.celda}
-              style={{ borderRight: "1px solid black" }}
-            >
-              23423
-            </div>
-
+            
             
           </div>
         </div>
@@ -413,7 +400,7 @@ function ModalAgregar(props) {
 
   const handleClientes = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/Clientes/add', {
+      const response = await axios.post('http://localhost:3000/clientes/add', {
         usuario_id: id,
         DNI,
         nombre,
@@ -725,6 +712,8 @@ export default function Clientes() {
   const onClienteAdded = () => {
     fetchClientes(); // Recargar la lista de clientes
   };
+
+
 
   const [modalShowList, setModalShowList] = useState(Array(clientes.length).fill(false));
   const [clienteEdit, setClienteEdit] = useState(null);

@@ -19,32 +19,63 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
 
-function ModalEliminar(props) {
-  return (
-    <Modal
-      {...props}
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Body className={style.ModalHeader}>
-        <h4>Deseas eliminar este producto?</h4>
-      </Modal.Body>
-      <Modal.Footer className={style.modalFooter}>
-        <button onClick={props.onHide} className={style.boton1}>
-          No
-        </button>
-        <button className={style.sesion}>Si</button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
+
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function ModalEditar(props) {
   const { register, formState: { errors }, handleSubmit, } = useForm();
   function insertar() {
     // Aquí puedes manejar la lógica de inserción de datos
   }
+
+  const { producto, onHide, onProductoAdded } = props;
+
+  const [nombre, setNombre] = useState('');
+  const [marca, setMarca] = useState('');
+  const [descripcion, setDescripcion] = useState('');
+  const [cantidad, setCantidad] = useState('');
+  const [precio_compra, setPrecio_compra] = useState('');
+  const [precio_venta, setPrecio_venta] = useState('');
+
+  useEffect(() => {
+    if (producto) {
+      // Poblar los estados con la información del cliente que se va a editar
+      setNombre(producto.nombre || '');
+      setMarca(producto.marca || '');
+      setDescripcion(producto.descripcion || '');
+      setCantidad(producto.cantidad || '');
+      setPrecio_compra(producto.precio_compra || '');
+      setPrecio_venta(producto.precio_venta || '');
+    }
+  }, [producto]);
+
+  const { id } = useParams();
+
+  const handleEditProductos = async () => {
+    try {
+      const response = await axios.put(`http://localhost:3000/productos/update/${producto.producto_id}`, {
+        usuario_id: id,
+        nombre,
+        marca,
+        descripcion,
+        cantidad,
+        precio_compra,
+        precio_venta
+        
+      });
+      
+      console.log(response.data.message); // Manejar la respuesta del servidor
+
+      onProductoAdded(); /* Recargamos tabla */
+      onHide(); /* cerramos modal */
+      
+    } catch (error) {
+      console.error('Error al agregar producto:', error);
+    }
+  };
+
   return (
     <Modal
       {...props}
@@ -73,6 +104,8 @@ function ModalEditar(props) {
             minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
             maxLength: { value: 20, message: "No más de 20 caracteres"},
           })}
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>Nombre:</label>
         {errors.nombre && (
@@ -89,6 +122,8 @@ function ModalEditar(props) {
             minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
             maxLength: { value: 20, message: "No más de 20 caracteres"},
           })}
+          value={marca}
+          onChange={(e) => setMarca(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>Marca:</label>
         {errors.marca && (
@@ -105,6 +140,8 @@ function ModalEditar(props) {
             minLength: { value: 5, message: "Por favor ingresa de 5 caracteres" },
             maxLength: { value: 50, message:"Ingrese menos de 50 caracteres" },
           })}
+          value={descripcion}
+          onChange={(e) => setDescripcion(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Descripción:</label>
@@ -126,9 +163,11 @@ function ModalEditar(props) {
             minLength: { value: 0, message: "Por favor ingresa un número de teléfono"},
             maxLength: { value: 10000, message: "Por favor ingresa un número de teléfono"},
           })}
+          value={cantidad}
+          onChange={(e) => setCantidad(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
-          Cantidad Disponible:</label>
+          Cantidad:</label>
           {errors.cantidad && (
             <span className={style.errorMessage}>{errors.cantidad.message}</span>
           )}
@@ -147,6 +186,8 @@ function ModalEditar(props) {
             minLength: { value: 0, message: "Por favor ingresa un precio"},
             maxLength: { value: 10000, message: "Por favor ingresa un precio"},
           })}
+          value={precio_compra}
+          onChange={(e) => setPrecio_compra(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Precio Compra:</label>
@@ -168,6 +209,8 @@ function ModalEditar(props) {
             minLength: { value: 0, message: "Por favor ingresa un precio"},
             maxLength: { value: 10000, message: "Por favor ingresa un precio"},
           })}
+          value={precio_venta}
+          onChange={(e) => setPrecio_venta(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Precio venta:</label>
@@ -178,7 +221,7 @@ function ModalEditar(props) {
       
      
       <Modal.Footer className={style.modalFooter}>
-        <button className={style.sesion}>Actualizar informacion</button>
+        <button className={style.sesion} type="button" onClick={handleEditProductos}>Actualizar informacion</button>
       </Modal.Footer>
       </form>
       </Modal.Body>
@@ -191,6 +234,46 @@ function ModalAgregar(props) {
   function insertar() {
     // Aquí puedes manejar la lógica de inserción de datos
   }
+
+  /* Consumo backend */
+  const [nombre, setNombre] = useState('');
+  const [marca, setMarca] = useState('');
+  const [descripcion, setDescripcion] = useState('');
+  const [cantidad, setCantidad] = useState('');
+  const [precio_compra, setPrecio_compra] = useState('');
+  const [precio_venta, setPrecio_venta] = useState('');
+
+  const { id } = useParams();
+
+  const handleProductos = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/productos/add', {
+        usuario_id: id,
+        nombre,
+        marca,
+        descripcion,
+        cantidad,
+        precio_compra,
+        precio_venta
+      });
+      
+      console.log(response.data.message); // Manejar la respuesta del servidor
+
+      props.onProductoAdded(); /* Recargamos tabla */
+      props.onHide(); /* cerramos modal */
+
+      setNombre('');
+      setMarca('');
+      setDescripcion('');
+      setCantidad('');
+      setPrecio_compra('');
+      setPrecio_venta('');
+      
+    } catch (error) {
+      console.error('Error al agregar producto:', error);
+    }
+  };
+
   return (
     <Modal
       {...props}
@@ -219,6 +302,8 @@ function ModalAgregar(props) {
             minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
             maxLength: { value: 20, message: "No más de 20 caracteres"},
           })}
+          value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>Nombre:</label>
         {errors.nombre && (
@@ -235,6 +320,8 @@ function ModalAgregar(props) {
             minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
             maxLength: { value: 20, message: "No más de 20 caracteres"},
           })}
+          value={marca}
+            onChange={(e) => setMarca(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>Marca:</label>
         {errors.marca && (
@@ -251,6 +338,8 @@ function ModalAgregar(props) {
             minLength: { value: 5, message: "Por favor ingresa de 5 caracteres" },
             maxLength: { value: 50, message:"Ingrese menos de 50 caracteres" },
           })}
+          value={descripcion}
+            onChange={(e) => setDescripcion(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Descripción:</label>
@@ -272,6 +361,8 @@ function ModalAgregar(props) {
             minLength: { value: 0, message: "Por favor ingresa un número de teléfono"},
             maxLength: { value: 10000, message: "Por favor ingresa un número de teléfono"},
           })}
+          value={cantidad}
+            onChange={(e) => setCantidad(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Cantidad Disponible:</label>
@@ -293,6 +384,8 @@ function ModalAgregar(props) {
             minLength: { value: 0, message: "Por favor ingresa un precio"},
             maxLength: { value: 10000, message: "Por favor ingresa un precio"},
           })}
+          value={precio_compra}
+            onChange={(e) => setPrecio_compra(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Precio Compra:</label>
@@ -314,6 +407,8 @@ function ModalAgregar(props) {
             minLength: { value: 0, message: "Por favor ingresa un precio"},
             maxLength: { value: 10000, message: "Por favor ingresa un precio"},
           })}
+          value={precio_venta}
+            onChange={(e) => setPrecio_venta(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Precio venta:</label>
@@ -323,7 +418,7 @@ function ModalAgregar(props) {
       </div>
       
       <Modal.Footer className={style.modalFooter}>
-        <button className={style.sesion} type="submit">Agregar</button>
+        <button className={style.sesion} type="button" onClick={handleProductos}>Agregar</button>
       </Modal.Footer>
       </form>
       </Modal.Body>
@@ -333,8 +428,57 @@ function ModalAgregar(props) {
 
 export default function Productos() {
   const [modalShow2, setModalShow2] = React.useState(false);
-  const [modalShow1, setModalShow1] = React.useState(false);
-  const [modalShow, setModalShow] = React.useState(false);
+
+  /* Consumo backend */
+  const { id } = useParams();
+
+  const [productos, setProductos] = useState([]);
+
+  const fetchProductos = () => {
+    axios.get(`http://localhost:3000/productos/${id}`)
+      .then(response => {
+        // Actualizar el estado con los datos obtenidos
+        setProductos(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener los productos:', error);
+      });
+  };
+
+  const handleEliminarProducto = async (producto_id) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/productos/delete/${producto_id}`);
+      console.log(response.data); // Manejar la respuesta del servidor, si es necesario
+      setProductos(productos.filter(producto => producto.producto_id !== producto_id));
+    } catch (error) {
+      console.error('Error al eliminar el producto:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProductos();
+  }, []);
+
+  const onProductoAdded = () => {
+    fetchProductos(); // Recargar la lista de clientes
+  };
+
+  /* Para editar */
+  const [modalShowList, setModalShowList] = useState(Array(productos.length).fill(false));
+  const [productoEdit, setProductoEdit] = useState(null);
+
+  const handleProductoClick = (index, producto) => {
+    const newModalShowList = [...modalShowList];
+    newModalShowList[index] = true;
+    setModalShowList(newModalShowList);
+    setProductoEdit(producto);
+  };
+
+  const handleCloseModal = (index) => {
+    const newModalShowList = [...modalShowList];
+    newModalShowList[index] = false;
+    setModalShowList(newModalShowList);
+  };
 
   return (
     <div className={style.containerFluid}>
@@ -360,6 +504,7 @@ export default function Productos() {
                 <ModalAgregar
                   show={modalShow2}
                   onHide={() => setModalShow2(false)}
+                  onProductoAdded={onProductoAdded}
                 />
               </span>
             </OverlayTrigger>
@@ -407,7 +552,7 @@ export default function Productos() {
                   fontWeight: "800",
                 }}
               >
-                Correo
+                Marca
               </div>
               
               <div
@@ -429,7 +574,7 @@ export default function Productos() {
                   fontWeight: "800",
                 }}
               >
-                Cantidad disponible
+                Cantidad
               </div>
               
               <div
@@ -460,44 +605,46 @@ export default function Productos() {
               </div>
 
               {/* <!-- Filas de informacion --> */}
+              {productos.map((producto, index) => (
+                <React.Fragment key={producto.producto_id}>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                Yhonny Aplicano
+                {producto.nombre}
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                yhonny@gmail.com
-              </div>
-              
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
+                {producto.marca}
               </div>
               
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                yhonny@gmail.com
+                {producto.descripcion}
               </div>
               
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                yhonny@gmail.com
+                {producto.cantidad}
+              </div>
+              
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                {producto.precio_compra} lps
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                6
+                {producto.precio_venta} lps
               </div>
               <div className={style.celda}>
               <OverlayTrigger
@@ -505,7 +652,7 @@ export default function Productos() {
             >
                 <button
                   className={style.delete}
-                  onClick={() => setModalShow(true)}
+                  onClick={() => handleProductoClick(index, producto)}
                   style={{ marginRight: "5%" }}
                 >
                   <BiSolidPencil />
@@ -513,8 +660,10 @@ export default function Productos() {
                 </OverlayTrigger>
 
                 <ModalEditar
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
+                  show={modalShowList[index]}
+                  onHide={() => handleCloseModal(index)}
+                  producto={productoEdit}
+                  onProductoAdded={onProductoAdded}
                 />
 
 <OverlayTrigger
@@ -522,78 +671,15 @@ export default function Productos() {
             >
                 <button
                   className={style.delete}
-                  onClick={() => setModalShow1(true)}
+                  onClick={() => handleEliminarProducto(producto.producto_id)}
                 >
                   <BsFillTrashFill />
                 </button>
                 </OverlayTrigger>
+              </div>
+              </React.Fragment>
+              ))}
 
-                <ModalEliminar
-                  show={modalShow1}
-                  onHide={() => setModalShow1(false)}
-                />
-              </div>
-
-              {/* <!-- Filas de informacion --> */}
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                Yhonny Aplicano
-              </div>
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-              
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-              
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-              
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                6
-              </div>
-              <div className={style.celda}>
-                <button
-                  className={style.delete}
-                  onClick={() => setModalShow(true)}
-                  style={{ marginRight: "5%" }}
-                >
-                  <BiSolidPencil />
-                </button>
-                <ModalEditar
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />
-
-                <button
-                  className={style.delete}
-                  onClick={() => setModalShow(true)}
-                >
-                  <BsFillTrashFill />
-                </button>
-              </div>
             </div>
           </div>
         </div>

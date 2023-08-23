@@ -9,21 +9,22 @@ const myConnection = require('express-myconnection');
 
 const app = express();
 
-app.use(cors({
+app.use(cors(/* {
     origin: ['http://52.73.89.207:8080', 'http://localhost:8082'], // Agrega las URL permitidas
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
-}));
+} */));
 app.use(express.json()); /* Hacemos que reciba informacion tipo json */
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Importando rutas
 const clienteRoutes = require('./routers/cliente');
 const productoRoutes = require('./routers/producto');
-const categoriaRoutes = require('./routers/categoria');
+const ventaRoutes = require('./routers/venta');
 const proveedorRoutes = require('./routers/proveedor');
 const usuarioRoutes = require('./routers/usuario');
 const servicioRoutes = require('./routers/servicio');
+const empleadoRoutes = require('./routers/empleado');
 
 // Configuración de express-session
 app.use(session({
@@ -51,10 +52,11 @@ app.use(express.urlencoded({extended: false}));
 //Routes
 app.use('/clientes', clienteRoutes);
 app.use('/productos', productoRoutes);
-app.use('/categorias', categoriaRoutes);
+app.use('/ventas', ventaRoutes);
 app.use('/proveedores', proveedorRoutes);
 app.use('/usuarios', usuarioRoutes);
 app.use('/servicios', servicioRoutes);
+app.use('/empleados', empleadoRoutes);
 
 
 // Static Files

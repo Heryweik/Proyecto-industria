@@ -15,14 +15,14 @@ controller.save = (req, res) => {
         usuario_id: req.body.usuario_id,
         cliente: req.body.cliente,
         fecha_hora: req.body.fecha_hora,
-        descripcion: req.body.descripcion,
-        direccion: req.body.direccion,
-        empleado: req.body.empleado
+        producto: req.body.producto,
+        cantidad: req.body.cantidad,
+        total: req.body.total
     };
 
     req.getConnection((err, conn) =>{
-        conn.query('INSERT INTO Mantenimientos SET ?', [data], (err, mantenimiento) => {
-            console.log(mantenimiento);
+        conn.query('INSERT INTO Ventas SET ?', [data], (err, venta) => {
+            console.log(venta);
             res.send({ message:'works'})
         });
     });
@@ -38,7 +38,7 @@ controller.edit = (req, res) => {
 
         const { id } = req.params;
 
-        conn.query("SELECT * FROM Mantenimientos WHERE usuario_id = ?", [id], (err, mantenimiento) => {
+        conn.query("SELECT * FROM Ventas WHERE usuario_id = ?", [id], (err, venta) => {
             conn.release();
 
             if (err) {
@@ -46,10 +46,11 @@ controller.edit = (req, res) => {
                 return;
             }
 
-            console.log(mantenimiento);
-            res.json(mantenimiento);
+            console.log(venta);
+            res.json(venta);
         });
     });
 };
+
 
 module.exports = controller;

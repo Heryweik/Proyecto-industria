@@ -18,26 +18,10 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
 
-function ModalEliminar(props) {
-  return (
-    <Modal
-      {...props}
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Body className={style.ModalHeader}>
-        <h4>Deseas eliminar este empleado?</h4>
-      </Modal.Body>
-      <Modal.Footer className={style.modalFooter}>
-        <button onClick={props.onHide} className={style.boton1}>
-          No
-        </button>
-        <button className={style.sesion}>Si</button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
 
 function ModalHorario(props) {
   return (
@@ -84,18 +68,7 @@ function ModalHorario(props) {
               08:00am - 06:00pm
             </div>
 
-            {/* <!-- Filas de informacion --> */}
-            <div
-              className={style.celda}
-              style={{ borderRight: "1px solid black" }}
-            >
-              PRO
-            </div>
-            <div
-              className={style.celda}
-            >
-              5
-            </div>
+            
 
           </div>
         </div>
@@ -154,18 +127,7 @@ function ModalVacaciones(props) {
               20/08/2023
             </div>
 
-            {/* <!-- Filas de informacion --> */}
-            <div
-              className={style.celda}
-              style={{ borderRight: "1px solid black" }}
-            >
-              PRO
-            </div>
-            <div
-              className={style.celda}
-            >
-              5
-            </div>
+           
 
           </div>
         </div>
@@ -184,6 +146,57 @@ function ModalEditar(props) {
   function insertar() {
     // Aquí puedes manejar la lógica de inserción de datos
   }
+
+  const { empleado, onHide, onEmpleadoAdded } = props;
+
+  const [DNI, setDNI] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [horario, setHorario] = useState('');
+  const [vacaciones, setVacaciones] = useState('');
+
+  useEffect(() => {
+    if (empleado) {
+      // Poblar los estados con la información del cliente que se va a editar
+      setDNI(empleado.DNI || '');
+      setNombre(empleado.nombre || '');
+      setApellido(empleado.apellido || '');
+      setTelefono(empleado.telefono || '');
+      setCorreo(empleado.correo || '');
+      setDireccion(empleado.direccion || '');
+      setHorario(empleado.horario || '');
+      setVacaciones(empleado.vacaciones || '');
+    }
+  }, [empleado]);
+
+  const { id } = useParams();
+
+  const handleEditEmpleados = async () => {
+    try {
+      const response = await axios.put(`http://localhost:3000/empleados/update/${empleado.empleado_id}`, {
+        usuario_id: id,
+        DNI,
+        nombre,
+        apellido,
+        telefono,
+        correo,
+        direccion,
+        horario,
+        vacaciones
+      });
+      
+      console.log(response.data.message); // Manejar la respuesta del servidor
+
+      onEmpleadoAdded(); /* Recargamos tabla */
+      onHide(); /* cerramos modal */
+      
+    } catch (error) {
+      console.error('Error al agregar empleado:', error);
+    }
+  };
 
   return (
     <Modal
@@ -215,6 +228,8 @@ function ModalEditar(props) {
               minLength: { value: 13, message: "Por favor ingresa una DNI válida" },
               maxLength: { value: 13, message: "Por favor ingresa una DNI válida" },
             })}
+            value={DNI}
+          onChange={(e) => setDNI(e.target.value)}
           />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           DNI:</label>
@@ -236,6 +251,8 @@ function ModalEditar(props) {
             minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
             maxLength: { value: 20, message: "No más de 20 caracteres"},
           })}
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Nombre:</label>
@@ -257,6 +274,8 @@ function ModalEditar(props) {
             minLength: { value: 3, message:  "Por favor ingresamás de 2 caracteres"},
             maxLength: { value: 20, message: "No más de 20 caracteres"},
           })}
+          value={apellido}
+          onChange={(e) => setApellido(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Apellido:</label>
@@ -278,6 +297,8 @@ function ModalEditar(props) {
             minLength: { value: 8, message: "Por favor ingresa un número de teléfono"},
             maxLength: { value: 11, message: "Por favor ingresa un número de teléfono"},
           })}
+          value={telefono}
+          onChange={(e) => setTelefono(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Teléfono:</label>
@@ -300,6 +321,8 @@ function ModalEditar(props) {
             minLength: { value: 2, message: "Por favor ingresa un correo" },
             maxLength: { value: 50, message:"Por favor ingresa un correo" },
           })}
+          value={correo}
+          onChange={(e) => setCorreo(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Correo:</label>
@@ -317,6 +340,8 @@ function ModalEditar(props) {
             minLength: { value: 5, message: "Por favor ingresa de 5 caracteres" },
             maxLength: { value: 50, message:"Ingrese menos de 50 caracteres" },
           })}
+          value={direccion}
+          onChange={(e) => setDireccion(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Dirección:</label>
@@ -324,9 +349,33 @@ function ModalEditar(props) {
             <span className={style.errorMessage}>{errors.direccion.message}</span>
           )}
         </div>
+
+        <div className={style.form}>
+        <input
+          type="text"
+          className={`form-control ${style.inNombre}`}
+          id="horario"
+          value={horario}
+          onChange={(e) => setHorario(e.target.value)}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Horario laboral:</label>
+        </div>
+
+        <div className={style.form}>
+        <input
+          type="datetime-local"
+          className={`form-control ${style.inNombre}`}
+          id="vacaciones"
+          value={vacaciones}
+          onChange={(e) => setVacaciones(e.target.value)}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Vacaciones:</label>
+        </div>
      
       <Modal.Footer className={style.modalFooter}>
-        <button className={style.sesion}>Actualizar informacion</button>
+        <button className={style.sesion} type="button" onClick={handleEditEmpleados}>Actualizar informacion</button>
       </Modal.Footer>
       </form>
       </Modal.Body>
@@ -339,6 +388,51 @@ function ModalAgregar(props) {
   function insertar() {
     // Aquí puedes manejar la lógica de inserción de datos
   }
+
+  /* Consumo backend */
+  const [DNI, setDNI] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [horario, setHorario] = useState('');
+  const [vacaciones, setVacaciones] = useState('');
+
+  const { id } = useParams();
+
+  const handleEmpleados = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/empleados/add', {
+        usuario_id: id,
+        DNI,
+        nombre,
+        apellido,
+        telefono,
+        correo,
+        direccion,
+        horario,
+        vacaciones
+      });
+      
+      console.log(response.data.message); // Manejar la respuesta del servidor
+
+      props.onEmpleadoAdded(); /* Recargamos tabla */
+      props.onHide(); /* cerramos modal */
+
+      setDNI('');
+      setNombre('');
+      setApellido('');
+      setTelefono('');
+      setCorreo('');
+      setDireccion('');
+      setHorario('');
+      setVacaciones('');
+      
+    } catch (error) {
+      console.error('Error al agregar cliente:', error);
+    }
+  };
 
   return (
     <Modal
@@ -370,6 +464,8 @@ function ModalAgregar(props) {
               minLength: { value: 13, message: "Por favor ingresa una DNI válida" },
               maxLength: { value: 13, message: "Por favor ingresa una DNI válida" },
             })}
+            value={DNI}
+            onChange={(e) => setDNI(e.target.value)}
           />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           DNI:</label>
@@ -391,6 +487,8 @@ function ModalAgregar(props) {
             minLength: { value: 3, message:  "Por favor ingresa más de 2 caracteres"},
             maxLength: { value: 20, message: "No más de 20 caracteres"},
           })}
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Nombre:</label>
@@ -412,6 +510,8 @@ function ModalAgregar(props) {
             minLength: { value: 3, message:  "Por favor ingresamás de 2 caracteres"},
             maxLength: { value: 20, message: "No más de 20 caracteres"},
           })}
+          value={apellido}
+          onChange={(e) => setApellido(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Apellido:</label>
@@ -433,6 +533,8 @@ function ModalAgregar(props) {
             minLength: { value: 8, message: "Por favor ingresa un número de teléfono"},
             maxLength: { value: 11, message: "Por favor ingresa un número de teléfono"},
           })}
+          value={telefono}
+          onChange={(e) => setTelefono(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Teléfono:</label>
@@ -455,6 +557,8 @@ function ModalAgregar(props) {
             minLength: { value: 2, message: "Por favor ingresa un correo" },
             maxLength: { value: 50, message:"Por favor ingresa un correo" },
           })}
+          value={correo}
+          onChange={(e) => setCorreo(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Correo:</label>
@@ -472,6 +576,8 @@ function ModalAgregar(props) {
             minLength: { value: 5, message: "Por favor ingresa de 5 caracteres" },
             maxLength: { value: 50, message:"Ingrese menos de 50 caracteres" },
           })}
+          value={direccion}
+          onChange={(e) => setDireccion(e.target.value)}
         />
         <label className={`form-label mb-0 ${style.userLabel}`}>
           Dirección:</label>
@@ -479,8 +585,33 @@ function ModalAgregar(props) {
             <span className={style.errorMessage}>{errors.direccion.message}</span>
           )}
         </div>
+
+        <div className={style.form}>
+        <input
+          type="text"
+          className={`form-control ${style.inNombre}`}
+          id="horario"
+          value={horario}
+          onChange={(e) => setHorario(e.target.value)}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Horario laboral:</label>
+        </div>
+
+        <div className={style.form}>
+        <input
+          type="datetime-local"
+          className={`form-control ${style.inNombre}`}
+          id="vacaciones"
+          value={vacaciones}
+          onChange={(e) => setVacaciones(e.target.value)}
+        />
+        <label className={`form-label mb-0 ${style.userLabel}`}>
+          Vacaciones:</label>
+        </div>
+
       <Modal.Footer className={style.modalFooter}>
-        <button className={style.sesion}>Agregar</button>
+        <button className={style.sesion} type="button" onClick={handleEmpleados}>Agregar</button>
       </Modal.Footer>
       </form>
       </Modal.Body>
@@ -492,8 +623,57 @@ export default function Empleados() {
   const [modalShow4, setModalShow4] = React.useState(false);
   const [modalShow3, setModalShow3] = React.useState(false);
   const [modalShow2, setModalShow2] = React.useState(false);
-  const [modalShow1, setModalShow1] = React.useState(false);
-  const [modalShow, setModalShow] = React.useState(false);
+
+  /* Consumo backend */
+  const { id } = useParams();
+
+  const [empleados, setEmpleados] = useState([]);
+
+  const fetchEmpleados = () => {
+    axios.get(`http://localhost:3000/empleados/${id}`)
+      .then(response => {
+        // Actualizar el estado con los datos obtenidos
+        setEmpleados(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener los empleados:', error);
+      });
+  };
+
+  const handleEliminarEmpleado = async (empleado_id) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/empleados/delete/${empleado_id}`);
+      console.log(response.data); // Manejar la respuesta del servidor, si es necesario
+      setEmpleados(empleados.filter(empleado => empleado.empleado_id !== empleado_id));
+    } catch (error) {
+      console.error('Error al eliminar el empleado:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchEmpleados();
+  }, []);
+
+  const onEmpleadoAdded = () => {
+    fetchEmpleados(); // Recargar la lista de clientes
+  };
+
+  /* Para editar */
+  const [modalShowList, setModalShowList] = useState(Array(empleados.length).fill(false));
+  const [empleadoEdit, setEmpleadoEdit] = useState(null);
+
+  const handleEmpleadoClick = (index, empleado) => {
+    const newModalShowList = [...modalShowList];
+    newModalShowList[index] = true;
+    setModalShowList(newModalShowList);
+    setEmpleadoEdit(empleado);
+  };
+
+  const handleCloseModal = (index) => {
+    const newModalShowList = [...modalShowList];
+    newModalShowList[index] = false;
+    setModalShowList(newModalShowList);
+  };
 
   return (
     <div className={style.containerFluid}>
@@ -519,6 +699,7 @@ export default function Empleados() {
                 <ModalAgregar
                   show={modalShow2}
                   onHide={() => setModalShow2(false)}
+                  onEmpleadoAdded={onEmpleadoAdded}
                 />
               </span>
             </OverlayTrigger>
@@ -627,44 +808,46 @@ export default function Empleados() {
               </div>
 
               {/* <!-- Filas de informacion --> */}
+              {empleados.map((empleado, index) => (
+                <React.Fragment key={empleado.empleado_id}>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                Yhonny Aplicano
+                {empleado.DNI}
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                yhonny@gmail.com
-              </div>
-
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
+                {empleado.nombre}
               </div>
 
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                yhonny@gmail.com
+                {empleado.apellido}
               </div>
 
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                yhonny@gmail.com
+                {empleado.telefono}
+              </div>
+
+              <div
+                className={style.celda}
+                style={{ borderRight: "1px solid black" }}
+              >
+                {empleado.correo}
               </div>
               <div
                 className={style.celda}
                 style={{ borderRight: "1px solid black" }}
               >
-                6
+                {empleado.direccion}
               </div>
               <div className={style.celda}>
                 <OverlayTrigger
@@ -672,7 +855,7 @@ export default function Empleados() {
                 >
                   <button
                     className={style.delete}
-                    onClick={() => setModalShow(true)}
+                    onClick={() => handleEmpleadoClick(index, empleado)}
                     style={{ marginRight: "5%" }}
                   >
                     <BiSolidPencil />
@@ -680,8 +863,10 @@ export default function Empleados() {
                 </OverlayTrigger>
 
                 <ModalEditar
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
+                  show={modalShowList[index]}
+                  onHide={() => handleCloseModal(index)}
+                  empleado={empleadoEdit}
+                  onEmpleadoAdded={onEmpleadoAdded}
                 />
 
                 <OverlayTrigger
@@ -689,79 +874,15 @@ export default function Empleados() {
                 >
                   <button
                     className={style.delete}
-                    onClick={() => setModalShow1(true)}
+                    onClick={() => handleEliminarEmpleado(empleado.empleado_id)}
                   >
                     <BsFillTrashFill />
                   </button>
                 </OverlayTrigger>
+              </div>
+              </React.Fragment>
+              ))}
 
-                <ModalEliminar
-                  show={modalShow1}
-                  onHide={() => setModalShow1(false)}
-                />
-              </div>
-
-              {/* <!-- Filas de informacion --> */}
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                Yhonny Aplicano
-              </div>
-
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                yhonny@gmail.com
-              </div>
-              <div
-                className={style.celda}
-                style={{ borderRight: "1px solid black" }}
-              >
-                6
-              </div>
-              <div className={style.celda}>
-                <button
-                  className={style.delete}
-                  onClick={() => setModalShow(true)}
-                  style={{ marginRight: "5%" }}
-                >
-                  <BiSolidPencil />
-                </button>
-                <ModalEditar
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />
-
-                <button
-                  className={style.delete}
-                  onClick={() => setModalShow(true)}
-                >
-                  <BsFillTrashFill />
-                </button>
-              </div>
             </div>
           </div>
         </div>

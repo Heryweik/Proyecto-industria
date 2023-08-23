@@ -9,6 +9,8 @@ import { useState } from "react";
 import { FaPowerOff } from "react-icons/fa";
 
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 /* Bootstrap */
 import Modal from "react-bootstrap/Modal";
@@ -48,6 +50,24 @@ export default function NavBar() {
     setAbierto(!abierto);
   };
 
+  /* Consumo del backend */
+  const [usuarios, setUsuarios] = useState([]);
+
+  const fetchUsuario = () => {
+    axios.get(`http://localhost:3000/usuarios/${id}`)
+      .then(response => {
+        // Actualizar el estado con los datos obtenidos
+        setUsuarios(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener los clientes:', error);
+      });
+  };
+
+  useEffect(() => {
+    fetchUsuario();
+  }, []);
+
   return (
     <div className={style.Nav}>
       <div>
@@ -79,8 +99,9 @@ export default function NavBar() {
           </div>
 
           <div className={style.nombre}>
-            <span className={style.usuario}>Yhonny Yupanky</span>
-
+          {usuarios.map(usuario => (
+            <span className={style.usuario} key={usuario.usuario_id}>{usuario.nombre} {usuario.apellido}</span>
+          ))}
             <button
               className={`btn ${style.sesion}`}
               onClick={() => setModalShow(true)}
@@ -108,23 +129,23 @@ export default function NavBar() {
           </button>
           {abierto && (
             <div className={style.contenido}>
-              <Link to={"/clientes"}>
+              <Link to={"/clientes/" + id}>
                 <button className={style.boton2}>Clientes</button>
               </Link>
-              <Link to={"/proveedores"}>
+              <Link to={"/proveedores/" + id}>
                 <button className={style.boton2}>Proveedores</button>
               </Link>
               
-              <Link to={"/empleados"}>
+              <Link to={"/empleados/" + id}>
                 <button className={style.boton2}>Empleados</button>
               </Link>
-              <Link to={"/productos"}>
+              <Link to={"/productos/" + id}>
                 <button className={style.boton2}>Productos</button>
               </Link>
-              <Link to={"/servicios"}>
+              <Link to={"/servicios/" + id}>
                 <button className={style.boton2}>Mantenimientos</button>
               </Link>
-              <Link to={"/ventas"}>
+              <Link to={"/ventas/" + id}>
                 <button className={style.boton2}>Ventas</button>
               </Link>
             </div>

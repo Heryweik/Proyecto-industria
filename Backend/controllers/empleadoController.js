@@ -17,7 +17,7 @@ controller.list = (req, res) => {
             return;
         }
 
-        conn.query('SELECT * FROM Proveedores', (err, proveedores) => {
+        conn.query('SELECT * FROM Empleados', (err, empleados) => {
             conn.release();
 
             if (err) {
@@ -25,8 +25,8 @@ controller.list = (req, res) => {
                 return;
             }
 
-            console.log(proveedores);
-            res.json(proveedores);
+            console.log(empleados);
+            res.json(empleados);
         });
     });
 };
@@ -34,15 +34,19 @@ controller.list = (req, res) => {
 controller.save = (req, res) => {
     const data = {
         usuario_id: req.body.usuario_id,
+        DNI: req.body.DNI,
         nombre: req.body.nombre,
+        apellido: req.body.apellido,
         telefono: req.body.telefono,
         correo: req.body.correo,
         direccion: req.body.direccion,
+        horario: req.body.horario,
+        vacaciones: req.body.vacaciones,
     };
 
     req.getConnection((err, conn) =>{
-        conn.query('INSERT INTO Proveedores SET ?', [data], (err, proveedor) => {
-            console.log(proveedor);
+        conn.query('INSERT INTO Empleados SET ?', [data], (err, empleado) => {
+            console.log(empleado);
             res.send({ message:'works'})
         });
     });
@@ -58,7 +62,7 @@ controller.edit = (req, res) => {
 
         const { id } = req.params;
 
-        conn.query("SELECT * FROM Proveedores WHERE usuario_id = ?", [id], (err, proveedores) => {
+        conn.query("SELECT * FROM Empleados WHERE usuario_id = ?", [id], (err, empleados) => {
             conn.release();
 
             if (err) {
@@ -66,8 +70,8 @@ controller.edit = (req, res) => {
                 return;
             }
 
-            console.log(proveedores);
-            res.json(proveedores);
+            console.log(empleados);
+            res.json(empleados);
         });
     });
 };
@@ -80,15 +84,19 @@ controller.update = (req, res) => {
         }
 
         const { id } = req.params;
-        const newproveedor = {
+        const newempleado = {
             usuario_id: req.body.usuario_id,
+            DNI: req.body.DNI,
             nombre: req.body.nombre,
+            apellido: req.body.apellido,
             telefono: req.body.telefono,
             correo: req.body.correo,
-            direccion: req.body.direccion
+            direccion: req.body.direccion,
+            horario: req.body.horario,
+            vacaciones: req.body.vacaciones,
         };
 
-        conn.query('UPDATE Proveedores set ? where proveedor_id = ?', [newproveedor, id], (err, proveedores) => {
+        conn.query('UPDATE Empleados set ? where empleado_id = ?', [newempleado, id], (err, empleados) => {
             conn.release();
 
             if (err) {
@@ -96,8 +104,8 @@ controller.update = (req, res) => {
                 return;
             }
 
-            console.log(proveedores);
-            res.json(proveedores);
+            console.log(empleados);
+            res.json(empleados);
         });
     });
 };
@@ -110,17 +118,17 @@ controller.delete = (req, res) => {
             return res.status(500).json({ error: 'Error en la conexión a la base de datos' });
         }
 
-        connection.query('DELETE FROM Proveedores WHERE proveedor_id = ?', [id], (err, result) => {
+        connection.query('DELETE FROM Empleados WHERE empleado_id = ?', [id], (err, result) => {
             if (err) {
-                console.error('Error al eliminar el proveedor:', err);
-                return res.status(500).json({ error: 'Error al eliminar el proveedor' });
+                console.error('Error al eliminar el empleado:', err);
+                return res.status(500).json({ error: 'Error al eliminar el empleado' });
             }
 
             if (result.affectedRows === 0) {
-                return res.status(404).json({ error: 'Proveedor no encontrado' });
+                return res.status(404).json({ error: 'Empleado no encontrado' });
             }
 
-            res.status(200).json({ message: 'Proveedor eliminado correctamente' });
+            res.status(200).json({ message: 'Empleado eliminado correctamente' });
         });
     });
 };
