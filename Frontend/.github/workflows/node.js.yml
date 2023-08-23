@@ -5,7 +5,7 @@ name: Despliegue
 
 on:
   push:
-    branches: [ "actions" ]
+    branches: [ "main" ]
 
 jobs:
   build:
