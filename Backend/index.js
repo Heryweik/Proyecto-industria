@@ -19,6 +19,14 @@ app.use(cors({
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 } */));
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://52.73.89.207:8080');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
 app.use(express.json()); /* Hacemos que reciba informacion tipo json */
 app.use(bodyParser.urlencoded({ extended: true }));
 
