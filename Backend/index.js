@@ -9,7 +9,12 @@ const myConnection = require('express-myconnection');
 
 const app = express();
 
-app.use(cors(/* {
+app.use(cors({
+    origin: 'http://52.73.89.207:8080',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
+}
+    /* {
     origin: ['http://52.73.89.207:8080', 'http://localhost:8082'], // Agrega las URL permitidas
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
@@ -25,6 +30,7 @@ const proveedorRoutes = require('./routers/proveedor');
 const usuarioRoutes = require('./routers/usuario');
 const servicioRoutes = require('./routers/servicio');
 const empleadoRoutes = require('./routers/empleado');
+const methods = require('methods');
 
 // Configuración de express-session
 app.use(session({
