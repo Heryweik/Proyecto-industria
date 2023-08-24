@@ -10,7 +10,7 @@ const myConnection = require('express-myconnection');
 const app = express();
 
 app.use(cors({
-    origin: 'http://52.73.89.207:8080',
+    origin: ['http://52.73.89.207:8080', 'http://localhost:8082'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }
