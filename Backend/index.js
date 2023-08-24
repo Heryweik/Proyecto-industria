@@ -21,7 +21,7 @@ app.use(cors({
 } */));
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://52.73.89.207:8080');
+    res.setHeader('Access-Control-Allow-Origin', 'http://172.31.36.123:8080');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
