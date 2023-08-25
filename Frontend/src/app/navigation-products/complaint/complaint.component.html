@@ -1,0 +1,36 @@
+<div class="modal-body">
+    <form class="formComplaint" [formGroup]="complaintForm">
+        <div align="center">
+            <h1 class="titulo">Denuncia a un vendedor</h1>
+             
+                <div class="form-floating mb-3 mt-3">
+                    <select [(ngModel)]="denuncia.fk_id_complaint_category" formControlName="categoria" class="form-select" name="CategoriaDenuncia" id="categoria">
+                        <option *ngFor="let category of complaintCategories" [value]="category.id_complaint_category">
+                            {{category.var_name}}
+                        </option>
+                    </select>
+                    <label for="categoria">Selecciona la categoría de la denuncia</label>
+                </div>
+                <div class="errors-container"
+                        *ngIf="categoriaControl.invalid && (categoriaControl.touched || categoriaControl.dirty)">
+                        <p class="errors-msg" class="fs-6" *ngIf="categoriaControl.hasError('required')">El campo es
+                          obligatorio selecciona una opción</p>
+
+                </div>
+         
+            <br>
+            <textarea [(ngModel)]="denuncia.text_description" formControlName="descripcion" maxlength="512" class="description" placeholder="Escribe aquí mas detalles sobre la denuncia" name="comentarios" rows="10" cols="35"></textarea>
+            <div class="errors-container"
+              *ngIf="descripcionControl.invalid && (descripcionControl.touched || descripcionControl.dirty)">
+              <p class="errors-msg" class="fs-6" *ngIf="descripcionControl.hasError('required')">El campo es obligatorio
+              </p>
+            </div>
+            
+        </div>
+    </form>
+    <div class="modal-footer">
+        <!--Botones de enviar o cerrar la denuncia-->
+        <button type="button" class="cbtn1" (click)="closeModalComplaint()" >Cerrar</button>
+        <button type="button" class="cbtn2" (click)="sendNewComplaint()" type="submit" [disabled]="complaintForm.invalid">Enviar</button>
+    </div>
+</div>

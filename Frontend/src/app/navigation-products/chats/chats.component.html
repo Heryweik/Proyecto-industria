@@ -1,0 +1,45 @@
+<div class="page-chat">
+    <div class="bar-chats">
+        <div *ngIf="chats.length==0">
+            <h3>No tiene chats</h3>
+        </div>
+        <div *ngFor="let p of chats">
+            <div *ngIf="!(p.Rol == 'Cliente' && p.ultimo_mensaje==null)" [class]="chatSelected!=p.id_chat?'bar-chats-content':'bar-chats-content2'" (click)="getMessages(p.id_chat,p.Rol,p.id_comprador,p.id_vendedor)">
+                <div class="bar-chats-content-image" [style]="'background-image: url('+'http://localhost:3000/'+p.Foto+')'">
+                </div>
+                <div class="bar-chats-content-text">
+                    <h4 style="font-size: 18px;" [title]="p.Producto">{{renderText(p.Producto,37)}}</h4>
+                    <h5 style="font-size: 15px;">{{ p.Rol == "Cliente" ? p.fk_id_user_seller : p.fk_id_user_buyer }}</h5>
+                    <h6 style="font-size: 13px;" [title]="p.ultimo_mensaje">{{renderText(p.ultimo_mensaje,57)}}</h6>
+                </div>
+                <div *ngIf="p.no_leidos != '0'" class="bar-chats-content-unread-chat">
+                    <span>{{p.no_leidos}}</span>
+                </div>
+            </div>
+            <hr *ngIf="!(p.Rol == 'Cliente' && p.ultimo_mensaje==null)">
+        </div>
+    </div>
+    <div class="messenge">
+        <h3 *ngIf="messenge == null" style="margin-bottom: 300px; text-align:center;">Haz clic sobre un chat</h3>
+        <div *ngIf="messenge != null" class="messenge-text" #messengeContainer>
+            <h3 *ngIf="messenge?.length == 0" style="margin-top: 50px; text-align:center;">Escriba un mensaje</h3>
+            <div [class]="mes.fk_id_user==token? 'messenge-text-2':'messenge-text-1'" *ngFor="let mes of messenge">
+                <h6 style="font-size: 11px; text-align: right; margin: 0px;">{{mes.dateMessenge+"    "}}<b>{{mes.hourMessenge}}</b></h6>
+                <p>{{mes.text_contents}}</p>
+                <h6 *ngIf="mes.bit_status==0 && mes.fk_id_user==token" style="font-size: 11px; text-align: right; margin: 0px;"><i class="fa-solid fa-check"></i></h6>
+                <h6 *ngIf="mes.bit_status==1 && mes.fk_id_user==token" style="font-size: 11px; text-align: right; margin: 0px;"><i class="fa-solid fa-check-double"></i></h6>
+            </div>
+        </div>
+        <div *ngIf="messenge != null" class="messenge-send">
+            <div class="messenge-send-text">
+                <form [formGroup]="dataMessenge" method="POST">
+                    <textarea #myInput autofocus [(ngModel)]="dataM.text_contents" formControlName="messenge" placeholder="Escribe un mensaje aqui">.
+                    </textarea>
+                </form>
+            </div>
+            <div class="messenge-send-button">
+                <i (click)="sendMessenge()" style="cursor: pointer;" class="fa-solid fa-paper-plane"></i>
+            </div>
+        </div>
+    </div>
+</div>

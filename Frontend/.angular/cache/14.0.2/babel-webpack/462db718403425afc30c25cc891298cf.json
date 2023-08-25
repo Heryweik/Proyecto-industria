@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './toPairs.js';","map":{"version":3,"names":["default"],"sources":["C:/Users/Dennis Barahona/Documents/GitHub/web/IS-802-0900-Proyecto-IS-Grupo-5/Frontend/node_modules/lodash-es/entries.js"],"sourcesContent":["export { default } from './toPairs.js'\n"],"mappings":"AAAA,SAASA,OAAT,QAAwB,cAAxB"},"metadata":{},"sourceType":"module"}

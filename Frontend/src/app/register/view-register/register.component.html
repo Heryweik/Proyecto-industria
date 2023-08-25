@@ -1,0 +1,163 @@
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <img src="../../../assets/Imagenes/LOGO2.png" alt="logo_empresa">
+        </div>
+        <nav class="menu">
+            <a href="" routerLinkActive="/landing">Inicio</a>
+        </nav>
+    </div>
+</header>
+<div class="login-container">
+    <div class="div-img"><img class="image-container" src="../../../assets/Imagenes/registro.jpg" alt=""></div>
+    <div class="icon-container" style="align-items: center ;display: none;">
+        <i class="fa-solid fa-user" id="icon" style="margin-top:140px"></i>
+        <i class="fa-solid fa-user" id="icon"></i>
+        <i class="fa-solid fa-envelope" id="icon"></i>
+        <i class="fa-solid fa-unlock" id="icon"></i>
+        <i class="fa-solid fa-phone" id="icon"></i>
+        <i class="fa-solid fa-location-dot" id="icon"></i>
+    </div>
+    
+    <div class="login-info-container">
+        <h1 class="title">Crea una nueva cuenta</h1>
+        <form  [formGroup]="loginForm" class="inputs-container" id="id-form" action="" method="POST">
+            <div class="container-form">
+                <div class="container-icon">
+                    <i class="fa-solid fa-user" id="icon"></i>
+                </div>
+                <div class="container-part-form">
+                    <input [(ngModel)]="registro.var_name" class="input" type="text" placeholder="Escribe tu nombre" name="nombre" formControlName="nombre" required>
+                    <div class="errors-container" *ngIf="nombreControl.invalid && (nombreControl.touched || nombreControl.dirty)">
+                        <p class="errors-msg" *ngIf="nombreControl.hasError('required')">El campo es obligatorio</p>
+                        <p class="errors-msg" *ngIf="nombreControl.hasError('minlength')">Nombre muy corto</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container-form">
+                <div class="container-icon">
+                    <i class="fa-solid fa-user" id="icon"></i>
+                </div>
+                <div class="container-part-form">
+                    <input [(ngModel)]="registro.var_lastname" class="input" type="text" placeholder="Escribe tu apellido" name="apellido" formControlName="apellido" required>
+                    <div class="errors-container" *ngIf="apellidoControl.invalid && (apellidoControl.touched || apellidoControl.dirty)">
+                        <p class="errors-msg" *ngIf="apellidoControl.hasError('required')">El campo es obligatorio</p>
+                        <p class="errors-msg" *ngIf="apellidoControl.hasError('minlength')">Apellido muy corto</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-form">
+                <div class="container-icon">
+                    <i class="fa-solid fa-envelope" id="icon"></i>
+                </div>
+                <div class="container-part-form">
+                    <input [(ngModel)]="registro.var_email" class="input" type="email" placeholder="Escribe tu correo: alguien@correo.com" name="correo" formControlName="email"  id="email" name="correo"  required>
+                    <div class="errors-container" *ngIf="emailControl.invalid && (emailControl.touched || emailControl.dirty)">
+                        <p class="errors-msg" *ngIf="emailControl.hasError('required')">El campo es obligatorio</p>
+                        <p class="errors-msg" *ngIf="emailControl.hasError('email')">El campo debe ser un email valido</p>
+                    </div>
+                    <div class="errors-container" *ngIf="existEmail">
+                        <p class="errors-msg" >Ya existe una cuenta con este correo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-form">
+                <div class="container-icon">
+                    <i class="fa-solid fa-unlock" id="icon"></i>
+                </div>
+                <div class="container-part-form">
+                    <input [(ngModel)]="registro.tex_password" class="input" type="password" placeholder="Escribe tu contraseña" name="password" formControlName="password" required>
+                    <div class="errors-container" *ngIf="passControl.invalid && (passControl.touched || passControl.dirty)">
+                        <p class="errors-msg" *ngIf="passControl.hasError('required')">El campo es obligatorio</p>
+                        <p class="errors-msg" *ngIf="passControl.hasError('pattern')"> Debe tener minimo 8 caracteres, Use minusculas, mayusculas, numeros y simbolos[@$!%*?&-/_|]</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-form">
+                <div class="container-icon">
+                    <i class="fa-solid fa-unlock" id="icon"></i>
+                </div>
+                <div class="container-part-form">
+                    <!--password2-->
+                    <input class="input" type="password" placeholder="Escribe tu contraseña de nuevo" name="confirmPassword" formControlName="confirmPassword" required>
+                    <div class="errors-container" *ngIf="passValidateControl.invalid && (passValidateControl.touched || passValidateControl.dirty)">
+                        <p class="errors-msg" *ngIf="passValidateControl.hasError('required')">El campo es obligatorio</p>
+                        <p class="errors-msg" *ngIf="passValidateControl.hasError('pattern')" align="left"> confirme contraseña</p>
+                    </div>
+                    <div class="errors-container" *ngIf="match('password','confirmPassword')">
+                        <p> Las contraseñas no coinciden </p>
+                    </div>
+                    <!--===============================================================-->
+                </div>
+            </div>
+            
+            <div class="container-form">
+                <div class="container-icon">
+                    <i class="fa-solid fa-phone" id="icon"></i>
+                </div>
+                <div class="container-part-form">
+                    <input [(ngModel)]="registro.var_phone" class="input" type="tel"  maxlength="8" name="tel" formControlName="telefono" placeholder="Teléfono (Ej: 99991234)"
+                        required>
+                    <div class="errors-container" *ngIf="telControl.invalid && (telControl.touched || telControl.dirty)">
+                        <p class="errors-msg" *ngIf="telControl.hasError('required')">El campo es obligatorio</p>
+                        <p class="errors-msg" *ngIf="telControl.hasError('pattern')">Ingresa 8 números</p>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="container-form">
+                <div class="container-icon">
+                    <i style="margin-top: 3px;" class="fa-solid fa-location-dot" id="icon"></i>
+                </div>
+                <div class="container-part-form">
+                    <table class="table">
+                        <thead class="tbl-head">
+                            <tr>
+                                <td class="tbl-col-nombre">Selecciona tu ubicación</td>
+                                <td class="tbl-col-depto">
+                                    <select [(ngModel)]="registro.fk_id_department" class="selector" name="Departamento" formControlName="ubicacion">
+
+                                        <!-- Traer departamentos de la base de datos-->
+                                        <option *ngFor="let department of departments" [value]="department.id_department">
+                                            {{department.var_name}}
+                                        </option>
+
+                                    </select>
+
+                                    <div class="errors-container" *ngIf="validateDepartments" align="center">
+                                        <p class="errors-msg" *ngIf="validateDepartments">Debe seleccionar un departamento</p>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="container-form">
+                <div class="container-icon">
+                    <input type="checkbox" name="Terminos" class="input-chk" formControlName="check" required>
+                </div>
+                <div class="container-part-form">
+                    <span class="span" style="text-align: left;">Para crear tu cuenta acepta los <a routerLink="termsAndConditions" class="link"  target="_blank">Terminos y Condiciones</a></span>
+                    <div class="errors-container" *ngIf="chkControl.invalid && (chkControl.touched || chkControl.dirty)">
+                        <p class="errors-msg" *ngIf="chkControl.hasError('required')">Rellena este item</p>
+                    </div>
+                </div>
+            </div>
+
+            <button (click)="agregar()" type="submit" [disabled]="loginForm.invalid" class="btn">Registrarme</button>
+            <div class="errors-container" *ngIf="error">
+                <p class="errors-msg" *ngIf="error">Ocurrio un error, intentelo de nuevo</p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<app-footer [url1]="ruta"></app-footer>
+

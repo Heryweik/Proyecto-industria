@@ -1,0 +1,101 @@
+
+.ng-touched.ng-invalid:is(input,.selector, :checked),
+.ng-dirty.ng-invalid:is(input,.selector, :checked){
+    outline: 2px solid red;
+}
+
+.ng-dirty.ng-invalid:is(input,.selector, :checked){
+    outline: 2px solid red;
+}
+
+#hola{
+    width: -webkit-fill-available;
+    height: fit-content;
+    margin: auto;
+    position: absolute;
+    background-color: #ffffff00;
+    justify-content: center;
+    display: flex;
+    padding: 0px;
+    top: 20px;
+    img{
+        width: 160px;
+        height: 160px;
+    }
+}
+#formDiv{
+    width: 350px;
+    height:-webkit-fill-available;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 110px;
+    padding: 80px 60px 0px 60px;
+    margin-bottom: 45px;
+    h1{
+        font-weight: 400;
+        font-size: 25px;
+        text-align: center;
+        letter-spacing: -0.25px;
+        color: #191C1C;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+    form{
+        width: -webkit-fill-available;
+        margin-right: 5%;
+        margin-left: 5%;
+        
+        input{
+            width: 100%;
+            font-size: 1em;
+            box-shadow: 0px 1px 3.5px 0px rgb(110 110 110 / 75%);
+            height: 30px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        h3{
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 24px;
+            letter-spacing: -0.01em;
+            color: #51595F;
+        }
+        button{
+            background: #6151eb;
+            box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+            border-radius: 40px;
+            border: none;
+            width: 90%;
+            margin-left: 5%;
+            height: 30px;
+            color: white;
+            margin-top: 50px;
+            margin-bottom:30px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            cursor: pointer;
+            background: #ffc107;
+            color: #000;
+        } 
+
+        button:active {
+            box-shadow: 0 0 10px #FAA11D;
+            top: 3px;
+        }
+        
+        p{
+            margin: 0px;
+            font-size: 12px;
+        }
+    }
+    
+}

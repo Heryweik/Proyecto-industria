@@ -1,0 +1,20 @@
+Comandos a ejecutar:
+
+npm install
+
+Configurar variables de entorno:
+	
+	Para poder connectarce a la base de datos debe de configurar sus propias variables de entorno que correspondan a su estacion
+	de trabajo de MySQL.
+//////////////////////////// Archivo: .env
+host = localhost
+user = rootsql
+password = password
+port = 3000
+portdb = 3306
+database = PLAZITANET
+///////////////////////////
+
+Comandos a ejecutar:
+
+npm run dev

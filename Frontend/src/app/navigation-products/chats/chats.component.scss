@@ -1,0 +1,220 @@
+.page-chat{
+    margin-top: 77px;
+    display:flex;
+    height: 582px;
+    .bar-chats{
+        padding-top: 13px;
+        background-color: white;
+        padding-left: 5px;
+        overflow-x:hidden; overflow-y:scroll;
+        width: 1030px;
+        height: 581px;
+        &::-webkit-scrollbar {
+            -webkit-appearance: none;
+        };
+        
+        &::-webkit-scrollbar:vertical {
+            width:10px;
+        };
+        
+        &::-webkit-scrollbar-button:increment{
+            display: none;
+        };
+        
+        &::-webkit-scrollbar-button {
+            display: none;
+        };
+
+        &::-webkit-scrollbar:horizontal {
+            height: 10px;
+        };
+        
+        &::-webkit-scrollbar-thumb {
+            background-color: #eaeaea;
+            border-radius: 20px;
+            border: 2px solid #f1f2f3;
+        };
+        
+        &::-webkit-scrollbar-track {
+            border-radius: 10px;  
+        };
+        hr{
+            margin: 2px 0px;
+        }
+        &-content2{
+            transition: all .3s;
+            background-color: #4b4b4b;
+            color: white;
+            display: flex;
+            border-radius: 60px 0px 0px 60px;
+            &-image{
+                width: 70px;
+                height: 70px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+                border-radius: 52px;
+                box-shadow: -2px 0px 5px #999;
+            }
+            &-unread-chat{
+                width: 75px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                span{
+                    width: 45px;
+                    height: 30px;
+                    background-color: #51595f;
+                    color: white;
+                    font-size: 13px;
+                    text-align: center;
+                    padding-top: 6px;
+                    border-radius: 30px;
+                }
+            }
+            &-text{
+                padding-left: 8px;
+                display: flex;
+	            flex-direction: column;
+                justify-content: center;
+                width: 379px;
+                h4,h5,h6{
+                    margin: 0px;
+                }
+            }
+        }
+        &-content{
+            transition: all .3s;
+            border-radius: 60px 0px 0px 60px;
+            &:hover{
+                background-color: #909496;
+                color: white;
+                cursor: pointer;
+            }
+            display: flex;
+            &-image{
+                width: 70px;
+                height: 70px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+                border-radius: 52px;
+                background-color: #909496;
+                box-shadow: -2px 0px 5px #999;
+            }
+            &-unread-chat{
+                width: 75px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                span{
+                    width: 45px;
+                    height: 30px;
+                    background-color: #51595f;
+                    color: white;
+                    font-size: 13px;
+                    text-align: center;
+                    padding-top: 6px;
+                    border-radius: 30px;
+                }
+            }
+            &-text{
+                padding-left: 8px;
+                display: flex;
+	            flex-direction: column;
+                justify-content: center;
+                width: 379px;
+                h4,h5,h6{
+                    margin: 0px;
+                }
+            }
+        }
+    }
+    .messenge{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        &-text{
+            overflow-x:hidden; overflow-y:scroll;
+            height: 650px;
+            display: block;
+            p{
+                margin: 0px;
+                font-size: 14px;
+            }
+            &::-webkit-scrollbar {
+                -webkit-appearance: none;
+            };
+            
+            &::-webkit-scrollbar:vertical {
+                width:10px;
+            };
+            
+            &::-webkit-scrollbar-button:increment{
+                display: none;
+            };
+            
+            &::-webkit-scrollbar-button {
+                display: none;
+            };
+    
+            &::-webkit-scrollbar:horizontal {
+                height: 10px;
+            };
+            
+            &::-webkit-scrollbar-thumb {
+                background-color: #677b81;
+                border-radius: 20px;
+                border: 2px solid #f1f2f3;
+            };
+            
+            &::-webkit-scrollbar-track {
+                border-radius: 10px;  
+            };
+            &-1{
+                background-color: #909496;
+                border-radius: 4px;
+                color: white;
+                padding: 6px;
+                max-width: 445px;
+                margin-left: auto;
+                margin: 10px auto 10px 10px;
+            }
+            &-2{
+                background-color: #252F37;
+                border-radius: 4px;
+                color: white;
+                padding: 6px;
+                max-width: 445px;
+                margin-left: auto;
+                margin: 10px 10px 10px auto;
+            }
+        }
+        &-send{
+            display: flex;
+            &-text{
+                width: 100%;
+                padding: 10px 0px 0px 10px;
+                margin-right: 10px;
+                textarea{
+                    width: 100%;
+                    resize: none;
+                    border-radius: 5px;
+                }
+            }
+            &-button{
+                font-size: 40px;
+                color: #252f37;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                margin: 0px 10px 0px 0px;
+                padding-bottom: 15px;
+                &:hover{
+                    color: #1d2329;
+                }
+            }
+        }
+    }
+}

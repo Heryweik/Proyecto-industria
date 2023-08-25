@@ -1,0 +1,176 @@
+.header{
+    width: 100%;
+    
+    height: 75px;
+    background-image:linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%) ;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 4);
+}
+.container{
+    width: 90%;
+    
+    max-width: 1200px;
+    margin: auto;
+}
+
+.logo img{
+    float: left;
+    margin-top: 5px;
+    line-height: 50px;
+    height: 65px;
+    width: 180px;
+}
+.logo h1{
+    color: #252F37;
+    font-weight: 400;
+    font-size: 24px;
+    cursor: default;
+}
+.menu{
+    
+    float: right;
+    line-height: 70px;
+}
+.menu a{
+    color: #252F37;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 50px;
+    line-height: normal;
+    font-size: 18px;
+    transition: all 500ms ease;
+    border-bottom: 1px solid transparent;
+    font-weight: 600;
+}
+.columna{
+    height: 50px;
+}
+.menu a:hover{
+    background-color: #5E6A72;
+    color: #FFF;
+    border-bottom: 4px solid #FFF;
+}
+
+#encabezado{
+    padding-left: 110px;
+    padding-top: 250px;
+    
+}
+
+#parrafo{
+    font-size: larger;
+    padding-left: 170px;
+    padding-top: 15px;
+    
+}
+
+.venta img {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 820px;
+    top: 170px;
+
+}
+
+
+.flex {
+    display: flex;
+    justify-content: center;
+    float: right;
+    
+}
+
+.btn1 {
+    width: 233px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    background-color: #faa01e;
+    cursor: pointer;
+    height: 34px;
+    margin-left: 115px;
+    margin-right: 50px;
+
+}
+
+.btn1:hover {
+    cursor: pointer;
+    background: #875a19;
+
+}
+
+.btn1:active {
+    box-shadow: 0 0 10px #FAA11D;
+    top: 3px;
+}
+
+.btn2 {
+    width: 233px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    background-color: #7dd2d2;
+    cursor: pointer;
+    height: 34px;
+    margin-top: 25px;
+
+}
+
+.btn2:hover {
+    cursor: pointer;
+    background: rgb(84, 144, 144);
+
+}
+
+.btn2:active {
+    box-shadow: 0 0 10px #7CD3D3;
+    top: 3px;
+}
+
+
+.header1{
+    width: 100%;
+    
+    height: 35px;
+    background-image:linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%) ;
+    position: relative;
+    top: 21px;
+    left: 0;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 4);
+    margin-top: 200px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+/*
+.pie-pagina{
+    text-align: center;
+    display: block;
+    background-color: #252F37;
+    color: var(--login-bg);
+}
+.link-foot{
+    text-decoration: none;
+    color: var(--login-bg);
+}
+
+.table-foot{
+    display:block;
+    
+}*/
+
+/*prueba
+.header1{
+    width: 100%;
+    height: 75px;
+    background: red;
+
+}*/

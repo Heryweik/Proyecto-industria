@@ -1,0 +1,6 @@
+#all-components{
+    box-sizing: border-box;
+    /*position: absolute;
+    width: 100vw;*/
+    min-height: 100vh;
+}

@@ -1,0 +1,243 @@
+.ng-touched.ng-invalid:is(input,.selector, :checked),
+.ng-dirty.ng-invalid:is(input,.selector, :checked){
+    outline: 2px solid red;
+}
+
+.ng-dirty.ng-invalid:is(input,.selector, :checked){
+    outline: 2px solid red;
+}
+
+.errors-msg{
+  font-size: 15px;
+  margin: 0px;
+}
+
+  .login-box {
+    width: 390px;
+    height: 420px;
+    background: #fff;
+    color: rgb(5, 5, 5);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    margin-top: 50px;
+  }
+ 
+  .header{
+    width: 100%;
+    
+    height: 75px;
+    background-image:linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%) ;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 4);
+}
+.container{
+    width: 90%;
+    
+    max-width: 1200px;
+    margin: auto;
+}
+.logo img{
+    float: left;
+    margin-top: 5px;
+    line-height: 50px;
+    height: 67px;
+    width: 180px;
+}
+.logo h1{
+    color: #252F37;
+    font-weight: 400;
+    font-size: 24px;
+    cursor: default;
+}
+.menu{
+    display: block;
+    float: right;
+    line-height: 75px;
+}
+.menu a{
+    color: #252F37;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 50px;
+    line-height: normal;
+    font-size: 18px;
+    transition: all 500ms ease;
+    border-bottom: 1px solid transparent;
+    font-weight: 600;
+}
+.columna{
+    height: 50px;
+}
+.menu a:hover{
+    background-color: #5E6A72;
+    color: #FFF;
+    border-bottom: 4px solid #FFF;
+}
+  /*
+  .container a{
+    text-decoration: none;
+    font-size: 45px;
+    line-height: 20px;
+    color: rgb(11, 76, 101);
+    
+  }*/
+  /*logoempresa*/
+  
+  .logoEmpre{
+    width: 100px;
+    height: 50px;
+    border-radius: 0%;
+    position: absolute;
+    top: -250px;
+    left: calc(10% - 8px);
+
+  }
+  /*Avatar*/
+  .login-box .avatar {
+    width: 115px;
+    height: 100px;
+    border-radius: 20%;
+    position: absolute;
+    top: -50px;
+    margin-left: auto;
+    margin-right: auto;
+    left: calc(50% - 60px);
+  }
+  /*Estilo del H1 */
+  .login-box h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+  }
+  
+  .login-box label {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+  }
+  /*Margen del boton*/
+  .login-box input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  /*Para el correo y la contraseña*/
+  .login-box input[type="email"], .login-box input[type="password"] {
+    border: none;
+    border-bottom: 1px solid rgb(5, 0, 0);
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: rgb(8, 0, 0);
+    font-size: 16px;
+  }
+  /*Antes de iniciar sesion*/
+  .login-box input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #6151eb;
+    color: white;
+    font-size: 18px;
+    border-radius: 20px;
+  }
+  /*Cuando se hace clip en iniciar sesion*/
+  .login-box input[type="submit"]:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: white;
+  }
+  /*Al presionar iniciar sesion*/
+  .login-box input[type="submit"]:active {
+    box-shadow: 0 0 10px #FAA11D;
+    top: 3px;
+  }
+
+  /*decoracion de los link a*/
+  .login-box a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: rgb(11, 76, 101);
+  }
+  /*Para dar clip*/
+  .login-box a:hover {
+    color: rgb(16, 15, 15);
+  }
+
+  .login-info-container > p {
+    font-size: 1.25em;
+    margin-top: 1.5em;
+}
+
+.inputs-container {
+    height: 75%;
+    /*CAMBIO WIDTH  DE 85 A 100 PARA ICONOS*/
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.icon-container i{
+    color: #008cff;
+}
+
+.icon-container{
+    height: 100%;
+    /*CAMBIO WIDTH  DE 85 A 100 PARA ICONOS*/
+    width: 100%;
+    display: table-cell;
+    /*flex-direction: column;*/
+    /*justify-content: space-around;*/
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+}
+
+.login-container {
+  height: 35.75em;
+  width: 50em;
+  margin: 6em auto;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.login-info-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  
+  background-color: var(--login-bg);
+}
+
+
+.image-container {
+  opacity:75%;
+  width: 40;
+  height: 300px;
+  margin-top: 130px;
+  background-color: var(--image-bg);
+  box-sizing: border-box;
+}
+
+.pie-pagina{
+  text-align: center;
+  display: block;
+  background-color: #163d5e;
+  color: var(--login-bg);
+}
+
+
