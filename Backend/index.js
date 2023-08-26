@@ -18,13 +18,6 @@ app.use(cors(
 app.use(express.json()); /* Hacemos que reciba informacion tipo json */
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://52.73.89.207:8080');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-});
-
 //Importando rutas
 const clienteRoutes = require('./routers/cliente');
 const productoRoutes = require('./routers/producto');
